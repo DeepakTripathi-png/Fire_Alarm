@@ -275,6 +275,7 @@ font-size: 0.75rem;
   padding: 1rem;
   /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; */
   border-radius: 0.5rem;
+  width:100%; 
 
 }
 .header-title {

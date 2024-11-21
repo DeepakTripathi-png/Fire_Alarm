@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h2 style="color: red">Add New Role</h2>
+                        <h3 style="color: red">Add New Role</h3>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary waves-effect waves-light add-btn"><span class="btn-label"> <i class="fas fa-long-arrow-alt-left"></i></span>Back</a>
                     </div>
                     <div class="card">

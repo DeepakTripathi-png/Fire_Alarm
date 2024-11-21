@@ -183,16 +183,16 @@
                 <div class="col-12">
                 <div class="header">Latest Event / Alarm</div>
                 <div class="event-card">
-                    <div class="event-details">
-                        <div>Device ID <a href="#">TOR2314232</a></div>
-                        <div>Device Type: Smoke Detector</div>
-                        <div>Event Type: Miss fire</div>
-                        <div>Location: Phursungi, Pune</div>
-                    </div>
-                    <div class="event-status">
-                        <div class="date-time">Date & Time : 12/11/2024 16:14:45</div>
-                        <div class="status status-missfire">Miss fire</div>
-                    </div>
+                        <div class="event-details">
+                            <div>Device ID <a href="#">TOR2314232</a></div>
+                            <div>Device Type: Smoke Detector</div>
+                            <div>Event Type: Miss fire</div>
+                            <div>Location: Phursungi, Pune</div>
+                        </div>
+                        <div class="event-status">
+                            <div class="date-time">Date & Time : 12/11/2024 16:14:45</div>
+                            <div class="status status-missfire">Miss fire</div>
+                        </div>
                 </div>
             
                 <div class="event-card">

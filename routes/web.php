@@ -63,8 +63,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     Route::view('/device-import', 'admin.Device.import_device');
     
-    Route::view('/map-device', 'admin.Device.map_device_to_customer');
-    Route::view('/my_device', 'admin.Device.my_device');
+    Route::view('/map-site', 'admin.Device.map_device');
+
+    Route::view('/map-site/add', 'Admin.Device.map_device_add');
+
+    Route::view('/device', 'admin.Device.device');
+
+    Route::view('/device/add', 'Admin.Device.add_device');
   
    //Customer Route
    Route::view('/customer', 'admin.Customer.customer');

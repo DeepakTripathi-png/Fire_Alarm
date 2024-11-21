@@ -187,6 +187,7 @@
 
     <button class="btn-save">Save</button>
 </div>
+
 <div class="container table-container">
     <table>
         <thead>
@@ -254,6 +255,18 @@
 </div>
 
 @endsection
+
+
+
+
+
+
+
+
+<!-- New -->
+
+
+
 
 
 

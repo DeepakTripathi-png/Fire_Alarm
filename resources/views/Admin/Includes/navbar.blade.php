@@ -96,7 +96,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 </li>
                 @endif
 
-                {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'master_view'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'master_view'))
                 <li class="master">
                     <a href="#master" data-bs-toggle="collapse">
                         <i class="mdi mdi-chart-pie"></i>
@@ -105,6 +105,8 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                     </a>
                     <div class="collapse" id="master">
                         <ul class="nav-second-level">
+
+                        
                             @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_view'))
                             <li class="site-master">
                                 <a href="{{ url('admin/master/site') }}">Site Master</a>
@@ -168,7 +170,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                         </ul>
                     </div>
                 </li>
-                @endif --}}
+                @endif 
 
                 {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'vendor_view'))
                 <li class="vendor">
@@ -348,27 +350,24 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                             </a>
                             <div class="collapse" id="setting">
                                 <ul class="nav-second-level">
-                                    <!-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'import_deice_view'))
-                                    <li class="general-setting">
-                                        <a href="{{ url('/admin/device-import') }}">
-                                            <span> Import Device</span>
-                                        </a>
-                                    </li>
-                                    @endif -->
-                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_device_customer_view'))
-                                    <li class="visual-setting">
-                                        <a href="{{ url('/admin/map-device') }}">
-                                            <span> Map Device to Customer</span>
-                                        </a>
-                                    </li>
-                                    @endif
+                              
+                                     
                                     @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'my_device_view'))
                                     <li class="change-password">
-                                        <a href="{{ url('/admin/my_device') }}">
-                                            <span> My Device </span>
+                                        <a href="{{ url('/admin/device') }}">
+                                            <span> Device </span>
                                         </a>
                                     </li>
                                     @endif
+
+                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_device_customer_view'))
+                                    <li class="visual-setting">
+                                        <a href="{{ url('/admin/map-site') }}">
+                                            <span> Map Site</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                   
                                 </ul>
                             </div>
                         </li>
@@ -376,25 +375,36 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
 
 
-                <!-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'add_customer'))
-                <li class="Customer">
-                    <a href="{{ url('admin/customer') }}">
-                        <i class="mdi mdi-human-child"></i>
-                        
-                        <span>Add Customer</span>
-                    </a>
-                </li>
-                @endif -->
-
+          
 
                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management'))
                 <li class="vendor">
                     <a href="{{ url('admin/alarm') }}">
-                        <i class="mdi mdi-alarm-check"></i>
+                    <!-- <i class="mdi mdi-bullhorn"></i> -->
+                    <i class="mdi mdi-bell-ring"></i>
+
+
+
                         <span> Alarm Management </span>
                     </a>
                 </li>
                 @endif
+
+
+                
+                <!-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management')) -->
+                <li class="vendor">
+                    <a href="#">
+                    <!-- <i class="mdi mdi-bullhorn"></i> -->
+                    <i class="mdi mdi-file-document"></i>
+
+
+
+
+                        <span> Report</span>
+                    </a>
+                </li>
+                <!-- @endif -->
 
                 
 
@@ -437,6 +447,8 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                         </div>
                     </li>
                 @endif --}}
+
+
             </ul>
         </div>
     </div>
