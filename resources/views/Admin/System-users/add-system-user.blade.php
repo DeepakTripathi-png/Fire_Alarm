@@ -16,7 +16,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h3 style="color:red;">Add System User</h3>
+                        {{-- <h3 style="color:red;">Add System User</h3> --}}
+                        <div class="mb-2 justify-content-between d-flex align-items-center">
+                            <h4 class="mt-0 header-title">Add System User</h4>
+                        </div>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary waves-effect waves-light add-btn"><span class="btn-label"> <i class="fas fa-long-arrow-alt-left"></i></span>Back</a>
                     </div>
                     <div class="card department-card">

@@ -9,9 +9,23 @@
         word-wrap: break-word;
         background-color: var(--ct-card-bg);
         background-clip: border-box;
-        border: 0 solid var(--ct-card-border-color);
-        border-radius: 0.25rem;
+        /* border: 0 solid var(--ct-card-border-color);
+        border-radius: 0.25rem; */
+        padding: 0px !important;
 
+
+    }
+
+
+
+
+
+    .card-body {
+        flex: 1 1 auto;
+        /* padding: 1rem; */
+        /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; */
+        border-radius: 0.5rem;
+        width: 100%;
     }
 
     .morris-donut-example svg text tspan {
@@ -36,7 +50,7 @@
     <div class="content">
         <div class="container-fluid dashboard-cards">
             <div class="row">
-                <h2 style="color: red">Analytics</h2>
+               
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -178,9 +192,10 @@
         <!-- New -->
 
 
-        <div class="container-fluid">
+        {{-- <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+
                 <div class="header">Latest Event / Alarm</div>
                 <div class="event-card">
                         <div class="event-details">
@@ -224,25 +239,119 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
+
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+              
+                    <div class="card-body table-responsive department-card">
+
+                        {{-- <div class="header">Latest Event / Alarm</div>
+
+                        <h4 class="mt-0 header-title">Latest Event / Alarm</h4> --}}
+
+                        <div class="mb-2 justify-content-between d-flex align-items-center">
+                            <h4 class="mt-0 header-title">Latest Event / Alarm</h4>
+                        </div>
+
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 event-details">
+                                            <div>Device ID <a href="#">TOR2314232</a></div>
+                                            <div>Device Type: Smoke Detector</div>
+                                            <div>Event Type: Miss fire</div>
+                                            <div>Location: Phursungi, Pune</div>
+                                        </div>
+                                        <div class="col-md-6 event-status text-md-right">
+                                            <div class="date-time">Date & Time: 12/11/2024 16:14:45</div>
+                                            <div class="status status-missfire">Miss fire</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 event-details">
+                                            <div>Device ID <a href="#">TOR2314232</a></div>
+                                            <div>Device Type: Smoke Detector</div>
+                                            <div>Event Type: Miss fire</div>
+                                            <div>Location: Phursungi, Pune</div>
+                                        </div>
+                                        <div class="col-md-6 event-status text-md-right">
+                                            <div class="date-time">Date & Time: 12/11/2024 16:14:45</div>
+                                            <div class="status status-missfire">Miss fire</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 event-details">
+                                            <div>Device ID <a href="#">TOR2314232</a></div>
+                                            <div>Device Type: Smoke Detector</div>
+                                            <div>Event Type: Miss fire</div>
+                                            <div>Location: Phursungi, Pune</div>
+                                        </div>
+                                        <div class="col-md-6 event-status text-md-right">
+                                            <div class="date-time">Date & Time: 12/11/2024 16:14:45</div>
+                                            <div class="status status-missfire">Miss fire</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+
+            
+                        
+
+
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div> 
 
         <!-- New -->
         
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                    <h2>Recently Active Device List</h2>
+                  
                         <div class="card-body table-responsive department-card">
+                            {{-- <h2>Recently Active Device List</h2> --}}
+
+                            <div class="mb-2 justify-content-between d-flex align-items-center">
+                                <h4 class="mt-0 header-title">Recently Active Device List</h4>
+                            </div>
+
                             <table id="cims_data_table" class="table table-bordered table-bordered dt-responsiv w-100 ">
                                 <thead class="table-light">
                                     <tr role="row">
-                                        <!-- <th >Sr No</th>
-                                        <th >Name</th>
-                                        <th >Email ID</th>
-                                        <th >Role</th>
-                                        <th >Mobile No</th>
-                                        <th >Status</th>
-                                        <th >Action</th> -->
+                                       
 
                                         <th>Sr no</th>
                                         <th>Device Id</th>
@@ -264,16 +373,7 @@
                                     <td data-label="Device Type">Smoke Detector</td>
                                     <td data-label="Location">Phursungi, Pune</td>
                                     <td data-label="Date Time">12/11/2024 16:14:45</td>
-                                    <!-- <td data-label="Status" class="status">
-                                        <a href="javascript:;" disabled>
-                                            <i class="fa fa-toggle-on tgle-on status_button" aria-hidden="true" title="Active"></i>
-                                        </a>      
-                                    </td> -->
-
-                                    <!-- <td data-label="Action" class="action-buttons">
-                                        <button class="btn edit"><i class="fas fa-edit"></i></button>
-                                        <button class="btn delete"><i class="fas fa-trash"></i></button>
-                                    </td> -->
+                             
 
                                     <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
 

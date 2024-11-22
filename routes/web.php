@@ -61,6 +61,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::view('master/site', 'Admin.Master.add_site');
+
+    Route::view('master/device_type', 'Admin.Master.device_type_master');
+
+
+
+
     Route::view('/device-import', 'admin.Device.import_device');
     
     Route::view('/map-site', 'admin.Device.map_device');

@@ -1,22 +1,17 @@
 @section('meta_title') Add Device | Fire Alarm @endsection
 @extends('Admin.Layouts.layout')
 @section('content')
-<style>
-.card-body {
-    flex: 1 1 auto;
-    padding: 1rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-    border-radius: 0.5rem;
-    width: 100%;
-}    
-</style>    
+  
 <div class="content-page">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h3 style="color:red;">Add Device Add</h3>
+                        {{-- <h3 style="color:red;">Add Device Add</h3> --}}
+                        <div class="mb-2 justify-content-between d-flex align-items-center">
+                            <h4 class="mt-0 header-title">Add Device Add</h4>
+                        </div>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary waves-effect waves-light add-btn"><span class="btn-label"> <i class="fas fa-long-arrow-alt-left"></i></span>Back</a>
                     </div>
                     <div class="card department-card">
@@ -29,10 +24,19 @@
                                     <div class="col-12">
                                         <h5 class="mb-3">Device Identification</h5>
                                         <div class="row">
+
                                             <div class="mb-3 col-6">
-                                                <label for="device_name" class="form-label">Device Name</label>
-                                                <input type="text" class="form-control" id="device_name" name="device_name" placeholder="Enter device name">
+                                                <label for="site_name" class="form-label">Select Site</label>
+                                                <select class="form-select" id="site_name" name="site_name">
+                                                    <option value="">Select Site</option>
+                                                    <option value="1">Codepix Solution</option>
+                                                    <option value="Heat Sensor">Infosys Hinjewadi</option>
+                                                   
+                                                </select>
                                             </div>
+
+
+
                                             <div class="mb-3 col-6">
                                                 <label for="device_type" class="form-label">Device Type</label>
                                                 <select class="form-select" id="device_type" name="device_type">
@@ -43,19 +47,22 @@
                                                     <option value="Control Panel">Control Panel</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                         </div>
                                         <div class="row">
+
                                             <div class="mb-3 col-6">
-                                                <label for="device_model" class="form-label">Device Model</label>
-                                                <input type="text" class="form-control" id="device_model" name="device_model" placeholder="Enter model number">
-                                            </div>
-                                            <div class="mb-3 col-6">
-                                                <label for="serial_number" class="form-label">Serial Number</label>
+                                                <label for="serial_number" class="form-label">Device ID</label>
                                                 <input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="Enter serial number">
                                             </div>
+
+                                            <div class="mb-3 col-6">
+                                                <label for="device_name" class="form-label">Device Name</label>
+                                                <input type="text" class="form-control" id="device_name" name="device_name" placeholder="Enter device name">
+                                            </div>
+                                          
                                         </div>
                                     </div>
-
+{{-- 
                                     <!-- Location Details -->
                                     <div class="col-12">
                                         <h5 class="mb-3">Location Details</h5>
@@ -99,7 +106,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <!-- Device Status -->
                                     <!-- <div class="col-12">

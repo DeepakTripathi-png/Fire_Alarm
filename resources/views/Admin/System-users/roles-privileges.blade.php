@@ -8,7 +8,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h3 style="color:red">Roles & Privileges</h3>
+                        {{-- <h3 style="color:red">Roles & Privileges</h3> --}}
+                        <div class="mb-2 justify-content-between d-flex align-items-center">
+                            <h4 class="mt-0 header-title">Roles & Privileges</h4>
+                        </div>
                         <a href="{{ url('admin/roles-privileges/add') }}" class="btn btn-success waves-effect waves-light add-btn" ><span class="btn-label"> <i class="fas fa-plus "></i></span>Add</a>
                     </div>
                     <div class="card">
