@@ -405,13 +405,9 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 
                 <!-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management')) -->
                 <li class="vendor">
-                    <a href="#">
+                    <a href="{{ url('admin/report') }}">
                     <!-- <i class="mdi mdi-bullhorn"></i> -->
                     <i class="mdi mdi-file-document"></i>
-
-
-
-
                         <span> Report</span>
                     </a>
                 </li>

@@ -84,6 +84,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
    //Alarm Management 
    Route::view('/alarm', 'admin.Alarm.alarm');
 
+   Route::view('/report', 'Admin.Report.report');
+
 
 
     // Start Backend Common Routes For The Projects
