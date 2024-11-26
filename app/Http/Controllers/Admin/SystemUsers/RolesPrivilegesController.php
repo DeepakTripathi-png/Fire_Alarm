@@ -93,7 +93,7 @@ class RolesPrivilegesController extends Controller
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
 
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_edit')) {
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_edit')&& $row->id != 1) {
                         $actionBtn .= '<a href="' . url('admin/roles-privileges/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit" disabled><i class="mdi mdi-pencil"></i></button></a>';
@@ -111,7 +111,7 @@ class RolesPrivilegesController extends Controller
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
 
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_status_change')) {
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_status_change')&& $row->id != 1) {
                         if ($row->status == 'active') {
                             $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="role_privileges" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;

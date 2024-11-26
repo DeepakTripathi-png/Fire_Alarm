@@ -96,218 +96,32 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 </li>
                 @endif
 
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'master_view'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view')||str_contains($RolesPrivileges, 'site_master_view'))
                 <li class="master">
                     <a href="#master" data-bs-toggle="collapse">
                         <i class="mdi mdi-chart-pie"></i>
                         <span> Master </span>
                         <span class="menu-arrow"></span>
                     </a>
+
                     <div class="collapse" id="master">
                         <ul class="nav-second-level">
-
-
-                                  
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_view'))
+       
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view'))
                             <li class="site-master">
-                                <a href="{{ url('admin/master/device_type') }}">Device Type</a>
+                                <a href="{{ url('admin/master/device-type') }}">Device Type</a>
                             </li>
                             @endif
 
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_master_view'))
                             <li class="site-master">
                                 <a href="{{ url('admin/master/site') }}">Site Master</a>
                             </li>
-                            @endif
-
-                      
-
-
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'department_view'))
-                            <li class="department-master">
-                                <a href="{{ url('admin/master/department') }}">Department Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'designation_view'))
-                            <li class="designation-master">
-                                <a href="{{ url('admin/master/designation') }}">Designation Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'category_view'))
-                            <li class="category-master">
-                                <a href="{{ url('admin/master/category') }}">Item Category Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'sub_categories_view'))
-                            <li class="sub-category-master">
-                                <a href="{{ url('admin/master/sub-category') }}">Item Sub Category Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'unit_view'))
-                            <li class="unit-master">
-                                <a href="{{ url('admin/master/unit') }}">Unit Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'item_view'))
-                            <li class="item-master">
-                                <a href="{{ url('admin/master/item') }}">Item Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'document_category_view'))
-                            <li class="document-category-master">
-                                <a href="{{ url('admin/master/document-category') }}">Document Category Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'document_sub_categories_view'))
-                            <li class="document-sub-category-master">
-                                <a href="{{ url('admin/master/document-sub-category') }}">Document Sub Category Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'warehouse_view'))
-                            <li class="warehouse-master">
-                                <a href="{{ url('admin/master/warehouse') }}">Warehouse Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'configuration_view'))
-                            <li class="configuration-master">
-                                <a href="{{ url('admin/master/configuration') }}">Configuration Master</a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'employee_view'))
-                            <li class="employee">
-                                <a href="{{ url('admin/master/employee') }}">Employee</a>
-                            </li>
-                            @endif
+                            @endif        
                         </ul>
                     </div>
                 </li>
                 @endif 
-
-                {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'vendor_view'))
-                <li class="vendor">
-                    <a href="{{ url('admin/vendor') }}">
-                        <i class="mdi mdi-account"></i>
-                        <span> Vendor </span>
-                    </a>
-                </li>
-                @endif --}}
-                {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'main_inventory_view'))
-                <li class="main-inventory">
-                    <a href="{{ url('admin/inventory/main') }}">
-                        <i class="mdi mdi-clipboard-list"></i>
-                        <span> Main Inventory </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_inventory_view'))
-                <li class ="site-inventory">
-                    <a href="{{ url('admin/inventory/site') }}">
-                        <i class="mdi mdi-clipboard-list"></i>
-                        <span> Site Inventory </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'item_requisition_view'))
-                <li class="item-requisition">
-                    <a href="{{ url('admin/requisitions/pending') }}">
-                        <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Item Requisition </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'utilized_item_view'))
-                <li class="utilized-item">
-                    <a href="{{ url('admin/utilized-item') }}">
-                        <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Utilized Item </span>
-                    </a>
-                </li>
-
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'all_document_view'))
-                <li class="documents">
-                    <a href="{{ url('admin/document') }}">
-                        <i class="mdi mdi-file-document"></i>
-                        <span>Documents </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'support_ticket_view'))
-                <li class="support-ticket">
-                    <a href="{{ url('admin/support-tickets/pending') }}">
-                        <i class="mdi mdi-ticket-confirmation"></i>
-                        <span>Support Ticket </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'dpr_view'))
-                <li class="dpr">
-                    <a href="{{ url('admin/dpr') }}" class="d-flex">
-                        <i class="mdi mdi-file-document-edit"></i>
-                        <span> DPR (Daily Progress Report) </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'attendance_view'))
-                <li class="attendance">
-                    <a href="{{ url('admin/attendance') }}">
-                        <i class="mdi mdi-account-check"></i>
-                        <span>Attendance</span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'training_view'))
-                <li class="training">
-                    <a href="{{ url('admin/training') }}">
-                        <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span>Training</span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'report_view'))
-                <li>
-                    <a href="#">
-                        <i class="mdi mdi-clipboard-edit"></i>
-                        <span> Reports </span>
-                    </a>
-                </li>
-                @endif
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'system_users_view'))
-                <li class="system-user">
-                    <a href="#system-user" data-bs-toggle="collapse">
-                        <i class="mdi mdi-account-circle"></i>
-                        <span> System Users</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="system-user">
-                        <ul class="nav-second-level">
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'user_view'))
-                            <li class="system-user-list">
-                                <a href="{{ url('admin/system-user') }}">
-                                    <span> System Users </span>
-                                </a>
-                            </li>
-                            @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_view'))
-                            <li class="role-privileges">
-                                <a href="{{ url('/admin/roles-privileges') }}">
-                                    <span> Role Privileges </span>
-                                </a>
-                            </li>
-                            @endif
-                        </ul>
-                    </div>
-                </li>
-                @endif --}}
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_view'))
-
-                <!-- <li class="role-privileges">
-                    <a href="{{ url('/admin/roles-privileges') }}">
-                        <i class="mdi mdi-account"></i>
-                        <span> Role Management </span>
-                    </a>
-                </li> -->
-
 
 
                 <li class="setting">
@@ -318,14 +132,14 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                     </a>
                     <div class="collapse" id="role_management">
                         <ul class="nav-second-level">
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'import_deice_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_view'))
                             <li class="general-setting">
                                 <a href="{{ url('/admin/roles-privileges') }}">
                                     <span>Role</span>
                                 </a>
                             </li>
                             @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_device_customer_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'system_user_view'))
                             <li class="visual-setting">
                                 <a href="{{ url('admin/system-user') }}">
                                     <span>System User</span>
@@ -337,18 +151,11 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                     </div>
                 </li>
 
-                @endif
+                {{-- @endif --}}
 
 
 
-                {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'vendor_view'))
-                <li class="vendor">
-                    <a href="{{ url('admin/vendor') }}">
-                        <i class="mdi mdi-monitor-multiple"></i>
-                        <span> Device Management </span>
-                    </a>
-                </li>
-                @endif --}}
+              
 
 
 
@@ -388,73 +195,29 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
           
 
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management_view'))
                 <li class="vendor">
                     <a href="{{ url('admin/alarm') }}">
-                    <!-- <i class="mdi mdi-bullhorn"></i> -->
+               
                     <i class="mdi mdi-bell-ring"></i>
 
 
 
-                        <span> Alarm Management </span>
+                        <span> Alert Management </span>
                     </a>
                 </li>
                 @endif
 
 
                 
-                <!-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management')) -->
+                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'report_view'))
                 <li class="vendor">
                     <a href="{{ url('admin/report') }}">
-                    <!-- <i class="mdi mdi-bullhorn"></i> -->
                     <i class="mdi mdi-file-document"></i>
                         <span> Report</span>
                     </a>
                 </li>
-                <!-- @endif -->
-
-                
-
-               
-                
-                {{-- @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'settings_view'))
-                    <li class="setting">
-                        <a href="#setting" data-bs-toggle="collapse">
-                            <i class="mdi mdi-chart-pie"></i>
-                            <span> Settings </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="setting">
-                            <ul class="nav-second-level">
-                                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'general_setting_view'))
-                                <li class="general-setting">
-                                    <a href="{{ url('/admin/general-setting') }}">
-                                        <span> General Settings</span>
-                                    </a>
-                                </li>
-                                @endif
-                                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'visual_setting_view'))
-                                <li class="visual-setting">
-                                    <a href="{{ url('/admin/visual-setting') }}">
-                                        <span> Visual Settings</span>
-                                    </a>
-                                </li>
-                                @endif
-                                <li class="change-password">
-                                    <a href="{{ url('/admin/change-password') }}">
-                                        <span> Change Password</span>
-                                    </a>
-                                </li>
-                                <li class="logout">
-                                    <a href="{{ url('admin/logout') }}">
-                                        <span> Logout</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                @endif --}}
-
+                @endif
 
             </ul>
         </div>

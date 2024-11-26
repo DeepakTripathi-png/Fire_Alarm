@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\SystemUsers\RolesPrivilegesController;
 use App\Http\Controllers\Admin\SystemUsers\SystemUserController;
 use App\Http\Controllers\Admin\NotFoundController\NotFoundController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\AlertNotificationController;
+use App\Http\Controllers\Admin\Master\DeviceTypeMasterController;
+use App\Http\Controllers\Admin\Master\SiteMasterController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -55,15 +58,36 @@ Route::get('/', function () {
 
 // End Frontend Routes
 
+Route::get('/check-unread-notifications', [AlertNotificationController::class, 'showAlert'])->name('showAlert');
+Route::post('/test-notification', [AlertNotificationController::class, 'store'])->name('notification.store');
+Route::get('/test-notification', [AlertNotificationController::class, 'create'])->name('notification.create');
+
 
 // Start Backend Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_admin']], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::view('master/site', 'Admin.Master.add_site');
+    // Route::view('master/site', 'Admin.Master.add_site');
 
-    Route::view('master/device_type', 'Admin.Master.device_type_master');
+    // Route::view('master/device_type', 'Admin.Master.device_type_master');
+
+
+
+    Route::controller(DeviceTypeMasterController::class)->group(function () {
+        Route::get('master/device-type', 'index');
+        Route::post('master/device-type/store', 'store')->name('master.device_type.store');
+        Route::get('master/device-type/data-table','data_table');
+        Route::get('device-type-master/edit/{id}','edit');
+    });
+
+
+    Route::controller(SiteMasterController::class)->group(function () {
+        Route::get('master/site', 'index');
+        Route::post('master/site/store', 'store')->name('master.site.store');
+        Route::get('master/site/data-table','data_table');
+        Route::get('site-master/edit/{id}','edit');
+    });
 
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2024 at 09:37 AM
+-- Generation Time: Nov 26, 2024 at 01:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,74 @@ SET time_zone = "+00:00";
 --
 -- Database: `firealarm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alert_notifications`
+--
+
+CREATE TABLE `alert_notifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `device_id` varchar(255) NOT NULL,
+  `device_type` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `alert_notifications`
+--
+
+INSERT INTO `alert_notifications` (`id`, `device_id`, `device_type`, `location`, `description`, `is_read`, `created_at`, `updated_at`) VALUES
+(1, '12222', 'Fire Alarm', 'Pune', 'This is Fire Alerts', 1, '2024-11-25 00:31:52', '2024-11-25 00:32:02'),
+(2, '12222', 'Fire Alarm', 'Pune', 'sdsd', 1, '2024-11-25 00:36:47', '2024-11-25 00:36:55'),
+(3, '12222', 'Fire Alarm', 'Pune', 'zczcZc', 1, '2024-11-25 00:37:48', '2024-11-25 00:42:11'),
+(4, 'Deserunt sed adipisi', 'Ducimus tenetur pla', 'Aut velit minus enim', 'Nulla omnis saepe ap', 1, '2024-11-25 00:38:06', '2024-11-25 00:42:11'),
+(5, 'Voluptates omnis seq', 'Ipsa voluptatum adi', 'Dolore doloribus tot', 'Ut et cillum est vo', 1, '2024-11-25 00:38:22', '2024-11-25 00:42:11'),
+(6, 'Blanditiis aute labo', 'Unde officia in reru', 'Eu consequatur Non', 'Eius non rerum modi', 1, '2024-11-25 00:43:02', '2024-11-25 00:43:35'),
+(7, 'Quam sed corporis po', 'Laborum assumenda se', 'Nam voluptas vitae c', 'Qui et quaerat et ne', 1, '2024-11-25 00:49:05', '2024-11-25 00:50:37'),
+(8, 'Eiusmod eligendi ame', 'Nemo in eius nulla r', 'Qui mollit libero at', 'Iusto in autem labor', 1, '2024-11-25 00:51:05', '2024-11-25 00:51:39'),
+(9, 'Amet dolorem ipsam', 'Assumenda dolores do', 'Asperiores non nisi', 'Corporis ut minus vo', 1, '2024-11-25 00:53:28', '2024-11-25 00:56:14'),
+(10, 'Et eum veritatis qui', 'Do sed natus maxime', 'Et excepturi et odit', 'Laboris corrupti ad', 1, '2024-11-25 01:11:14', '2024-11-25 01:12:21'),
+(11, 'Eos deleniti velit e', 'Sapiente sit ad non', 'Aut repudiandae temp', 'Possimus aliqua Iu', 1, '2024-11-25 01:13:21', '2024-11-25 01:13:22'),
+(12, 'Pariatur Dignissimo', 'Delectus maiores co', 'Unde cumque sit quo', 'Atque quam dolor occ', 1, '2024-11-25 01:17:09', '2024-11-25 01:17:10'),
+(13, 'Inventore accusantiu', 'Rem sed ut in corpor', 'Ratione nobis do est', 'Dolor earum deserunt', 1, '2024-11-25 01:17:21', '2024-11-25 01:17:22'),
+(14, 'Doloremque voluptate', 'Molestias excepteur', 'Itaque enim nihil su', 'Et provident tempor', 1, '2024-11-25 01:18:25', '2024-11-25 01:18:26'),
+(15, 'Doloremque culpa eos', 'Molestiae sunt quis', 'Porro sed in aut dig', 'Asperiores amet ill', 1, '2024-11-25 01:19:15', '2024-11-25 01:19:15'),
+(16, 'Et voluptatibus omni', 'Eos reprehenderit', 'Omnis aliquid aspern', 'Nulla necessitatibus', 1, '2024-11-25 01:25:14', '2024-11-25 01:25:15'),
+(17, 'Aliquid fugiat in ip', 'Consequatur mollit t', 'Qui voluptatem Sunt', 'Ex voluptatem sit e', 1, '2024-11-25 01:26:23', '2024-11-25 01:26:23'),
+(18, 'Consectetur itaque e', 'Enim mollitia magnam', 'Dolor exercitationem', 'Autem blanditiis eum', 1, '2024-11-25 01:32:14', '2024-11-25 01:32:15'),
+(19, 'Enim culpa harum au', 'Amet in officia qui', 'Voluptatem autem ex', 'Animi quisquam qui', 1, '2024-11-25 01:32:33', '2024-11-25 01:32:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device_type_masters`
+--
+
+CREATE TABLE `device_type_masters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `device_type` text DEFAULT NULL,
+  `created_ip_address` varchar(255) DEFAULT NULL,
+  `modified_ip_address` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `modified_by` bigint(20) DEFAULT NULL,
+  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `device_type_masters`
+--
+
+INSERT INTO `device_type_masters` (`id`, `device_type`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Fire Alarm 1', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-25 03:12:36', '2024-11-26 00:20:19'),
+(2, 'Pump', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 00:28:20', '2024-11-26 00:28:20');
 
 -- --------------------------------------------------------
 
@@ -100,7 +168,7 @@ CREATE TABLE `master_admins` (
 --
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
-(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2024-11-21 04:45:24', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2024-11-21 12:45:24');
+(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2024-11-26 04:26:46', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2024-11-25 22:56:46');
 
 -- --------------------------------------------------------
 
@@ -126,7 +194,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2023_07_05_075239_create_master_admins_table', 1),
 (6, '2023_07_13_034312_create_general_settings_table', 1),
 (7, '2023_08_22_102532_create_role_privileges_table', 1),
-(8, '2023_08_28_112847_create_visual_settings_table', 1);
+(8, '2023_08_28_112847_create_visual_settings_table', 1),
+(9, '2024_11_25_043851_create_alert_notifications_table', 2),
+(11, '2024_11_25_070606_create_device_type_masters_table', 3),
+(12, '2024_11_26_063603_create_site_masters_table', 4);
 
 -- --------------------------------------------------------
 
@@ -183,10 +254,36 @@ CREATE TABLE `role_privileges` (
 --
 
 INSERT INTO `role_privileges` (`id`, `role_name`, `privileges`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'dashboard_view,admin_view,customer_view,role_privileges_view,device_management,import_deice_view,map_device_customer_view,my_device_view,alarm_management,add_customer,admin_view,master_view,master_status,master_delete,master_edit,master_add,\ncustomer_status,customer_delete,customer_edit,customer_add,customer_view,location_status,location_delete,location_edit,location_add,location_view,alarm_status,alarm_delete,alarm_add,alarm_edit,alarm_view,reports_status,reports_delete,reports_add,reports_edit,reports_view, role_privileges_view, role_privileges_add, role_privileges_edit, role_privileges_delete, role_privileges_status_change, settings_view, general_setting_view, general_setting_add, general_setting_edit, visual_setting_view, visual_setting_add, visual_setting_edit,user_view,user_add,user_edit', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-15 04:32:54'),
-(2, 'Dashboard', 'dashboard_view', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-15 05:27:26', '2024-11-15 05:27:26'),
+(1, 'Super Admin', 'dashboard_view, master_view, device_type_view, site_view, role_view, system_user_view, device_management, my_device_view, map_device_customer_view, alarm_management_view, report_view, settings_view, general_setting_view, visual_setting_view, location_view, location_add, location_edit, location_delete, location_status, alarm_view, alarm_edit, alarm_add, alarm_delete, alarm_status, reports_edit, reports_delete, reports_status, role_privileges_view, role_privileges_add, role_privileges_edit, role_privileges_delete, role_privileges_status_change, user_view, user_add, user_edit, user_delete, user_status_change, privileges,device_master_add, device_type_master_delete, device_type_master_status_change, device_type_master_edit,device_master_add,device_type_master_view,site_master_view,site_master_edit,site_master_add,site_master_status_change,site_master_delete', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
 (3, 'Admin', 'dashboard_view,reports_view', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-15 05:28:04', '2024-11-15 05:28:04'),
-(4, 'Customer', 'dashboard_view,admin_view,master_view,customer_view,location_view,alarm_view,reports_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2024-11-15 05:32:08');
+(4, 'Client Admin', 'dashboard_view,alarm_view,reports_view,reports_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2024-11-26 04:46:26'),
+(5, 'Client Operator', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_view,role_view,role_add,role_edit,role_delete,role_status,system_user_view,system_user_add,system_user_edit,system_user_delete,role_status,device_management_view,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,reports_view,reports_edit,reports_view,reports_delete,reports_status', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 04:47:07', '2024-11-26 04:47:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_masters`
+--
+
+CREATE TABLE `site_masters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `site_name` varchar(255) DEFAULT NULL,
+  `site_address` longtext DEFAULT NULL,
+  `created_ip_address` varchar(255) DEFAULT NULL,
+  `modified_ip_address` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `modified_by` bigint(20) DEFAULT NULL,
+  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `site_masters`
+--
+
+INSERT INTO `site_masters` (`id`, `site_name`, `site_address`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Codepix  11', 'Swami Plot No 166, Gajanan Nagar, 1/1/1, opposite ASHTAVINAYAK CITY, next to Pearl Society, Maharashtra Vidhyut Department Quarters, Phursungi, Pune, Maharashtra 412308', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-26 01:31:05', '2024-11-26 04:33:13');
 
 -- --------------------------------------------------------
 
@@ -235,6 +332,18 @@ CREATE TABLE `visual_settings` (
 --
 
 --
+-- Indexes for table `alert_notifications`
+--
+ALTER TABLE `alert_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `device_type_masters`
+--
+ALTER TABLE `device_type_masters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -280,6 +389,12 @@ ALTER TABLE `role_privileges`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `site_masters`
+--
+ALTER TABLE `site_masters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -295,6 +410,18 @@ ALTER TABLE `visual_settings`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alert_notifications`
+--
+ALTER TABLE `alert_notifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `device_type_masters`
+--
+ALTER TABLE `device_type_masters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -318,7 +445,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -330,7 +457,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `role_privileges`
 --
 ALTER TABLE `role_privileges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `site_masters`
+--
+ALTER TABLE `site_masters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
