@@ -50,6 +50,23 @@
     <div class="content">
         <div class="container-fluid dashboard-cards">
             <div class="row">
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mt-0 mb-4">Sites</h4>
+                            <div class="widget-chart-1">
+                                <div class="widget-chart-box-1 float-start" dir="ltr">
+                                    <i class="mdi mdi-office-building text-warning"></i>
+                                </div>
+                                <div class="widget-detail-1 text-end">
+                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
+                                    <p class="text-muted mb-1">Total Assign Device</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
@@ -67,22 +84,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Sites</h4>
-                            <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-office-building text-warning"></i>
-                                </div>
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                    <p class="text-muted mb-1">Total Assign Device</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+        
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -100,63 +104,75 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Not Sent
+                            <h4 class="header-title mt-0 mb-4">Inactive Device
                             </h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-warehouse text-danger"></i>
+                                    {{-- <i class="mdi mdi-warehouse text-danger"></i> --}}
+                                    <i class="mdi mdi-clipboard-list text-danger"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 100 </h2>
-                                    <p class="text-muted mb-1">Not Sent
+                                    <p class="text-muted mb-1">Inactive Sent
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Total Config Library</h4>
+                            <h4 class="header-title mt-0 mb-4">Total Alerts</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-account-circle text-secondary"></i>
+                                    {{-- <i class="mdi mdi-account-circle text-secondary"></i> --}}
+
+                                    <i class="mdi mdi-alarm-light text-secondary"></i>
+
+                                    
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 1 </h2>
-                                    <p class="text-muted mb-1">Total Config Library</p>
+                                    <p class="text-muted mb-1">Total Alerts</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4"> Sent</h4>
+                            <h4 class="header-title mt-0 mb-4">Fixed Alerts</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-account-check"></i>
+                                    {{-- <i class="mdi mdi-account-check"></i> --}}
+                                    <i class="mdi mdi-alarm-light text-info"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 0 </h2>
-                                    <p class="text-muted mb-1">Sent</p>
+                                    <p class="text-muted mb-1">Fixed Alerts</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4"> Failed</h4>
+                            <h4 class="header-title mt-0 mb-4">Pending Alerts</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-cancel"></i>
+                                    {{-- <i class="mdi mdi-cancel"></i> --}}
+                                    <i class="mdi mdi-alarm-light text-warning"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
@@ -166,22 +182,25 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4"> No of Vendor</h4>
+                            <h4 class="header-title mt-0 mb-4">Active Alerts</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-account-check"></i>
+                                     {{-- <i class="mdi mdi-account-check"></i> --}}
+                                    <i class="mdi mdi-alarm-light text-danger"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                    <p class="text-muted mb-1">No of Vendor</p>
+                                    <p class="text-muted mb-1">Active Alerts</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         
         </div>
@@ -189,57 +208,7 @@
 
 
 
-        <!-- New -->
-
-
-        {{-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-
-                <div class="header">Latest Event / Alarm</div>
-                <div class="event-card">
-                        <div class="event-details">
-                            <div>Device ID <a href="#">TOR2314232</a></div>
-                            <div>Device Type: Smoke Detector</div>
-                            <div>Event Type: Miss fire</div>
-                            <div>Location: Phursungi, Pune</div>
-                        </div>
-                        <div class="event-status">
-                            <div class="date-time">Date & Time : 12/11/2024 16:14:45</div>
-                            <div class="status status-missfire">Miss fire</div>
-                        </div>
-                </div>
-            
-                <div class="event-card">
-                    <div class="event-details">
-                        <div>Device ID <a href="#">TOR2314232</a></div>
-                        <div>Device Type: Smoke Detector</div>
-                        <div>Event Type: Fixed</div>
-                        <div>Location: Phursungi, Pune</div>
-                    </div>
-                    <div class="event-status">
-                        <div class="date-time">Date & Time : 12/11/2024 16:14:45</div>
-                        <div class="status status-fixed">Fixed</div>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-details">
-                        <div>Device ID <a href="#">TOR2314232</a></div>
-                        <div>Device Type: Smoke Detector</div>
-                        <div>Event Type: Miss fire</div>
-                        <div>Location: Phursungi, Pune</div>
-                    </div>
-                    <div class="event-status">
-                        <div class="date-time">Date & Time : 12/11/2024 16:14:45</div>
-                        <div class="status status-pending">Pending</div>
-                    </div>
-                </div>
-
-
-                </div>
-            </div>
-        </div> --}}
+        
 
 
 
