@@ -179,7 +179,7 @@
                                                     </tr>
 
 
-
+{{-- 
                                                     <tr>
                                                         <td class="text-center">3</td>
                                                         <td>Role Management</td>
@@ -193,36 +193,36 @@
                                                         <td class="text-center"></td>
                                                         <td class="text-center"></td>
                                                         <td class="text-center"></td>
-                                                    </tr>
+                                                    </tr> --}}
 
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Role</td>
+                                                        <td>Role Management > Role & Previleges</td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_view" class="ccheckbox view"
-                                                                value="role_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_view') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="role_privileges_view" class="ccheckbox view"
+                                                                value="role_privileges_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_privileges_view') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_add" class="ccheckbox add"
-                                                                value="role_add"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_add') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="role_privileges_add " class="ccheckbox add"
+                                                                value="role_privileges_add "
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_privileges_add') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_edit" class="ccheckbox edit"
-                                                                value="role_edit"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_edit') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="role_privileges_edit" class="ccheckbox edit"
+                                                                value="role_privileges_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_privileges_edit') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_delete"
-                                                                class="ccheckbox deletes" value="role_delete"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_delete') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="role_privileges_delete"
+                                                                class="ccheckbox deletes" value="role_privileges_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_privileges_delete') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_status"
-                                                                class="ccheckbox status" value="role_status"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_status') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="role_privileges_status_change"
+                                                                class="ccheckbox status" value="role_privileges_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_privileges_status_change') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 class="ccheckbox all-other"></td>
@@ -231,31 +231,31 @@
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>System User</td>
+                                                        <td>Role Management > System User</td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="system_user_view"
-                                                                class="ccheckbox view" value="system_user_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'system_user_view') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="user_view"
+                                                                class="ccheckbox view" value="user_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'user_view') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="system_user_add"
-                                                                class="ccheckbox add" value="system_user_add"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'system_user_add') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="user_add"
+                                                                class="ccheckbox add" value="user_add"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'user_add') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="system_user_edit"
-                                                                class="ccheckbox edit" value="system_user_edit"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'system_user_edit') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="user_edit"
+                                                                class="ccheckbox edit" value="user_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'user_edit') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="system_user_delete"
-                                                                class="ccheckbox deletes" value="system_user_delete"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'system_user_delete') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="user_delete"
+                                                                class="ccheckbox deletes" value="user_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'user_delete') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="system_user_status"
-                                                                class="ccheckbox status" value="role_status"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'system_user_status') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="user_status_change"
+                                                                class="ccheckbox status" value="user_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'user_status_change') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 class="ccheckbox all-other"></td>
@@ -264,7 +264,7 @@
 
 
 
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td class="text-center">3</td>
                                                         <td>Device Management</td>
                                                         <td class="text-center"><input type="checkbox"
@@ -277,12 +277,12 @@
                                                         <td class="text-center"></td>
                                                         <td class="text-center"></td>
                                                         <td class="text-center"></td>
-                                                    </tr>
+                                                    </tr> --}}
 
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Device</td>
+                                                        <td>Device Management > Device</td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 name="privileges[]" id="device_view"
                                                                 class="ccheckbox view" value="device_view"
@@ -315,7 +315,7 @@
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Map Site</td>
+                                                        <td>Device Management > Map Site</td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 name="privileges[]" id="map_site_view"
                                                                 class="ccheckbox view" value="map_site_view"
@@ -388,32 +388,43 @@
                                                         <td class="text-center">2</td>
                                                         <td>Reports</td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="reports_view"
-                                                                class="ccheckbox view" value="reports_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'reports_view') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="report_view"
+                                                                class="ccheckbox view" value="report_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'report_view') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="reports_edit"
-                                                                class="ccheckbox edit" value="reports_edit"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'reports_edit') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="report_add"
+                                                                class="ccheckbox edit" value="report_add"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'report_add') ? 'checked' : '' }}>
+                                                        </td>
+
+
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+
+                                                        <td class="text-center"></td>
+
+                                                        <td class="text-center"></td>
+
+
+                                                        {{-- <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="report_edit"
+                                                                class="ccheckbox view" value="report_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'report_edit') ? 'checked' : '' }}>
+                                                        </td>
+
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="report_delete"
+                                                                class="ccheckbox delete" value="report_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'report_delete') ? 'checked' : '' }}>
                                                         </td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="reports_add"
-                                                                class="ccheckbox view" value="reports_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'reports_view') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="reports_delete"
-                                                                class="ccheckbox delete" value="reports_delete"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'reports_delete') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="reports_status"
-                                                                class="ccheckbox status" value="reports_status"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'reports_status') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                class="ccheckbox all-other"></td>
+                                                                name="privileges[]" id="report_status_change"
+                                                                class="ccheckbox status" value="report_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'report_status_change') ? 'checked' : '' }}>
+                                                        </td> --}}
+                                                        {{-- <td class="text-center"><input type="checkbox"
+                                                                class="ccheckbox all-other"></td> --}}
                                                     </tr>
 
 

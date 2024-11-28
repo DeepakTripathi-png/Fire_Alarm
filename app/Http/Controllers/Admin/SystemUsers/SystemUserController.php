@@ -117,7 +117,7 @@ class SystemUserController extends Controller
     }
 
     public function data_table(Request $request){
-        $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
+        $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.role_id', '!=', 1)->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
         if ($request->ajax()) {
             return DataTables::of($system_user)
                 ->addIndexColumn()
@@ -174,6 +174,11 @@ class SystemUserController extends Controller
                 ->make(true);
         }
     }
+
+
+
+
+
 
     public function edit($id){
         try {

@@ -123,7 +123,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 </li>
                 @endif 
 
-
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_view')||str_contains($RolesPrivileges, 'user_view'))  
                 <li class="setting">
                     <a href="#role_management" data-bs-toggle="collapse">
                         <i class="mdi mdi-laptop"></i>
@@ -132,14 +132,14 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                     </a>
                     <div class="collapse" id="role_management">
                         <ul class="nav-second-level">
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_view'))
                             <li class="general-setting">
                                 <a href="{{ url('/admin/roles-privileges') }}">
                                     <span>Role</span>
                                 </a>
                             </li>
                             @endif
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'system_user_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'user_view'))
                             <li class="visual-setting">
                                 <a href="{{ url('admin/system-user') }}">
                                     <span>System User</span>
@@ -150,6 +150,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                         </ul>
                     </div>
                 </li>
+                @endif
 
                 {{-- @endif --}}
 
@@ -159,7 +160,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
 
 
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_management'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
                         <li class="setting">
                             <a href="#setting" data-bs-toggle="collapse">
                                 <i class="mdi mdi-chart-pie"></i>
@@ -170,7 +171,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                                 <ul class="nav-second-level">
                               
                                      
-                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'my_device_view'))
+                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view'))
                                     <li class="change-password">
                                         <a href="{{ url('/admin/device') }}">
                                             <span> Device </span>
@@ -178,7 +179,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                                     </li>
                                     @endif
 
-                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_device_customer_view'))
+                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_site_view'))
                                     <li class="visual-setting">
                                         <a href="{{ url('/admin/map-site') }}">
                                             <span> Map Site</span>
@@ -195,14 +196,10 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
           
 
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_management_view'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_view'))
                 <li class="vendor">
                     <a href="{{ url('admin/alarm') }}">
-               
                     <i class="mdi mdi-bell-ring"></i>
-
-
-
                         <span> Alert Management </span>
                     </a>
                 </li>

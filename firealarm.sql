@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2024 at 01:08 PM
+-- Generation Time: Nov 28, 2024 at 07:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -168,7 +168,8 @@ CREATE TABLE `master_admins` (
 --
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
-(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2024-11-26 04:26:46', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2024-11-25 22:56:46');
+(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2024-11-28 04:40:40', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2024-11-27 23:10:40'),
+(2, 'system', NULL, 'Deepak', 'deepak@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2024-11-27 06:37:53', NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2024-11-27 01:07:53');
 
 -- --------------------------------------------------------
 
@@ -233,6 +234,30 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role_name` varchar(255) NOT NULL,
+  `hierarchy_level` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role_name`, `hierarchy_level`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 1, '2024-11-27 07:16:24', NULL),
+(2, 'Admin', 2, '2024-11-27 07:16:24', NULL),
+(3, 'Client Admin', 3, '2024-11-27 07:16:24', NULL),
+(4, 'Client Operator', 4, '2024-11-27 07:16:24', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role_privileges`
 --
 
@@ -254,8 +279,8 @@ CREATE TABLE `role_privileges` (
 --
 
 INSERT INTO `role_privileges` (`id`, `role_name`, `privileges`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'dashboard_view, master_view, device_type_view, site_view, role_view, system_user_view, device_management, my_device_view, map_device_customer_view, alarm_management_view, report_view, settings_view, general_setting_view, visual_setting_view, location_view, location_add, location_edit, location_delete, location_status, alarm_view, alarm_edit, alarm_add, alarm_delete, alarm_status, reports_edit, reports_delete, reports_status, role_privileges_view, role_privileges_add, role_privileges_edit, role_privileges_delete, role_privileges_status_change, user_view, user_add, user_edit, user_delete, user_status_change, privileges,device_master_add, device_type_master_delete, device_type_master_status_change, device_type_master_edit,device_master_add,device_type_master_view,site_master_view,site_master_edit,site_master_add,site_master_status_change,site_master_delete', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
-(3, 'Admin', 'dashboard_view,reports_view', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-15 05:28:04', '2024-11-15 05:28:04'),
+(1, 'Super Admin', 'dashboard_view, device_type_master_view, site_master_view, role_privileges_view, user_view, device_view, map_site_view, alarm_view, report_view, device_master_add, site_master_add, role_privileges_add, user_add, device_add, map_site_add, alarm_add, report_add, device_master_edit, site_master_edit, role_privileges_edit, user_edit, device_edit, map_site_edit, alarm_edit, report_edit, device_type_master_delete, site_master_delete, role_privileges_delete, user_delete, device_delete, map_site_delete, alarm_delete, report_delete, device_type_master_status_change, site_master_status_change, role_privileges_status_change, user_status_change, device_status, map_site_status, alarm_status, report_status_change', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
+(3, 'Admin', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_privileges_view,role_privileges_add,role_privileges_edit,role_privileges_delete,role_privileges_status_change,user_view,user_add,user_edit,user_delete,user_status_change,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,report_view,report_add', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:28:04', '2024-11-27 01:36:03'),
 (4, 'Client Admin', 'dashboard_view,alarm_view,reports_view,reports_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2024-11-26 04:46:26'),
 (5, 'Client Operator', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_view,role_view,role_add,role_edit,role_delete,role_status,system_user_view,system_user_add,system_user_edit,system_user_delete,role_status,device_management_view,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,reports_view,reports_edit,reports_view,reports_delete,reports_status', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 04:47:07', '2024-11-26 04:47:07');
 
@@ -383,6 +408,13 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `role_name` (`role_name`);
+
+--
 -- Indexes for table `role_privileges`
 --
 ALTER TABLE `role_privileges`
@@ -439,7 +471,7 @@ ALTER TABLE `general_settings`
 -- AUTO_INCREMENT for table `master_admins`
 --
 ALTER TABLE `master_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -452,6 +484,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `role_privileges`

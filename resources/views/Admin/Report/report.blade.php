@@ -81,8 +81,8 @@
                                         <th>Alarm Status</th>
                                         <th>Date</th> 
                                         <th>Description</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        {{-- <th>Status</th>
+                                        <th>Action</th> --}}
                                     </tr>
                                 </thead>
 
@@ -100,12 +100,12 @@
                                 <td>12/11/2024 16:14:45</td>
                                 <td>Signals the presence of smoke in a specific area.</td>
                                     
-                                    <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
+                                    {{-- <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
 
                                     <td>
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
-                                   </td>
+                                   </td> --}}
                                 </tr>
 
 
@@ -120,12 +120,12 @@
                                 <td class="status-green">Miss fire</td>
                                 <td>12/11/2024 16:14:45</td>
                                 <td>Signals the presence of smoke in a specific area.</td>
-                                    <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
+                                    {{-- <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
 
                                     <td>
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
-                                   </td>
+                                   </td> --}}
                                 </tr>
                                 <tr>
                                 <td>3</td>
@@ -138,12 +138,12 @@
                                 <td class="status-green">Miss fire</td>
                                 <td>12/11/2024 16:14:45</td>
                                 <td>Signals the presence of smoke in a specific area.</td>
-                                    <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
+                                    {{-- <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
 
                                     <td>
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
-                                   </td>
+                                   </td> --}}
                                 </tr>
                                                         
                                 </tbody>
