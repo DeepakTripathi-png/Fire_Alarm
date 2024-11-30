@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2024 at 07:01 AM
+-- Generation Time: Nov 30, 2024 at 08:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,6 +62,35 @@ INSERT INTO `alert_notifications` (`id`, `device_id`, `device_type`, `location`,
 (17, 'Aliquid fugiat in ip', 'Consequatur mollit t', 'Qui voluptatem Sunt', 'Ex voluptatem sit e', 1, '2024-11-25 01:26:23', '2024-11-25 01:26:23'),
 (18, 'Consectetur itaque e', 'Enim mollitia magnam', 'Dolor exercitationem', 'Autem blanditiis eum', 1, '2024-11-25 01:32:14', '2024-11-25 01:32:15'),
 (19, 'Enim culpa harum au', 'Amet in officia qui', 'Voluptatem autem ex', 'Animi quisquam qui', 1, '2024-11-25 01:32:33', '2024-11-25 01:32:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `devices`
+--
+
+CREATE TABLE `devices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `site_id` bigint(20) DEFAULT NULL,
+  `device_type_id` bigint(20) DEFAULT NULL,
+  `device_id` varchar(255) DEFAULT NULL,
+  `device_name` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `created_ip_address` varchar(255) DEFAULT NULL,
+  `modified_ip_address` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `modified_by` bigint(20) DEFAULT NULL,
+  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `devices`
+--
+
+INSERT INTO `devices` (`id`, `site_id`, `device_type_id`, `device_id`, `device_name`, `description`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '12222', 'Fire Alarm Pump', 'Hi This is Deepak', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-28 02:48:06', '2024-11-28 02:48:06');
 
 -- --------------------------------------------------------
 
@@ -198,7 +227,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2023_08_28_112847_create_visual_settings_table', 1),
 (9, '2024_11_25_043851_create_alert_notifications_table', 2),
 (11, '2024_11_25_070606_create_device_type_masters_table', 3),
-(12, '2024_11_26_063603_create_site_masters_table', 4);
+(12, '2024_11_26_063603_create_site_masters_table', 4),
+(13, '2024_11_28_060802_create_devices_table', 5);
 
 -- --------------------------------------------------------
 
@@ -308,7 +338,8 @@ CREATE TABLE `site_masters` (
 --
 
 INSERT INTO `site_masters` (`id`, `site_name`, `site_address`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Codepix  11', 'Swami Plot No 166, Gajanan Nagar, 1/1/1, opposite ASHTAVINAYAK CITY, next to Pearl Society, Maharashtra Vidhyut Department Quarters, Phursungi, Pune, Maharashtra 412308', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-26 01:31:05', '2024-11-26 04:33:13');
+(1, 'Codepix  11', 'Swami Plot No 166, Gajanan Nagar, 1/1/1, opposite ASHTAVINAYAK CITY, next to Pearl Society, Maharashtra Vidhyut Department Quarters, Phursungi, Pune, Maharashtra 412308', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-26 01:31:05', '2024-11-26 04:33:13'),
+(2, NULL, NULL, '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-28 02:46:18', '2024-11-28 02:46:18');
 
 -- --------------------------------------------------------
 
@@ -360,6 +391,12 @@ CREATE TABLE `visual_settings` (
 -- Indexes for table `alert_notifications`
 --
 ALTER TABLE `alert_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `devices`
+--
+ALTER TABLE `devices`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -450,6 +487,12 @@ ALTER TABLE `alert_notifications`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `devices`
+--
+ALTER TABLE `devices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `device_type_masters`
 --
 ALTER TABLE `device_type_masters`
@@ -477,7 +520,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -501,7 +544,7 @@ ALTER TABLE `role_privileges`
 -- AUTO_INCREMENT for table `site_masters`
 --
 ALTER TABLE `site_masters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

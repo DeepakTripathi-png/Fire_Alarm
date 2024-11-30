@@ -17,7 +17,7 @@
                     <div class="card department-card">
                         <div class="card-body">
                             
-                            <form action="#" method="post">
+                            <form action="{{route('device.store')}}" method="post">
                                 @csrf
                                 <div class="row">
                                     <!-- Device Identification -->
@@ -26,33 +26,37 @@
                                         <div class="row">
 
                                             <div class="mb-3 col-6">
-                                                <label for="site_name" class="form-label">Select Site</label>
-                                                <select class="form-select" id="site_name" name="site_name">
+                                                <label for="site_id" class="form-label">Select Site</label>
+                                                <select class="form-select" id="site_id" name="site_id">
                                                     <option value="">Select Site</option>
-                                                    <option value="1">Codepix Solution</option>
-                                                    <option value="Heat Sensor">Infosys Hinjewadi</option>
-                                                   
+                                                    @if(!empty($sites))
+                                                        @foreach($sites as $site)
+                                                        <option value="{{!empty($site->id)?$site->id:''}}">{{!empty($site->site_name)?$site->site_name:''}}</option>
+                                                        @endforeach 
+                                                    @endif
                                                 </select>
                                             </div>
 
 
 
                                             <div class="mb-3 col-6">
-                                                <label for="device_type" class="form-label">Device Type</label>
-                                                <select class="form-select" id="device_type" name="device_type">
-                                                    <option value="">Select Type</option>
-                                                    <option value="Smoke Detector">Smoke Detector</option>
-                                                    <option value="Heat Sensor">Heat Sensor</option>
-                                                    <option value="Alarm Bell">Alarm Bell</option>
-                                                    <option value="Control Panel">Control Panel</option>
+                                                <label for="device_type_id" class="form-label">Device Type</label>
+                                                <select class="form-select" id="device_type_id" name="device_type_id">
+                                                    <option value="">Select Device Type</option>
+                                                    @if(!empty($deviceTypes))
+                                                    @foreach($deviceTypes as $deviceType)
+                                                    <option value="{{!empty($deviceType->id)?$deviceType->id:''}}">{{!empty($deviceType->device_type)?$deviceType->device_type:''}}</option>
+                                                    @endforeach 
+                                                @endif
                                                 </select>
                                             </div>
+
                                          </div>
                                         <div class="row">
 
                                             <div class="mb-3 col-6">
-                                                <label for="serial_number" class="form-label">Device ID</label>
-                                                <input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="Enter serial number">
+                                                <label for="device_id" class="form-label">Device ID</label>
+                                                <input type="text" class="form-control" id="device_id" name="device_id" placeholder="Enter device id">
                                             </div>
 
                                             <div class="mb-3 col-6">

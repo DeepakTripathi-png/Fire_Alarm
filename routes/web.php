@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\AlertNotificationController;
 use App\Http\Controllers\Admin\Master\DeviceTypeMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
+use App\Http\Controllers\Admin\Device\DeviceController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -90,6 +91,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
     });
 
 
+    Route::controller(DeviceController::class)->group(function (){
+
+        Route::get('device', 'index');
+
+         Route::get('/device/add', 'add');
+
+        Route::post('device/store', 'store')->name('device.store');
+
+
+        // Route::get('master/site/data-table','data_table');
+        // Route::get('site-master/edit/{id}','edit');
+    });
+
+
+    // Route::view('/device', 'admin.Device.device');
+
+
 
 
     Route::view('/device-import', 'admin.Device.import_device');
@@ -98,9 +116,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     Route::view('/map-site/add', 'Admin.Device.map_device_add');
 
-    Route::view('/device', 'admin.Device.device');
+   
 
-    Route::view('/device/add', 'Admin.Device.add_device');
+   
   
    //Customer Route
    Route::view('/customer', 'admin.Customer.customer');
