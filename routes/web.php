@@ -15,6 +15,7 @@ use App\Http\Controllers\AlertNotificationController;
 use App\Http\Controllers\Admin\Master\DeviceTypeMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
 use App\Http\Controllers\Admin\Device\DeviceController;
+use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -69,11 +70,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Route::view('master/site', 'Admin.Master.add_site');
-
-    // Route::view('master/device_type', 'Admin.Master.device_type_master');
-
-
 
     Route::controller(DeviceTypeMasterController::class)->group(function () {
         Route::get('master/device-type', 'index');
@@ -109,20 +105,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
     // Route::view('/device', 'admin.Device.device');
 
 
+    Route::controller(AssignDeviceController::class)->group(function (){
+
+        Route::get('assign-site', 'index');
+        Route::get('/assign-site/add', 'add');
+        Route::post('assign-site/store', 'store')->name('assign-site.store');
+        Route::get('assign-site/edit/{id}','edit');
 
 
-    Route::view('/device-import', 'admin.Device.import_device');
+        Route::get('assign-site/data-table','data_table');
+       
+    });
+
+
+
+
+    // Route::view('/device-import', 'admin.Device.import_device');
     
-    Route::view('/map-site', 'admin.Device.map_device');
+    // Route::view('/map-site', 'admin.Device.map_device');
 
-    Route::view('/map-site/add', 'Admin.Device.map_device_add');
+    // Route::view('/map-site/add', 'Admin.Device.map_device_add');
 
    
 
    
   
    //Customer Route
-   Route::view('/customer', 'admin.Customer.customer');
+//    Route::view('/customer', 'admin.Customer.customer');
 
    //Alarm Management 
    Route::view('/alarm', 'admin.Alarm.alarm');
