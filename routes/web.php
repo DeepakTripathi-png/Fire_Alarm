@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
 
         // Route::get('master/site/data-table','data_table');
-        // Route::get('site-master/edit/{id}','edit');
+        Route::get('device/edit/{id}','edit');
     });
 
 
@@ -174,8 +174,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     route::get('/404', [NotFoundController::class, 'index']);
 });
-//Developer Comment
-//Comment Froma Ashvini Dev
+
+
 //End Backend Routes
 
 // Route::fallback(function () {
