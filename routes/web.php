@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('master/device-type', 'index');
         Route::post('master/device-type/store', 'store')->name('master.device_type.store');
         Route::get('master/device-type/data-table','data_table');
-        Route::get('device-type-master/edit/{id}','edit');
+        Route::get('git a/edit/{id}','edit');
     });
 
 
@@ -181,3 +181,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 // Route::fallback(function () {
 //     return redirect('admin/404');
 // });
+
