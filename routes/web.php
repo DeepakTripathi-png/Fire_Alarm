@@ -191,3 +191,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 // Route::fallback(function () {
 //     return redirect('admin/404');
 // });
+
