@@ -76,7 +76,7 @@
                 </a>
             </div>
         </li>
-        {{-- End --}}
+    {{-- End --}}
 
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -216,16 +216,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
                 {{-- @endif --}}
 
-<<<<<<< HEAD
-=======
-
-
-              
-
-
-{{-- 
->>>>>>> 72a99599a30afca253aac45524a95b3bdfcb3f6a
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
+                {{--@if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
                         <li class="setting">
                             <a href="#setting" data-bs-toggle="collapse">
                                 <i class="mdi mdi-chart-pie"></i>
