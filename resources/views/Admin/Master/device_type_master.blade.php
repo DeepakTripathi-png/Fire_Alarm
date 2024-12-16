@@ -25,7 +25,7 @@
                                     <div class="mb-3">
                                         <label for="device_type" class="form-label">Device Type</label>
                                         <input type="text" class="form-control" id="device_type" name="device_type"
-                                            placeholder="Device Type" value="{{!empty($deviceType)?$deviceType->device_type:''}}">
+                                            placeholder="Device Type" value="{{ old('device_type', !empty($deviceType) ? $deviceType->device_type : '') }}">
                                         @if($errors->has('device_type'))
                                             <span class="text-danger"><b>* {{$errors->first('device_type')}}</b></span>
                                         @endif
@@ -35,7 +35,6 @@
 
                                     <button type="reset" class="btn btn-danger reset-button">Cancel </button>
                                 </form>
-
 
                             </div>
                         </div>
