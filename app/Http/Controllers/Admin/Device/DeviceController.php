@@ -23,6 +23,13 @@ class DeviceController extends Controller
 {
 
     public function index(){
+
+        // $device = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
+
+
+        // dd($device);
+        
+        
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')){
@@ -111,14 +118,30 @@ class DeviceController extends Controller
 
     public function data_table(Request $request){
 
-        $device_type = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
-    
+        $device = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
+
         if ($request->ajax()) {
-            return DataTables::of($device_type)
+            return DataTables::of($device)
                 ->addIndexColumn()
                 
+                ->addColumn('site_name', function ($row) {
+                    return !empty($row->site->site_name) ? $row->site->site_name : '' ;
+                })
+
+                ->addColumn('site_address', function ($row) {
+                    return !empty($row->site->site_address) ? $row->site->site_address : '' ;
+                })
+
                 ->addColumn('device_type', function ($row) {
-                    return !empty($row->device_type) ? $row->device_type : '' ;
+                    return !empty($row->deviceType->device_type) ? $row->deviceType->device_type : '' ;
+                })
+
+                ->addColumn('device_id', function ($row) {
+                    return !empty($row->device_id) ? $row->device_id : '' ;
+                })
+
+                ->addColumn('date', function ($row) {
+                    return !empty($row->created_at) ? $row->created_at : '' ;
                 })
     
     
@@ -129,30 +152,32 @@ class DeviceController extends Controller
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
     
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_edit')) {
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_edit')) {
                         $actionBtn .= '<a href="' . url('admin/device/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit" disabled><i class="mdi mdi-pencil"></i></button></a>';
                     }
     
     
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_delete')) {
-                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Device Type Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_delete')) {
+                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="devices" data-flash="Device Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
                     }
                     return $actionBtn;
                 })
+
+
                 ->addColumn('status', function ($row) {
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
     
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_status_change')) {
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_status_change')) {
                         if ($row->status == 'active') {
-                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
+                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="devices" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;
                         } else {
-                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
+                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="devices" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
                             return $statusBlockBtn;
                         }
                     } else {
@@ -165,6 +190,7 @@ class DeviceController extends Controller
                         }
                     }
                 })
+
                 ->rawColumns(['action', 'status'])
                 ->make(true);
         }
