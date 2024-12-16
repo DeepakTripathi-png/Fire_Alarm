@@ -25,8 +25,6 @@
                                         <th>Sr no</th>
                                         <th>Site Name</th>
                                         <th>Adress</th>
-                                        {{-- <th>Mobile No.</th>
-                                        <th>Email</th> --}}
                                         <th>Device Type</th>
                                         <th>Name</th>
                                         <th>Device ID</th>
@@ -38,19 +36,15 @@
 
                                 <tbody>
 
-                                <tr>
+                                {{-- <tr>
                                     <td>1</td>
                                     <td>Codepix</td>
                                     <td>Phursungi Pune</td>
-                                    {{-- <td>+91-8857945412</td>
-                                    <td>codepix@gmail.com</td> --}}
                                     <td>Smoke Detector</td>
                                     <td>XYZ</td>
                                     <td>TOR2314233</td>
                                     <td>12/11/2024 16:14:45</td>
-                                    
                                     <td><a href="javascript:void(0)" data-id="4" data-table="role_privileges" data-flash="Status Changed Successfully!" class="change-status"><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a></td>
-
                                     <td>
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
@@ -62,8 +56,6 @@
                                     <td>2</td>
                                     <td>Fire Alarm</td>
                                     <td>Mumbai</td>
-                                    {{-- <td>+91-8857945412</td>
-                                    <td>fire@gmail.com</td> --}}
                                     <td>Smoke Detector</td>
                                     <td>ZYX</td>
                                     <td><a href="#">TOR2314234</a></td>
@@ -79,8 +71,6 @@
                                     <td>3</td>
                                     <td>Tor.ai</td>
                                     <td>Navi Mumbai</td>
-                                    {{-- <td>+91-8857945412</td>
-                                    <td>tor.ai@gmail.com</td> --}}
                                     <td>Smoke Detector</td>
                                     <td>ZXY</td>
                                     
@@ -92,7 +82,7 @@
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
                                    </td>
-                                </tr>
+                                </tr> --}}
                                                         
                                 </tbody>
                             </table>

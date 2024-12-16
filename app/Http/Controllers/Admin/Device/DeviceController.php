@@ -130,7 +130,7 @@ class DeviceController extends Controller
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
     
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_edit')) {
-                        $actionBtn .= '<a href="' . url('admin/device-type-master/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
+                        $actionBtn .= '<a href="' . url('admin/device/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit" disabled><i class="mdi mdi-pencil"></i></button></a>';
                     }

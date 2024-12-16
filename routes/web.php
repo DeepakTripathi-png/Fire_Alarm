@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
 
         // Route::get('master/site/data-table','data_table');
-        // Route::get('site-master/edit/{id}','edit');
+        Route::get('device/edit/{id}','edit');
     });
 
 
