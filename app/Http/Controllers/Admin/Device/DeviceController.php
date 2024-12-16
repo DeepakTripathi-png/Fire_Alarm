@@ -114,6 +114,20 @@ class DeviceController extends Controller
 
 
 
+ 
+    public function edit($id){
+        try {
+            $device= Device::where('id',$id)->with('site','deviceType')->first();
+
+            $deviceTypes=DeviceTypeMaster::where('status','active')->get();
+            $sites=SiteMaster::where('status','active')->get();
+         
+            return view('Admin.Device.add_device', compact('device','deviceTypes', 'sites'));
+        } 
+        catch (\Illuminate\Contracts\Encryption\DecryptException $e){
+            return redirect('admin/device')->with('error', 'Access Denied !');
+        }
+    }
 
 
     public function data_table(Request $request){
@@ -172,7 +186,7 @@ class DeviceController extends Controller
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
     
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_status_change')) {
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_status')) {
                         if ($row->status == 'active') {
                             $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="devices" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;
