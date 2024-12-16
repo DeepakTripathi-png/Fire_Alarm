@@ -37,6 +37,9 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @if($errors->has('site_id'))
+                                                  <span class="text-danger"><b>* {{$errors->first('site_id')}}</b></span>
+                                                @endif
                                             </div>
                                             
 
@@ -50,8 +53,11 @@
                                                         {{ !empty($device->deviceType->id) && $device->deviceType->id == $deviceType->id ? 'selected' : '' }}>
                                                         {{!empty($deviceType->device_type)?$deviceType->device_type:''}}</option>
                                                     @endforeach 
-                                                @endif
+                                                   @endif
                                                 </select>
+                                                @if($errors->has('device_type_id'))
+                                                <span class="text-danger"><b>* {{$errors->first('device_type_id')}}</b></span>
+                                              @endif
                                             </div>
 
                                          </div>
@@ -61,6 +67,9 @@
                                             <div class="mb-3 col-6">
                                                 <label for="device_id" class="form-label">Device ID</label>
                                                 <input type="text" class="form-control" id="device_id" name="device_id" placeholder="Enter device id" value="{{!empty($device->device_id)?$device->device_id:''}}">
+                                                @if($errors->has('device_id'))
+                                                <span class="text-danger"><b>* {{$errors->first('device_id')}}</b></span>
+                                               @endif
                                             </div>
 
                                          
@@ -68,6 +77,9 @@
                                             <div class="mb-3 col-6">
                                                 <label for="device_name" class="form-label">Device Name</label>
                                                 <input type="text" class="form-control" id="device_name" name="device_name" placeholder="Enter device name" value="{{!empty($device->device_name)?$device->device_name:''}}">
+                                                @if($errors->has('device_name'))
+                                                 <span class="text-danger"><b>* {{$errors->first('device_name')}}</b></span>
+                                               @endif
                                             </div>
                                           
                                         </div>
@@ -79,6 +91,9 @@
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Description</label>
                                             <textarea class="form-control" id="description" name="description" rows="3" placeholder="Additional details about the device" >{{!empty($device->description)?$device->description:''}}</textarea>
+                                            @if($errors->has('description'))
+                                              <span class="text-danger"><b>* {{$errors->first('description')}}</b></span>
+                                            @endif
                                         </div>
                                     </div>
 
