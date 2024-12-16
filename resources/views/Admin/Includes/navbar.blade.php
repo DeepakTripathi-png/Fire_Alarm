@@ -182,7 +182,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                                     @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_site_view'))
                                     <li class="visual-setting">
                                         <a href="{{ url('/admin/map-site') }}">
-                                            <span> Map Site</span>
+                                            <span> Assign Site</span>
                                         </a>
                                     </li>
                                     @endif
