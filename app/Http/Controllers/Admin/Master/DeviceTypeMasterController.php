@@ -105,8 +105,6 @@ public function data_table(Request $request){
             })
 
 
-         
-
             ->addColumn('action', function ($row) {
                 $actionBtn = '';
                 $role_id = Auth::guard('master_admins')->user()->role_id;
@@ -126,6 +124,8 @@ public function data_table(Request $request){
                 }
                 return $actionBtn;
             })
+            
+
             ->addColumn('status', function ($row) {
                 $role_id = Auth::guard('master_admins')->user()->role_id;
                 $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
@@ -148,6 +148,7 @@ public function data_table(Request $request){
                     }
                 }
             })
+
             ->rawColumns(['action', 'status'])
             ->make(true);
     }

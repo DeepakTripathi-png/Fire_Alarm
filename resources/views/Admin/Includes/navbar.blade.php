@@ -5,7 +5,7 @@
 #sidebar-menu>ul>li>a i {
     line-height:unset;
 }
- </style>
+</style>
 {{-- statrt Topbar --}}
 <div class="navbar-custom">
     <ul class="list-unstyled topnav-menu float-end mb-0">
@@ -216,6 +216,15 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
                 {{-- @endif --}}
 
+<<<<<<< HEAD
+=======
+
+
+              
+
+
+{{-- 
+>>>>>>> 72a99599a30afca253aac45524a95b3bdfcb3f6a
                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
                         <li class="setting">
                             <a href="#setting" data-bs-toggle="collapse">
@@ -237,7 +246,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
                                     @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_site_view'))
                                     <li class="visual-setting">
-                                        <a href="{{ url('/admin/map-site') }}">
+                                        <a href="{{ url('/admin/assign-site') }}">
                                             <span> Assign Site</span>
                                         </a>
                                     </li>
@@ -246,11 +255,28 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                                 </ul>
                             </div>
                         </li>
+                @endif --}}
+
+
+                @if(!empty($RolesPrivileges) && (str_contains($RolesPrivileges, 'device_view') || str_contains($RolesPrivileges, 'map_site_view')))
+                @if(str_contains($RolesPrivileges, 'device_view'))
+                <li class="setting">
+                    <a href="{{ url('/admin/device') }}">
+                        <i class="mdi mdi-chart-pie"></i>
+                        <span> Device Management </span>
+                    </a>
+                </li>
                 @endif
 
-
-
-          
+                @if(str_contains($RolesPrivileges, 'map_site_view'))
+                <li class="visual-setting">
+                    <a href="{{ url('/admin/assign-site') }}">
+                        <i class="mdi mdi-map-marker"></i>
+                        <span> Assign Site </span>
+                    </a>
+                </li>
+                @endif
+            @endif
 
                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_view'))
                 <li class="vendor">
@@ -263,7 +289,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
 
                 
-                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'report_view'))
+                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'report_view'))
                 <li class="vendor">
                     <a href="{{ url('admin/report') }}">
                     <i class="mdi mdi-file-document"></i>

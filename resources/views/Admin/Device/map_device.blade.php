@@ -11,12 +11,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        {{-- <h3 style="color:red">Map Device</h3> --}}
 
                         <div class="mb-2 justify-content-between d-flex align-items-center">
-                            <h4 class="mt-0 header-title">Map Device</h4>
+                            <h4 class="mt-0 header-title">Assigned Site</h4>
                         </div>
-                        <a href="{{ url('admin/map-site/add') }}" class="btn btn-success waves-effect waves-light add-btn" ><span class="btn-label"> <i class="fas fa-plus "></i></span>Add</a>
+                        <a href="{{ url('admin/assign-site/add') }}" class="btn btn-success waves-effect waves-light add-btn" ><span class="btn-label"> <i class="fas fa-plus "></i></span>Add</a>
                     </div>
                     <div class="card">
                         <div class="card-body table-responsive department-card">
@@ -37,7 +36,8 @@
 
                                 <tbody>
 
-                                <tr>
+
+                                {{-- <tr>
                                     <td>1</td>
                                     <td>Codepix</td>
                                     <td>Phursungi Pune</td>
@@ -53,7 +53,7 @@
                                         <a href="http://127.0.0.1:8000/admin/roles-privileges/edit/4"> <button type="button" data-id="4" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a> 
                                         <a href="javascript:void;" data-id="4" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>
                                    </td>
-                                </tr>
+                                </tr> --}}
 
                                
                                                         
@@ -68,4 +68,12 @@
     </div> 
 </div>
 
+@endsection
+
+@section('script')
+<script src="{{ URL::asset('admin_panel\controller_js\cn_assign_device.js')}}"></script>
+    <script>
+        $(".system-user").addClass("menuitem-active");
+        $(".system-user-list").addClass("menuitem-active");
+    </script>
 @endsection
