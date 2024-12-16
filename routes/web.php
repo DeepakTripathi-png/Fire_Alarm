@@ -174,6 +174,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     route::get('/404', [NotFoundController::class, 'index']);
 });
+//Developer Comment
 //End Backend Routes
 
 // Route::fallback(function () {
