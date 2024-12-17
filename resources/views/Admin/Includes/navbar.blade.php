@@ -9,12 +9,74 @@
 {{-- statrt Topbar --}}
 <div class="navbar-custom">
     <ul class="list-unstyled topnav-menu float-end mb-0">
+        {{-- <li class="dropdown notification-list topbar-dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="fe-bell noti-icon"></i>
+                <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+            </a>
+        </li> --}}
+
+    {{-- Added Ashvini --}}
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
                 <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
             </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+                <!-- Header -->
+                <div class="dropdown-header noti-title">
+                    <h6 class="text-overflow m-0">Notifications</h6>
+                </div>
+
+                <!-- Notification List -->
+                <div class="slimscroll noti-scroll">
+                    <!-- Notification Item -->
+                    <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-primary">
+                            <i class="mdi mdi-email-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>New message received</span>
+                            <small class="text-muted">2 mins ago</small>
+                            {{-- <br> --}}
+                            {{-- <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 10:00 AM</small> --}}
+                        </p>
+                    </a>
+
+                    <!-- Notification Item -->
+                    <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-success">
+                            <i class="mdi mdi-account-plus-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>New user registered</span>
+                            <small class="text-muted">10 mins ago</small>
+                            {{-- <br> --}}
+                            {{-- <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 9:50 AM</small> --}}
+                        </p>
+                    </a>
+
+                    <!-- Notification Item -->
+                    <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-warning">
+                            <i class="mdi mdi-alert-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>System alert</span>
+                            <small class="text-muted">30 mins ago</small>
+                            {{-- <br>
+                            <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 9:30 AM</small> --}}
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Footer -->
+                <a href="javascript:;" class="dropdown-item text-center text-primary notify-item notify-all">
+                    View All
+                </a>
+            </div>
         </li>
+    {{-- End --}}
 
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -154,13 +216,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
                 {{-- @endif --}}
 
-
-
-              
-
-
-{{-- 
-                @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
+                {{--@if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
                         <li class="setting">
                             <a href="#setting" data-bs-toggle="collapse">
                                 <i class="mdi mdi-chart-pie"></i>
