@@ -139,9 +139,14 @@ class AssignDeviceController extends Controller
                     return !empty($row->site->site_name) ? $row->site->site_name : '' ;
                 })
 
+                // ->addColumn('site_address', function ($row) {
+                //     return !empty($row->site->site_address) ? $row->site->site_address : '' ;
+                // })
+
                 ->addColumn('site_address', function ($row) {
-                    return !empty($row->site->site_address) ? $row->site->site_address : '' ;
+                    return !empty($row->site->site_address) ? "<div class='scrollable-cell'>".implode(', ', explode(',',$row->site->site_address))."</div>" : '' ;
                 })
+
 
                 ->addColumn('user_name', function ($row) {
                     return !empty($row->customer->user_name) ? $row->customer->user_name : '' ;
@@ -206,7 +211,7 @@ class AssignDeviceController extends Controller
                     }
                 })
 
-                ->rawColumns(['action', 'status'])
+                ->rawColumns(['action', 'status','site_address'])
                 ->make(true);
         }
     }
