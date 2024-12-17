@@ -19,17 +19,17 @@
                     </div>
                     <div class="card">
                         <div class="card-body table-responsive department-card">
-                            <table id="cims_data_table" class="table table-bordered table-bordered dt-responsiv w-100 ">
+                            <table id="cims_data_table" class="table table-bordered table-bordered dt-responsiv w-100">
                                 <thead class="table-light">
                                     <tr role="row">
-                                        <th>Sr no</th>
-                                        <th>Site Name</th>
-                                        <th>Adress</th>
-                                        <th>Device Type</th>
-                                        <th>Device ID</th>
-                                        <th>Date & Time</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="width: 5%;">Sr no</th>
+                                        <th style="width: 15%;">Site Name</th>
+                                        <th style="width: 20%;">Address</th>
+                                        <th style="width: 10%;">Device Type</th>
+                                        <th style="width: 10%;">Device ID</th>
+                                        <th style="width: 15%;">Date & Time</th>
+                                        <th style="width: 10%;">Status</th>
+                                        <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
 
