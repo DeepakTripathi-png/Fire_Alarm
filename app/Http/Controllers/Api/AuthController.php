@@ -57,6 +57,8 @@ class AuthController extends Controller
     {
         $request->user()->tokens()->delete();
 
+        Master_admin::where('api_token',$request->user()->api_token)->update(['api_token' =>null]);
+
         return response()->json([
             'status' => true,
             'message' => 'Logout successful',
