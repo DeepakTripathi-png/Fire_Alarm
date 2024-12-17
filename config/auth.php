@@ -43,6 +43,11 @@ return [
         'master_admins' => [
             'driver' => 'session',
             'provider' => 'master_admins',
+        ],
+       'api' => [
+            'driver' => 'token',
+            'provider' => 'master_admins',
+            'hash' => false,
         ]
     ],
 
