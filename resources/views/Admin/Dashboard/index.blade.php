@@ -12,8 +12,6 @@
         /* border: 0 solid var(--ct-card-border-color);
         border-radius: 0.25rem; */
         padding: 0px !important;
-
-
     }
 
 
@@ -133,10 +131,7 @@
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
                                     {{-- <i class="mdi mdi-account-circle text-secondary"></i> --}}
-
                                     <i class="mdi mdi-alarm-light text-secondary"></i>
-
-                                    
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 1 </h2>
