@@ -88,15 +88,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
 
     Route::controller(DeviceController::class)->group(function (){
-
         Route::get('device', 'index');
-
-         Route::get('/device/add', 'add');
-
+        Route::get('/device/add', 'add');
         Route::post('device/store', 'store')->name('device.store');
         Route::get('device/edit/{id}','edit');
-
-
         Route::get('device/data-table','data_table');
        
     });
