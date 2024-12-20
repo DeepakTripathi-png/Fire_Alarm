@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Master\DeviceTypeMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
 use App\Http\Controllers\Admin\Device\DeviceController;
 use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
+use App\Http\Controllers\Front\HomeController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -53,6 +54,8 @@ Route::get('reset-password', function(){ return abort(404); });
 Route::get('/', function () {
     return redirect('/admin');
 });
+
+Route::get('/', [HomeController::class, 'index']);
 
 // *
 // *----------- CODE HERE  -------------
