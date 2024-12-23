@@ -18,6 +18,15 @@
     color: red;
 }
 
+
+.navbar-brand {
+    padding-top: 1.3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
 </style>
 
 

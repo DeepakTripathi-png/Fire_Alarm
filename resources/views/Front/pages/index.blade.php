@@ -130,6 +130,13 @@
                 <div class="testimonial-name">Pankaj Pal</div><br>
                 <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home<br> is protected 24/7.”</div>
             </div>
+
+            {{-- <div class="testimonial-content">
+                <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Pankaj Pal" class="testimonial-image"><br><br>
+                <div class="testimonial-name">Ashu</div><br>
+                <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home<br> is protected 24/7.”</div>
+            </div> --}}
+
             <div class="testimonial-nav"> 
                 <button>
                     <i class="fas fa-chevron-left"></i>

@@ -1,177 +1,267 @@
-{{-- <style>
-     body {
-            background-color: #FFE4E1;
-            font-family: Arial, sans-serif;
-        }
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        .logo .dot {
-            color: orange;
-        }
-        .logo .globe {
-            color: orange;
-        }
-        .contact-info {
-            text-align: right;
-        }
-        .contact-info i {
-            color: orange;
-            margin-right: 10px;
-        }
-        @media (max-width: 576px) {
-            .contact-info {
-                text-align: left;
-                margin-top: 20px;
-            }
-        }
-</style>
-<div class="container">
-    <div class="row">
-     <div class="col-sm-6">
-      <div class="logo">
-       <span class="dot">
-        i
-       </span>
-       o
-       <span class="globe">
-        <i class="fas fa-globe">
-        </i>
-       </span>
-       Globe
-      </div>
-      <p>
-       At ioGlobe, great service starts with experienced professionals. Our skilled team ensures every project is completed on time, with top-notch quality. With personalized service, competitive rates, and a commitment to customer satisfaction, we consistently exceed expectations.
-      </p>
-     </div>
-     <div class="col-sm-6 contact-info">
-      <p>
-       <i class="fas fa-phone-alt">
-       </i>
-       +91-7757945810
-      </p>
-      <p>
-       <i class="fas fa-envelope">
-       </i>
-       info@firealarm.com
-      </p>
-      <p>
-       <i class="fas fa-map-marker-alt">
-       </i>
-       145 Fire alarm, mumbai-454567
-      </p>
-     </div>
-    </div>
-   </div> --}}
-
 <style>
-    /* General styling */
-body {
-    font-family: Arial, sans-serif;
+    h1, h2, h3, h4, h5, h6 {
+}
+section {
+    padding: 60px 0;
+    min-height: 100vh;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    outline: none;
+}
+ul {
     margin: 0;
     padding: 0;
-    /* background-color: #ffece5; */
+    list-style: none;
 }
 
-/* Container */
-.info-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px;
-    /* max-width: 1200px; */
-    margin: 50px auto;
-    background-color: #ffede6;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
+.main-footer{
+  position: relative;
+  background: #e158183d;
+  height: 423px;
 }
 
-/* Left Text Section */
-.info-text {
-    width: 60%;
+.footer-content{
+  position: relative;
+  padding: 85px 0px 80px 0px;
 }
-
-.info-text h1 {
-    font-size: 48px;
-    color: #ff5722;
-    margin-bottom: 20px;
-}
-
-.info-text p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Right Contact Section */
-.info-contact {
-    width: 35%;
-    text-align: right;
-}
-
-.info-contact p {
-    font-size: 18px;
-    line-height: 2;
-    color: #333;
-}
-
-.info-contact .icon {
-    color: #ff5722;
-    margin-right: 10px;
-}
-
-/* Background globe */
-.info-container::after {
-    content: "";
+.footer-content:before {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 87, 34, 0.1);
-    background-image: url('globe-icon.png'); /* Replace with your globe image */
-    background-repeat: no-repeat;
+    content: '';
+    background: url(/front/images/earth_1.png);
+    width: 316px;
+    height: 315px;
+    top: 67px;
+    right: -55px;
     background-size: cover;
-    z-index: -1;
-    transform: translate(50%, -50%);
-    opacity: 0.5;
+    background-repeat: no-repeat;
+    animation-name: float-bob;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: float-bob;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: float-bob;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: float-bob;
+    -ms-animation-duration: 30s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    -o-animation-name: float-bob;
+    -o-animation-duration: 30s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-timing-function: linear;
+}
+.footer-content .logo-widget{
+  position: relative;
+  margin-top: -5px;
+}
+.footer-content .logo-widget .footer-social li{
+  position: relative;
+  display: inline-block;
+  margin-right: 9px;
+}
+.footer-content .logo-widget .footer-social li:last-child{
+  margin-right: 0px;
+}
+.footer-content .logo-widget .footer-social li a{
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  background: #2e3138;
+  color: #9ea0a9;
+  text-align: center;
+  border-radius: 50%;
+}
+.footer-content .logo-widget .footer-social li a:hover{
+  color: #ffffff;
+  background: #ff5e14;
+}
+.footer-content .logo-widget .logo-box{
+  margin-bottom: 25px;
+}
+.footer-content .logo-widget .text p{
+  color: #000000;
+  margin-bottom: 32px;
+}
+.footer-content .footer-title{
+  position: relative;
+  font-size: 24px;
+  line-height: 35px;
+  font-family: 'Playfair Display', serif;
+  color: #1a1713;
+  font-weight: 700;
+  margin-bottom: 27px;
+}
+.footer-content .service-widget .list li{
+  display: block;
+  margin-bottom: 12px;
+}
+.footer-content .service-widget .list li a{
+  position: relative;
+  display: inline-block;
+  color: #000000;
+}
+.footer-content .service-widget .list li a:hover{
+  color: #ff5e14;
+}
+.footer-content .contact-widget p {
+    color: #000000;
+    margin-bottom: 15px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .info-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
+.footer-content .contact-widget .footer-title{
+  margin-bottom: 29px;
+}
 
-    .info-text, .info-contact {
-        width: 100%;
-    }
+.footer-content .contact-widget {
+    margin-left: 202px;
+    margin-top: 105px;
+    text-align: initial;
+    color: black;
+}
+/** footer-bottom **/
 
-    .info-contact {
-        text-align: center;
-    }
+.footer-bottom{
+  position: relative;
+  background: #1a1713;
+  padding: 25px 0px 22px 0px;
+}
+.footer-bottom .copyright,
+.footer-bottom .copyright a,
+.footer-bottom .footer-nav li a{
+  position: relative;
+  color: #9ea0a9;
+}
+.footer-bottom .copyright a:hover,
+.footer-bottom .footer-nav li a:hover{
+  color: #ff5e14;
+}
+.footer-bottom .footer-nav{
+  position: relative;
+  text-align: right;
+}
+.footer-bottom .footer-nav li{
+  position: relative;
+  display: inline-block;
+  margin-left: 29px;
+}
+.footer-bottom .footer-nav li:first-child{
+  margin-left: 0px;
+}
+.footer-bottom .footer-nav li:before{
+  position: absolute;
+  content: '';
+  background: #9ea0a9;
+  width: 1px;
+  height: 14px;
+  top: 7px;
+  left: -18px;
+}
+.footer-bottom .footer-nav li:first-child:before{
+  display: none;
+}
+.logo-box img {
+    max-width: 220px;
+}
 
-    .info-container::after {
-        width: 200px;
-        height: 200px;
-        transform: translate(50%, -20%);
-    }
+
+a {
+    color: #000000;
+    text-decoration: underline;
 }
 
 </style>
+<footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="logo-widget footer-widget">
+                            <figure class="logo-box"><a href="#">
+                                {{-- <img src="https://i.ibb.co/QDy827D/ak-logo.png" alt=""> --}}
+                                <img src="{{ asset('front/images/ioglobe_front_logo.png') }}" alt="FireAlarm Logo">
+                            </a></figure>
+                            <div class="text">
+                                <p>At IoGlobe, great service starts with experienced
+                                    professionals. Our skilled team ensures every project is
+                                    completed on time, with top-notch quality. With personalized
+                                    service, competitive rates, and a commitment to customer
+                                    satisfaction, we consistently exceed expectations.</p>
+                            </div>
+                            <ul class="footer-social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-widget">
+                        <div class="contact-widget footer-widget">
+                            <div class="text">
+                                <ul>
+                                    <li><a href="#home">Home</a></li>
+                                    <li><a href="#about">About</a></li>
+                                    <li><a href="#features">Features</a></li>
+                                    <li><a href="#services">Services</a></li>
+                                    <li><a href="#testimonials">Testimonials</a></li>
+                                    <li><a href="#contact">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
 
-   <div class="info-container">
-    <div class="info-text">
-        <img src="{{ asset('front/images/ioglobe_front_logo.png') }}" alt="FireAlarm Logo" style="max-height: 80px; max-width:170px; margin-right: 10px;">
-        <p>At IoGlobe, great service starts with experienced professionals. Our skilled team ensures every project is completed on time, with top-notch quality. With personalized service, competitive rates, and a commitment to customer satisfaction, we consistently exceed expectations.</p>
+                    {{-- <div class="col-lg-3 col-md-6 col-sm-12 offset-lg-2 footer-column">
+                        <div class="service-widget footer-widget">
+                            <div class="footer-title">Services</div>
+                            <ul class="list">
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 column">
+                    <div class="copyright">
+                        <a href="https://codepixsolutions.com/">Designed By Codepix Solutions PVT. LTD.</a> &copy; Copyright © 2024, All Right Reserved. </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 column">
+                    <ul class="footer-nav">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="info-contact">
-        <p><span class="icon">&#9742;</span> +91-7757945810</p>
-        <p><span class="icon">&#9993;</span> info@firealarm.com</p>
-        <p><span class="icon">&#127968;</span> 145 Fire alarm, Mumbai-454567</p>
-    </div>
-</div>
+    
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+</script>
