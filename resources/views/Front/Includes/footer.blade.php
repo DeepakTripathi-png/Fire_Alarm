@@ -177,6 +177,20 @@ a {
     text-decoration: underline;
 }
 
+
+@media (max-width: 600px) 
+{  
+.contact-widget.footer-widget {
+    display: none;
+}
+}
+
+@media (max-width: 600px) {
+.footer-bottom .footer-nav {
+    position: relative;
+    text-align: center;
+}
+}
 </style>
 <footer class="main-footer">
         <div class="container">

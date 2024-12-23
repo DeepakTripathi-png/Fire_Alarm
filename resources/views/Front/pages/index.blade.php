@@ -155,11 +155,11 @@
                     <div class="testimonial-name">Pankaj Pal</div>
                     <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home is protected 24/7.”</div>
                 </div>
-                <div class="swiper-slide testimonial-content">
+                {{-- <div class="swiper-slide testimonial-content">
                     <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Ashu" class="testimonial-image">
                     <div class="testimonial-name">Ashu</div>
                     <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home is protected 24/7.”</div>
-                </div>
+                </div> --}}
             </div>
             <!-- Navigation buttons -->
             {{-- <div class="swiper-button-prev"></div>
