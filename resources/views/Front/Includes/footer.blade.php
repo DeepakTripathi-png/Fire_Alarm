@@ -207,7 +207,7 @@ a {
                                 {{-- <img src="https://i.ibb.co/QDy827D/ak-logo.png" alt=""> --}}
                                 <a href="{{ url('/') }}">
                                 <img src="{{ asset('front/images/ioglobe_front_logo.png') }}" alt="FireAlarm Logo">
-                                </a
+                                </a>
                             </a></figure>
                             <div class="text">
                                 <p>At IoGlobe, great service starts with experienced
