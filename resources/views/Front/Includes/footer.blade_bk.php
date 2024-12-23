@@ -202,12 +202,11 @@ a {
             <div class="footer-content">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
-                        <div class="logo-widget footer-widget">
-                            <figure class="logo-box"><a href="#">
-                                {{-- <img src="https://i.ibb.co/QDy827D/ak-logo.png" alt=""> --}}
-                                <a href="{{ url('/') }}">
+                                                        <a href="{{ url('/') }}">
                                 <img src="{{ asset('front/images/ioglobe_front_logo.png') }}" alt="FireAlarm Logo">
-                                </a>
+                                                              <img src="{{ asset('front/images/ioglobe_front_logo.png') }}" alt="FireAlarm Logo">
+
+>
                             </a></figure>
                             <div class="text">
                                 <p>At IoGlobe, great service starts with experienced
@@ -219,7 +218,7 @@ a {
                             <ul class="footer-social">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
                                 <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                             </ul>
                         </div>
