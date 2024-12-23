@@ -24,7 +24,7 @@
             <div class="col-md-6 about-content">
                 <h2> More About Us</h2>
                 <p> Over the years, we’ve learned that great service begins and ends with experienced<br> and friendly professionals, which explains our rigorous hiring process. We believe <br> that our team is the best in the business, and have complete and total confidence in <br>every person providing our services.
-                KeSS finishes each project on schedule and with the highest <br> level of quality. With a focus on personalized service, competitive rates and customer satisfaction, we’re<br> always striving to meet and exceed expectations.</p>
+                    IoGlobe  finishes each project on schedule and with the highest <br> level of quality. With a focus on personalized service, competitive rates and customer satisfaction, we’re<br> always striving to meet and exceed expectations.</p>
             </div>
 
             <div class="col-md-6 about-image">
