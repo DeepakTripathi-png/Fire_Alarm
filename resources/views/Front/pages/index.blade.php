@@ -122,20 +122,19 @@
    {{-- End --}}
  
    {{-- Testimonial --}}
-    <div class="container-fluid testimonial-container" id="testimonials">
+    {{-- <div class="container-fluid testimonial-container" id="testimonials">
          <div class="testimonial-title">Testimonials</div>
             <div class="testimonial-content">
-                {{-- <img alt="Profile picture of Pankaj Pal" class="testimonial-image" src="https://placehold.co/100x100" /> --}}
                 <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Pankaj Pal" class="testimonial-image"><br><br>
                 <div class="testimonial-name">Pankaj Pal</div><br>
                 <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home<br> is protected 24/7.”</div>
             </div>
 
-            {{-- <div class="testimonial-content">
+            <div class="testimonial-content">
                 <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Pankaj Pal" class="testimonial-image"><br><br>
                 <div class="testimonial-name">Ashu</div><br>
                 <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home<br> is protected 24/7.”</div>
-            </div> --}}
+            </div>
 
             <div class="testimonial-nav"> 
                 <button>
@@ -145,7 +144,29 @@
                     <i class="fas fa-chevron-right"></i>
                 </button>
            </div>
-    </div><br>
+    </div><br> --}}
+
+    <div class="container-fluid testimonial-container" id="testimonials">
+        <div class="testimonial-title">Testimonials</div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide testimonial-content">
+                    <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Pankaj Pal" class="testimonial-image">
+                    <div class="testimonial-name">Pankaj Pal</div>
+                    <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home is protected 24/7.”</div>
+                </div>
+                <div class="swiper-slide testimonial-content">
+                    <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Ashu" class="testimonial-image">
+                    <div class="testimonial-name">Ashu</div>
+                    <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home is protected 24/7.”</div>
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    
 
    {{-- End --}}
 
@@ -218,4 +239,21 @@
 
 </script>
     
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: 1,
+        spaceBetween: 10,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+    });
+</script>
+
 @endsection
