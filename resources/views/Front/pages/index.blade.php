@@ -180,27 +180,32 @@
    {{-- Endd --}}
 
    {{-- Contact us --}}
-    <div class="contact-container" id="contact">
+   <div class="contact-container" id="contact">
         <div class="contact-info">
-          <h2>Get in Touch</h2>
-          <p><strong>Phone:</strong> +91-7757945810</p>
-          <p><strong>Email:</strong> info@firealarm.com</p>
-          <p><strong>Location:</strong> 145 Fire alarm, Mumbai-454567</p>
-          <p><strong>Business Hours:</strong> Mon-Fri 9am-5pm</p>
+            <h2>Get in Touch</h2>
+            <p><strong>Phone:</strong> +91-7757945810</p>
+            <p><strong>Email:</strong> info@firealarm.com</p>
+            <p><strong>Location:</strong> 145 Fire alarm, Mumbai-454567</p>
+            <p><strong>Business Hours:</strong> Mon-Fri 9am-5pm</p>
         </div>
 
-        <div class="contact-form">
-          <input type="text" placeholder="Name" required>
-          <input type="text" placeholder="Mobile" required>
-          <input type="email" placeholder="E-mail" required>
-          <textarea rows="4" placeholder="Message" required></textarea>
-          <button type="submit">Submit</button>
-        </div>
-
+    <div class="contact-form">
+        {{-- @if(session('success'))
+            <p>{{ session('success') }}</p>
+        @endif --}}
+        <form action="{{ route('contact.store') }}" method="POST">
+            @csrf
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="mobile" placeholder="Mobile" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <textarea name="message" rows="4" placeholder="Message" required></textarea>
+            {{-- <button type="submit">Submit</button> --}}
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
     </div>
-   {{-- End --}}
+</div>
+  {{-- End --}}
   
-
 
    <script>
     $(document).ready(function(){
@@ -256,4 +261,16 @@
     });
 </script>
 
+
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Contact form submitted successfully',
+            text: "Thank you! We'll get back to you soon.",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+@endif
 @endsection

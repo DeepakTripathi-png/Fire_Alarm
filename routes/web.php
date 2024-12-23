@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Master\SiteMasterController;
 use App\Http\Controllers\Admin\Device\DeviceController;
 use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ContactController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -56,7 +57,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
-
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 // *
 // *----------- CODE HERE  -------------
 // *
