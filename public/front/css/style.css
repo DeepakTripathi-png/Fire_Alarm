@@ -1,4 +1,7 @@
 /* Navbar Css */
+
+
+
 .container-fluid {
     margin-top: 41px;
 }
@@ -63,6 +66,12 @@ body {
     }
 }
 
+
+@media (max-width: 600px) {
+    img.bannerimage {
+        margin-top: 17px;
+    }
+}
 /* Mobile View Adjustments */
 @media (max-width: 600px) {
     .overlay {
@@ -206,9 +215,15 @@ body, html {
    
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .col-md-6.about-content {
         margin-top: 2px!important;
+    }
+} */
+
+@media (max-width: 600px) {
+    .col-md-6.about-content {
+        margin-top: -103px !important;
     }
 }
 

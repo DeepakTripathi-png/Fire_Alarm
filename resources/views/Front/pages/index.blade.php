@@ -7,7 +7,7 @@
     <div class="container-fluid" id="home">
         {{-- <img alt="Fire alarm system on a wall" class="background-image" src="https://placehold.co/1200x400" /> --}}
         
-        <img src="{{ asset('front/images/banner_image_background.png') }}" alt="banner image" style="">
+        <img src="{{ asset('front/images/banner_image_background.png') }}" alt="banner image" style="" class="bannerimage">
         
         <div class="overlay">
             <div class="content">
@@ -192,9 +192,9 @@
         </div>
 
     <div class="contact-form">
-        {{-- @if(session('success'))
+        @if(session('success'))
             <p>{{ session('success') }}</p>
-        @endif --}}
+        @endif
         <form action="{{ route('contact.store') }}" method="POST">
             @csrf
             <input type="text" name="name" placeholder="Name" required>
