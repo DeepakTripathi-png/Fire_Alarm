@@ -11,7 +11,7 @@
             <div class="content">
                 <h1 style="font-size: 42px;">Protect Your Home &amp; Business with <br>Our Fire Alarm Systems</h1>
                 <strong><p>Safety | Reliability | Cutting-Edge Technology</p></strong>
-                <a class="button" href="#">Get a Free Quote</a>
+                <a class="button" href="#contact">Get a Free Quote</a>
             </div>
         </div>
     </div>
