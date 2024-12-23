@@ -4,8 +4,9 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <img alt="Fire alarm system on a wall" class="background-image" src="https://placehold.co/1200x400" />
+    <div class="container-fluid" id="home">
+        {{-- <img alt="Fire alarm system on a wall" class="background-image" src="https://placehold.co/1200x400" /> --}}
+        <img src="{{ asset('front/images/banner_image_background.png') }}" alt="banner image" style="">
         <div class="overlay">
             <div class="content">
                 <h1 style="font-size: 42px;">Protect Your Home &amp; Business with <br>Our Fire Alarm Systems</h1>
@@ -16,22 +17,22 @@
     </div>
 
 
-    <div class="container-fluid about-section">
+    <div class="container-fluid about-section" id="about">
         <div class="row">
             <div class="col-md-6 about-content">
                 <h2> More About Us</h2>
-                <p> Over the years, we’ve learned that great service begins and ends with experienced<br> and friendly professionals, which explains our rigorous hiring process. We believe <br> that our team is the best in the business, and have complete and total confidence in <br>every person providing our services.</p>
-                <p> KeSS finishes each project on schedule and with the highest level of quality. With a <br>focus on personalized service, competitive rates and customer satisfaction, we’re<br> always striving to meet and exceed expectations.</p>
+                <p> Over the years, we’ve learned that great service begins and ends with experienced<br> and friendly professionals, which explains our rigorous hiring process. We believe <br> that our team is the best in the business, and have complete and total confidence in <br>every person providing our services.
+                KeSS finishes each project on schedule and with the highest <br> level of quality. With a focus on personalized service, competitive rates and customer satisfaction, we’re<br> always striving to meet and exceed expectations.</p>
             </div>
 
             <div class="col-md-6 about-image">
-                <img src="{{ asset('front/images/aboutus_fire_image.png') }}" class alt="FireAlarm Logo" style="margin-right: 10px;">
+                <img src="{{ asset('front/images/aboutus_fire_image.png') }}"  alt="FireAlarm Logo" style="margin-right: 10px;">
             </div>
         </div>
     </div>
      
 
-    <div class="container text-center my-5">
+    <div class="container text-center my-5" id="features">
         <h3 style="color:black;">Features of our Fire Alarm Systems</h3>
         <div class="row mt-4">
             <div class="col-md-4 col-sm-6">
@@ -82,7 +83,7 @@
 
 
      {{-- Service section --}}
-     {{-- <div class="container text-center py-5">
+     <div class="container text-center py-5" id="services">
         <h2 class="mb-5" style="color:black;">Our Services</h2>
         <div class="row">
             <div class="col-md-4 col-sm-12 mb-4">
@@ -107,50 +108,51 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- End --}}
 
     {{-- Product Highlights --}}
-    {{-- <div class="hero-section">
+    <div class="hero-section" id="services">
         <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Product_highlights" class="Producthighlights">
         <div class="hero-text">
-            <h2> Product Highlights</h2>
-            <p style="color: white;">The newest technology is used in the design of our contemporary fire alarm systems to provide optimal safety and usability. Our systems offer dependable security for your house or place of business with features including early detection, wireless connectivity, mobile app notifications, and battery backup.</p>
+            <h2><strong>Product Highlights</strong> </h2>
+            <p style="color: white;">The newest technology is used in the design of our contemporary fire alarm systems to provide optimal safety and usability. Our systems <br> offer dependable security for your house or place of business with features including early detection, wireless connectivity, mobile app <br> notifications, and battery backup.</p>
         </div>
-    </div><br> --}}
+    </div><br>
    {{-- End --}}
  
    {{-- Testimonial --}}
-    {{-- <div class="container-fluid testimonial-container">
+    <div class="container-fluid testimonial-container" id="testimonials">
          <div class="testimonial-title">Testimonials</div>
             <div class="testimonial-content">
-                <img alt="Profile picture of Pankaj Pal" class="testimonial-image" src="https://placehold.co/100x100" />
+                {{-- <img alt="Profile picture of Pankaj Pal" class="testimonial-image" src="https://placehold.co/100x100" /> --}}
+                <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Pankaj Pal" class="testimonial-image"><br><br>
                 <div class="testimonial-name">Pankaj Pal</div><br>
                 <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home<br> is protected 24/7.”</div>
             </div>
-            <div class="testimonial-nav"> --}}
-                {{-- <button>
+            <div class="testimonial-nav"> 
+                <button>
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <button>
                     <i class="fas fa-chevron-right"></i>
-                </button> --}}
-            {{-- </div>
-    </div><br> --}}
+                </button>
+           </div>
+    </div><br>
 
    {{-- End --}}
 
    {{-- Product Your Property --}}
-   {{-- <div class="container-fluid product">
+   <div class="container-fluid product">
          <h1>Ready to Product Your Property?</h1><br>
          <h3>Schedule a free fire alarm consultation or request a safety audit today!</h3>
          <br>
         <button type="button" class="btn btn-danger">Contact Us </button>
-    </div><br> --}}
+    </div><br>
    {{-- Endd --}}
 
    {{-- Contact us --}}
-    {{-- <div class="contact-container">
+    <div class="contact-container" id="contact">
         <div class="contact-info">
           <h2>Get in Touch</h2>
           <p><strong>Phone:</strong> +91-7757945810</p>
@@ -167,8 +169,46 @@
           <button type="submit">Submit</button>
         </div>
 
-    </div> --}}
+    </div>
    {{-- End --}}
   
+
+
+   <script>
+    $(document).ready(function(){
+        // Smooth scrolling for internal links except for the Home link
+        $('a[href^="#"]').not('a[href="#home"]').on('click', function(event) {
+            var target = $(this.getAttribute('href'));
+            if( target.length ) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top
+                }, 800);
+            }
+        });
+
+       $(window).on('scroll', function() {
+       var scrollPosition = $(window).scrollTop();
+       $('.navbar-nav a').css('color', ''); // Reset the color for all links
+       $('.navbar-nav a[href^="#"]').each(function() {
+           var currentLink = $(this);
+           var refElement = $(currentLink.attr("href"));
+           if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {
+               currentLink.css('color', 'red'); // Set inline color to red for the active link
+           }
+       });
+   });
+
+
+        // Highlight "Home" link when at the top of the page
+        $(window).on('load', function() {
+            var scrollPosition = $(window).scrollTop();
+            if (scrollPosition === 0) {
+                $('.navbar-nav a[href="#home"]').addClass("active");
+            }
+        });
+    });
+
+</script>
     
 @endsection
