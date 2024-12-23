@@ -1,6 +1,6 @@
 @extends('Front.Layouts.layout')
 
-@section('title', 'FireAlarm')
+@section('title', 'IoGlobe')
 
 @section('content')
 
