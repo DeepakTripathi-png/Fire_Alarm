@@ -1,4 +1,4 @@
-@extends('Front.layouts.layout')
+@extends('Front.Layouts.layout')
 
 @section('title', 'FireAlarm')
 

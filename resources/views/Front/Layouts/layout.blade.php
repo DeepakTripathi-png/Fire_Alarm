@@ -41,15 +41,15 @@
 
 <body>
    
-    @include('Front.includes.header')
+    @include('Front.Includes.header')
 
-    @include('Front.includes.navbar')
+    @include('Front.Includes.navbar')
 
     <div class="">
         @yield('content')
     </div>
 
-    @include('Front.includes.footer')
+    @include('Front.Includes.footer')
 
 </body>
 
