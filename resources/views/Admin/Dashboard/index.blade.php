@@ -58,7 +58,7 @@
                                     <i class="mdi mdi-office-building text-warning"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
+                                    <h2 class="fw-normal pt-2 mb-1">{{ $totalSiteCount }}</h2>
                                     <p class="text-muted mb-1">Total Assign Device</p>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                     <i class="mdi mdi-television"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 20 </h2>
+                                    <h2 class="fw-normal pt-2 mb-1"> {{ $totalDeviceCount }} </h2>
                                     <p class="text-muted mb-1">Total Device Count</p>
                                 </div>
                             </div>
