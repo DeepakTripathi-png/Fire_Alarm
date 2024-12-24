@@ -85,7 +85,7 @@
 
 
      {{-- Service section --}}
-     <div class="container text-center py-5" id="services">
+    <div class="container text-center py-5" id="services">
         <h2 class="mb-5" style="color:black;">Our Services</h2>
         <div class="row">
             <div class="col-md-4 col-sm-12 mb-4">
@@ -114,7 +114,7 @@
     {{-- End --}}
 
     {{-- Product Highlights --}}
-    <div class="hero-section" id="services">
+    <div class="hero-section">
         <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Product_highlights" class="Producthighlights">
         <div class="hero-text">
             <h2><strong>Product Highlights</strong> </h2>
@@ -209,7 +209,7 @@
   {{-- End --}}
   
 
-   <script>
+   {{-- <script>
     $(document).ready(function(){
         // Smooth scrolling for internal links except for the Home link
         $('a[href^="#"]').not('a[href="#home"]').on('click', function(event) {
@@ -244,8 +244,50 @@
         });
     });
 
-</script>
+</script> --}}
     
+
+
+<script>
+    $(document).ready(function () {
+        // Smooth scrolling for internal links
+        $('a[href^="#"]').on('click', function (event) {
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 70 // Adjust for fixed navbar height
+                }, 800);
+
+                // Close the navbar in mobile view
+                if ($('.navbar-toggler').is(':visible')) {
+                    $('.navbar-collapse').collapse('hide');
+                }
+            }
+        });
+
+        // Highlight the active link on scroll
+        $(window).on('scroll', function () {
+            var scrollPosition = $(window).scrollTop();
+            $('.navbar-nav a').removeClass('active'); // Remove active class from all links
+            $('.navbar-nav a[href^="#"]').each(function () {
+                var currentLink = $(this);
+                var refElement = $(currentLink.attr("href"));
+                if (refElement.length && refElement.offset().top - 80 <= scrollPosition && refElement.offset().top + refElement.height() > scrollPosition) {
+                    currentLink.addClass('active'); // Add active class to the current link
+                }
+            });
+        });
+
+        // Highlight "Home" link when at the top of the page
+        $(window).on('load', function () {
+            var scrollPosition = $(window).scrollTop();
+            if (scrollPosition === 0) {
+                $('.navbar-nav a[href="#home"]').addClass("active");
+            }
+        });
+    });
+</script>
 
 <script>
     var swiper = new Swiper('.swiper-container', {

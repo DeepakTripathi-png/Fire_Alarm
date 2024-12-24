@@ -25,9 +25,9 @@ ul {
   height: 423px;
 }
 
-.footer-content{
-  position: relative;
-  padding: 85px 0px 80px 0px;
+.footer-content {
+    position: relative;
+    padding: 45px 0px 80px 2px;
 }
 .footer-content:before {
     position: absolute;
@@ -75,9 +75,9 @@ ul {
 .footer-content .logo-widget .footer-social li a{
   position: relative;
   display: inline-block;
-  width: 42px;
-  height: 42px;
-  line-height: 42px;
+  width: 34px;
+  height: 34px;
+  line-height: 35px;
   background: #2e3138;
   color: #9ea0a9;
   text-align: center;
