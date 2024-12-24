@@ -92,7 +92,7 @@ ul {
 }
 .footer-content .logo-widget .text p{
   color: #000000;
-  margin-bottom: 32px;
+  margin-bottom: 25px;
 }
 .footer-content .footer-title{
   position: relative;

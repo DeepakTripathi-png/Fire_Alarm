@@ -159,7 +159,7 @@
                 </div>
                 <div class="swiper-slide testimonial-content">
                     <img src="{{ asset('front/images/Product_highlights.png') }}" alt="Profile picture of Ashu" class="testimonial-image">
-                    <div class="testimonial-name">Ashu</div>
+                    <div class="testimonial-name">John</div>
                     <div class="testimonial-text">“The installation was quick and professional. I feel much safer knowing my home is protected 24/7.”</div>
                 </div>
             </div>
@@ -185,9 +185,9 @@
    <div class="contact-container" id="contact">
         <div class="contact-info">
             <h2>Get in Touch</h2>
-            <p><strong>Phone:</strong> +91-7757945810</p>
-            <p><strong>Email:</strong> info@firealarm.com</p>
-            <p><strong>Location:</strong> 145 Fire alarm, Mumbai-454567</p>
+            <p><strong>Phone:</strong> +91-9324336434</p>
+            <p><strong>Email:</strong> kess.customercare@gmail.com</p>
+            <p><strong>Location:</strong> 578, bhoir nivas ,jihu village,sector 11,vashi,navi mmbai, 400703.  </p>
             <p><strong>Business Hours:</strong> Mon-Fri 9am-5pm</p>
         </div>
 
@@ -220,7 +220,7 @@
                     scrollTop: target.offset().top
                 }, 800);
             }
-        });
+         });
 
        $(window).on('scroll', function() {
        var scrollPosition = $(window).scrollTop();

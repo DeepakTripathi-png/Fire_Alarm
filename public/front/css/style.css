@@ -1,14 +1,21 @@
 /* Navbar Css */
 
 
-
+*{
+    font-family: 'Font Awesome 5 Brands';
+ }
+ .text {
+    font-size: 17px;
+}
 .container-fluid {
     margin-top: 41px;
 }
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Font Awesome 5 Brands';
 }
+
 .navbar {
     background-color: #e0e0e0;
     padding: 10px 20px;
@@ -19,27 +26,33 @@ body {
     box-shadow: 2px 4px 3px 0px #1f1f1f2b;
 
 }
+
 .navbar .logo {
     font-size: 24px;
     font-weight: bold;
 }
+
 .navbar .logo .red {
     color: red;
 }
+
 .navbar .menu {
     display: flex;
     gap: 20px;
 }
+
 .navbar .menu a {
     text-decoration: none;
     color: black;
     font-size: 18px;
 }
+
 .navbar .menu a.active {
     background-color: #d0d0d0;
     padding: 5px;
     border-radius: 5px;
 }
+
 @media (max-width: 600px) {
     .navbar {
         flex-direction: column;
@@ -66,12 +79,12 @@ body {
     }
 }
 
-
 @media (max-width: 600px) {
     img.bannerimage {
         margin-top: 17px;
     }
 }
+
 /* Mobile View Adjustments */
 @media (max-width: 600px) {
     .overlay {
@@ -119,8 +132,9 @@ body {
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Font Awesome 5 Brands';
 }
+
 .container {
     position: relative;
     text-align: left;
@@ -128,6 +142,7 @@ body, html {
    
     margin: auto;
 }
+
 .background-image {
     width: 100%;
     height: auto;
@@ -286,14 +301,14 @@ body, html {
 /* card */
 
 html {
-    font-family: sans-serif;
+    font-family: 'Font Awesome 5 Brands';
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Font Awesome 5 Brands';
     color: #454545;
     font-weight: 300;
     background: #ffffff;
