@@ -44,6 +44,8 @@
    
     @include('Front.Includes.header')
 
+
+    
     @include('Front.Includes.navbar')
 
     <div class="">
