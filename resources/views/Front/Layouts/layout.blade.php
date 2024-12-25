@@ -8,7 +8,7 @@
     <title>@yield('title')</title> 
 
     <!-- Favicon -->
-    {{-- <link rel="icon" href="{{ asset('package_assets/images/favicon_icon.jpg') }}" type="image/x-icon"> --}}
+    <link rel="icon" href="{{ asset('package_assets/images/favicon_icon.png') }}" type="image/x-icon">
 
     
     <!-- Stylesheets -->
