@@ -8,14 +8,16 @@
         {{-- <img alt="Fire alarm system on a wall" class="background-image" src="https://placehold.co/1200x400" /> --}}
         
         <img src="{{ asset('front/images/banner_image_background.png') }}" alt="banner image" style="" class="bannerimage">
-        
+        {{-- <img src="{{ asset('front/images/banner.png') }}" alt="banner image" style="" class="bannerimage"> --}}
         <div class="overlay">
             <div class="content">
-                <h1 style="font-size: 42px;">Protect Your Home &amp; Business with <br>Our Fire Alarm Systems</h1>
-                <strong><p>Safety | Reliability | Cutting-Edge Technology</p></strong>
+                <h1 style="font-size: 42px; color:white;">Protect Your Home &amp; Business with <br>Our Fire Alarm Systems</h1>
+                <strong><p style="color:white;">Safety | Reliability | Cutting-Edge Technology</p></strong>
                 <a class="button" href="#contact">Get a Free Quote</a>
             </div>
         </div>
+
+        
     </div>
 
 

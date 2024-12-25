@@ -81,7 +81,7 @@ body {
 
 @media (max-width: 600px) {
     img.bannerimage {
-        margin-top: 17px;
+       margin-top: 39px;
     }
 }
 
@@ -147,20 +147,34 @@ body, html {
     width: 100%;
     height: auto;
 }
+/*.overlay {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*       right: 206px;*/
+/*    bottom: 170px;*/
+    /* background: rgba(0, 0, 0, 0.5); */
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: flex-end;*/
+/*    padding: 32px;*/
+/*}*/
+
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 270px;
-    bottom: -146px;
+    top: 100px;
+    left: 58px;
+    /* right: 435px; */
+    bottom: 170px;
     /* background: rgba(0, 0, 0, 0.5); */
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 32px;
 }
+
 .content {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(18 17 17 / 37%);
     padding: 64px;
     border-radius: 10px;
     max-width: 816px;
@@ -631,7 +645,7 @@ img {
     align-items: center;
     margin-top: -221px;
     /* margin-right: 224px;
-    margin-left: 214px; */
+     margin-left: 214px; */
 }
 
 .testimonial-nav button i {
@@ -652,7 +666,7 @@ img {
         font-size: 16px;
     }
     .testimonial-text {
-        font-size: 16px;
+        font-size: 14px;
     }
     .testimonial-nav button {
         width: 30px;

@@ -49,7 +49,7 @@
     align-items: center;
     text-decoration: none;
     white-space: nowrap;
-}
+ }
 
 .navbar-brand img {
     max-height: 48px;
