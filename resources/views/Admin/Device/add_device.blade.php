@@ -23,8 +23,25 @@
                                     
                                     <!-- Device Identification -->
                                     <div class="col-12">
-                                        <h5 class="mb-3">Device Identification</h5>
+                                        {{-- <h5 class="mb-3">Device Identification</h5> --}}
                                         <div class="row">
+
+                                            <div class="mb-3 col-6">
+                                                <label for="device_id" class="form-label">Select Device</label>
+                                                <select class="form-select" id="device_id" name="device_id">
+                                                    <option value="">Select Device</option>
+                                                    @if(!empty($devices))
+                                                    @foreach($devices as $device)
+                                                    <option value="{{!empty($device->id)?$device->id:''}}"
+                                                        {{ !empty($device->deviceType->id) && $device->deviceType->id == $device->id ? 'selected' : '' }}>
+                                                        {{!empty($device->device_id)?$device->device_id:''}}</option>
+                                                    @endforeach 
+                                                   @endif
+                                                </select>
+                                                @if($errors->has('device_id'))
+                                                <span class="text-danger"><b>* {{$errors->first('device_id')}}</b></span>
+                                              @endif
+                                            </div>
                                      
                                             <div class="mb-3 col-6">
                                                 <label for="site_id" class="form-label">Select Site</label>
@@ -43,26 +60,11 @@
                                             </div>
                                             
 
-                                            <div class="mb-3 col-6">
-                                                <label for="device_type_id" class="form-label">Device Type</label>
-                                                <select class="form-select" id="device_type_id" name="device_type_id">
-                                                    <option value="">Select Device Type</option>
-                                                    @if(!empty($deviceTypes))
-                                                    @foreach($deviceTypes as $deviceType)
-                                                    <option value="{{!empty($deviceType->id)?$deviceType->id:''}}"
-                                                        {{ !empty($device->deviceType->id) && $device->deviceType->id == $deviceType->id ? 'selected' : '' }}>
-                                                        {{!empty($deviceType->device_type)?$deviceType->device_type:''}}</option>
-                                                    @endforeach 
-                                                   @endif
-                                                </select>
-                                                @if($errors->has('device_type_id'))
-                                                <span class="text-danger"><b>* {{$errors->first('device_type_id')}}</b></span>
-                                              @endif
-                                            </div>
+                                     
 
                                          </div>
                                          
-                                        <div class="row">
+                                        {{-- <div class="row">
 
                                             <div class="mb-3 col-6">
                                                 <label for="device_id" class="form-label">Device ID</label>
@@ -82,7 +84,8 @@
                                                @endif
                                             </div>
                                           
-                                        </div>
+                                        </div> --}}
+
                                     </div>
 
                                         

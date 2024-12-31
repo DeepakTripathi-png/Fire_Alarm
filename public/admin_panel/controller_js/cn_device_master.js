@@ -3,7 +3,7 @@ $(function () {
         processing: true,
         serverSide: true,
         
-        ajax: base_url + "/admin/master/device-type/data-table",
+        ajax: base_url + "/admin/master/device-master/data-table",
         columns: [{
             data: 'DT_RowIndex',
             name: 'DT_RowIndex'

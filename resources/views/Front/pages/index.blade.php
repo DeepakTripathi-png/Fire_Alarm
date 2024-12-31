@@ -30,7 +30,7 @@
             </div>
 
             <div class="col-md-6 about-image">
-                <img src="{{ asset('front/images/aboutus_fire_image.png') }}"  alt="FireAlarm Logo" style="margin-right: 10px;">
+                <img src="{{ asset('front/images/aboutus_fire_image.png') }}"  alt="FireAlarm Logo" style="margin-right: 10px;width:650px;">
             </div>
         </div>
     </div>

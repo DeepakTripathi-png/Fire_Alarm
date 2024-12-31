@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Master\Role_privilege;
-use App\Models\DeviceTypeMaster;
+use App\Models\DeviceMaster;
 use App\Models\SiteMaster;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -43,18 +43,47 @@ class DeviceController extends Controller
 
 
 
-    public function add(){
-        $role_id = Auth::guard('master_admins')->user()->role_id;
-        $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
-        if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')){
-            $deviceTypes=DeviceTypeMaster::where('status','active')->get();
-            $sites=SiteMaster::where('status','active')->get();
-            return view('Admin.Device.add_device',compact('deviceTypes','sites'));
-        }else{
-            return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
-        }
+    // public function add(){
+    //     $role_id = Auth::guard('master_admins')->user()->role_id;
+    //     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
+    //     if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')){
+    //         $assignedDeviceID= Device::where('status','active')->select('device_id')->get();
+
+    //         $devices=DeviceMaster::where('status','active')->get();
+    //         $sites=SiteMaster::where('status','active')->get();
+    //         return view('Admin.Device.add_device',compact('devices','sites'));
+    //     }else{
+    //         return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
+    //     }
        
+    // }
+
+
+    public function add()
+{
+    $role_id = Auth::guard('master_admins')->user()->role_id;
+    $RolesPrivileges = Role_privilege::where('id', $role_id)
+        ->where('status', 'active')
+        ->select('privileges')
+        ->first();
+
+    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')) {
+        // Get assigned device IDs
+        $assignedDeviceIDs = Device::where('status', 'active')->pluck('device_id');
+
+        // Get devices excluding assigned ones
+        $devices = DeviceMaster::where('status', 'active')
+            ->whereNotIn('id', $assignedDeviceIDs) // Exclude assigned device IDs
+            ->get();
+
+        $sites = SiteMaster::where('status', 'active')->get();
+
+        return view('Admin.Device.add_device', compact('devices', 'sites'));
+    } else {
+        return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
     }
+}
+
 
 
    
@@ -63,26 +92,22 @@ class DeviceController extends Controller
 
     public function store(Request $request)
     {
+
+        
         $validatedData = $request->validate([
             'site_id' => 'required|integer',
-            'device_type_id' => 'required|integer',
             'device_id' => 'required|integer',
-            'device_name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
         ], [
-            'site_id' => 'The site id field is required.',
-            'device_type_id.required' => 'The device type field is required.',
+            'site_id' => 'The site  field is required.',
             'device_id.required' => 'The device ID field is required.',
-            'device_name.required' => 'The device name field is required.',
             'description.max' => 'The description field may not be greater than 1000 characters.',
         ]);
 
         
         $input = [
             'site_id'=>$request->site_id,
-            'device_type_id' => $request->device_type_id,
             'device_id' => $request->device_id,
-            'device_name' => $request->device_name,
             'description' => $request->description ?? null, 
         ];
 
@@ -119,7 +144,7 @@ class DeviceController extends Controller
         try {
             $device= Device::where('id',$id)->with('site','deviceType')->first();
 
-            $deviceTypes=DeviceTypeMaster::where('status','active')->get();
+            $deviceTypes=DeviceMaster::where('status','active')->get();
             $sites=SiteMaster::where('status','active')->get();
          
             return view('Admin.Device.add_device', compact('device','deviceTypes', 'sites'));
@@ -133,6 +158,8 @@ class DeviceController extends Controller
     public function data_table(Request $request){
 
         $device = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
+
+        
 
         if ($request->ajax()) {
             return DataTables::of($device)
@@ -151,12 +178,12 @@ class DeviceController extends Controller
                 })
 
 
-                ->addColumn('device_type', function ($row) {
-                    return !empty($row->deviceType->device_type) ? $row->deviceType->device_type : '' ;
-                })
+                // ->addColumn('device_type', function ($row) {
+                //     return !empty($row->deviceType->device_type) ? $row->deviceType->device_type : '' ;
+                // })
 
                 ->addColumn('device_id', function ($row) {
-                    return !empty($row->device_id) ? $row->device_id : '' ;
+                    return !empty($row->deviceType->device_id) ? $row->deviceType->device_id : '' ;
                 })
 
                 ->addColumn('date', function ($row) {

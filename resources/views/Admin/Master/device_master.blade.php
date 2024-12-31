@@ -11,27 +11,27 @@
 
                 <div class="row">
                     <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h4 class="mt-0 header-title">Add Device Type</h4>
+                        <h4 class="mt-0 header-title"> {{!empty($device)?"Edit":"Update"}} Device</h4>
                     </div>
                     <div class="col-4">
                         <div class="card department-card">
                             <div class="card-body">
 
 
-                                <form action="{{ route('master.device_type.store') }}" method="post" id="add-banner-form" enctype="multipart/form-data">
+                                <form action="{{ route('master.device.store') }}" method="post" id="add-banner-form" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" class="form-control" id="id" name="id" value="{{!empty($deviceType)?$deviceType->id:''}}">
+                                    <input type="hidden" class="form-control" id="id" name="id" value="{{!empty($device)?$device->id:''}}">
 
                                     <div class="mb-3">
-                                        <label for="device_type" class="form-label">Device Type</label>
-                                        <input type="text" class="form-control" id="device_type" name="device_type"
-                                            placeholder="Device Type" value="{{ old('device_type', !empty($deviceType) ? $deviceType->device_type : '') }}">
-                                        @if($errors->has('device_type'))
-                                            <span class="text-danger"><b>* {{$errors->first('device_type')}}</b></span>
+                                        <label for="device_id" class="form-label">Device ID</label>
+                                        <input type="text" class="form-control" id="device_id" name="device_id"
+                                            placeholder="Device ID" value="{{ old('device_id', !empty($device) ? $device->device_id : '') }}">
+                                        @if($errors->has('device_id'))
+                                            <span class="text-danger"><b>* {{$errors->first('device_id')}}</b></span>
                                         @endif
                                     </div>
 
-                                    <button class="btn btn-success"  type="submit"> Submit </button>
+                                    <button class="btn btn-success"  type="submit"> {{!empty($device)?"Update":"Add"}} </button>
 
                                     <button type="reset" class="btn btn-danger reset-button">Cancel </button>
                                 </form>
@@ -52,7 +52,7 @@
                                                 <thead class="table-light">
                                                     <tr role="row">
                                                             <th  class="text-center">Sr. No.</th>
-                                                            <th  class="text-center">Device Type</th>
+                                                            <th  class="text-center">Device ID</th>
                                                             <th  class="text-center">Status</th>
                                                             <th  class="text-center"> Action</th>    
                                                     </tr>
@@ -79,7 +79,7 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('admin_panel/controller_js/cn_device_type_master.js')}}"></script>
+<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master.js')}}"></script>
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");

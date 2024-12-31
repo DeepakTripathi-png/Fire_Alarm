@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\SystemUsers\SystemUserController;
 use App\Http\Controllers\Admin\NotFoundController\NotFoundController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\AlertNotificationController;
-use App\Http\Controllers\Admin\Master\DeviceTypeMasterController;
+use App\Http\Controllers\Admin\Master\DeviceMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
 use App\Http\Controllers\Admin\Device\DeviceController;
 use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
@@ -75,11 +75,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-    Route::controller(DeviceTypeMasterController::class)->group(function () {
-        Route::get('master/device-type', 'index');
-        Route::post('master/device-type/store', 'store')->name('master.device_type.store');
-        Route::get('master/device-type/data-table','data_table');
-        Route::get('device-type-master/edit/{id}','edit');
+    Route::controller(DeviceMasterController::class)->group(function () {
+        Route::get('master/device-master', 'index');
+        Route::post('master/device-master/store', 'store')->name('master.device.store');
+        Route::get('master/device-master/data-table','data_table');
+        Route::get('device-master/edit/{id}','edit');
     });
 
 

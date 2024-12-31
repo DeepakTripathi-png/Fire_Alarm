@@ -9,6 +9,7 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         // Commands\UpdateTaskFine::class,
+        \App\Console\Commands\ToraiSocketServer::class,
     ];
     /**
      * Define the application's command schedule.

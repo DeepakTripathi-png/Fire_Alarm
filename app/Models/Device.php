@@ -31,7 +31,7 @@ class Device extends Model
    
    public function deviceType()
    {
-       return $this->belongsTo(DeviceTypeMaster::class);  
+       return $this->belongsTo(DeviceMaster::class,'device_id','id');  
    }
 
 

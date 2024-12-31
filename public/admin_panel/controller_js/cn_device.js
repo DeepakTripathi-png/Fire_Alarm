@@ -19,10 +19,10 @@ $(function () {
             name: 'site_address'
         },
 
-        {
-            data: 'device_type',
-            name: 'device_type'
-        },
+        // {
+        //     data: 'device_type',
+        //     name: 'device_type'
+        // },
 
         {
             data: 'device_id',

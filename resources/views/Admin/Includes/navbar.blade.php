@@ -171,7 +171,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
        
                             @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view'))
                             <li class="site-master">
-                                <a href="{{ url('admin/master/device-type') }}">Device Type</a>
+                                <a href="{{ url('admin/master/device-master') }}">Device Master</a>
                             </li>
                             @endif
 
@@ -263,11 +263,11 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 <li class="visual-setting">
                     <a href="{{ url('/admin/assign-site') }}">
                         <i class="mdi mdi-map-marker"></i>
-                        <span> Assign Site </span>
+                        <span> Site Management </span>
                     </a>
                 </li>
                 @endif
-            @endif
+               @endif
 
                 @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'alarm_view'))
                 <li class="vendor">

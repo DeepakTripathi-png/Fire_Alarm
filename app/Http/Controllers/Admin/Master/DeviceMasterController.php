@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\DeviceTypeMaster;
+use App\Models\DeviceMaster;
 use App\Models\Master\Role_privilege;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +18,14 @@ use DB;
 use Session;
 
 
-class DeviceTypeMasterController extends Controller
+class DeviceMasterController extends Controller
 {
 
     public function index(){
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view')){
-            return view('Admin.Master.device_type_master');
+            return view('Admin.Master.device_master');
         }else{
             return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
         }
@@ -36,14 +36,13 @@ class DeviceTypeMasterController extends Controller
     {
     
         $rules = [
-            'device_type' => 'required|string|max:255',
-     
+            'device_id' => 'required|integer', 
         ];
-
-
-        // Custom validation messages
+    
+        
         $messages = [
-            'device_type.required' => 'Device type is required.',
+            'device_id.required' => 'Device ID is required.',
+            'device_id.integer' => 'Device ID must be an integer.', 
         ];
 
         // Validate the request
@@ -56,21 +55,21 @@ class DeviceTypeMasterController extends Controller
 
         if (!empty($request->id)) {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_edit')) {
-                $input['device_type'] = $request->device_type;
+                $input['device_id'] = $request->device_id;
                 $input['modified_by'] = auth()->guard('master_admins')->user()->id;
                 $input['modified_ip_address'] = $request->ip();
-                DeviceTypeMaster::where('id', $request->id)->update($input);
-                return redirect('admin/master/device-type')->with('success', 'Device Type updated successfully!');
+                DeviceMaster::where('id', $request->id)->update($input);
+                return redirect('admin/master/device-master')->with('success', 'Device updated successfully!');
             }else{
                 return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
             }
         } else {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_add')){
-                $input['device_type'] = $request->device_type;
+                $input['device_id'] = $request->device_id;
                 $input['created_by'] = auth()->guard('master_admins')->user()->id;
                 $input['created_ip_address'] = $request->ip();
-                DeviceTypeMaster::create($input);
-              return redirect('admin/master/device-type')->with('success', 'Device Type added successfully!');
+                DeviceMaster::create($input);
+              return redirect('admin/master/device-master')->with('success', 'Device added successfully!');
             }else{
                 return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
             }
@@ -82,8 +81,8 @@ class DeviceTypeMasterController extends Controller
 
     public function edit($id){
         try {
-            $deviceType= DeviceTypeMaster::where('id',$id)->first();
-            return view('Admin.Master.device_type_master', compact('deviceType'));
+            $device= DeviceMaster::where('id',$id)->first();
+            return view('Admin.Master.device_master', compact('device'));
         } 
         catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return redirect('admin/roles-privileges')->with('error', 'Access Denied !');
@@ -91,22 +90,18 @@ class DeviceTypeMasterController extends Controller
     }
 
 
-    
-    
-   
-
-
-
     public function data_table(Request $request){
 
-        $device_type = DeviceTypeMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id','device_type','status')->get();
+        $device = DeviceMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id','device_id','status')->get();
 
-        if ($request->ajax()) {
-            return DataTables::of($device_type)
+       
+
+        if ($request->ajax()){
+            return DataTables::of($device)
                 ->addIndexColumn()
                 
                 ->addColumn('device_type', function ($row) {
-                    return !empty($row->device_type) ? $row->device_type : '' ;
+                    return !empty($row->device_id) ? $row->device_id : '' ;
                 })
 
 
@@ -118,7 +113,7 @@ class DeviceTypeMasterController extends Controller
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
 
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_edit')) {
-                        $actionBtn .= '<a href="' . url('admin/device-type-master/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
+                        $actionBtn .= '<a href="' . url('admin/device-master/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit" disabled><i class="mdi mdi-pencil"></i></button></a>';
                     }
@@ -126,7 +121,7 @@ class DeviceTypeMasterController extends Controller
                     
 
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_delete')) {
-                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Device Type Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
+                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="device_masters" data-flash="Device Type Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
                     }
@@ -138,10 +133,10 @@ class DeviceTypeMasterController extends Controller
 
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_status_change')) {
                         if ($row->status == 'active') {
-                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
+                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_masters" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;
                         } else {
-                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_type_masters" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
+                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="device_masters" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
                             return $statusBlockBtn;
                         }
                     } else {

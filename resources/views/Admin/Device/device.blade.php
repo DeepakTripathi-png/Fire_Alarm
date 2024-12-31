@@ -25,7 +25,7 @@
                                         <th style="width: 5%;">Sr no</th>
                                         <th style="width: 15%;">Site Name</th>
                                         <th style="width: 20%;">Address</th>
-                                        <th style="width: 10%;">Device Type</th>
+                                        {{-- <th style="width: 10%;">Device Type</th> --}}
                                         <th style="width: 10%;">Device ID</th>
                                         <th style="width: 15%;">Date & Time</th>
                                         <th style="width: 10%;">Status</th>
