@@ -168,6 +168,12 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
                     <div class="collapse" id="master">
                         <ul class="nav-second-level">
+
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_master_view'))
+                            <li class="site-master">
+                                <a href="{{ url('admin/master/site') }}">Site Master</a>
+                            </li>
+                            @endif   
        
                             @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view'))
                             <li class="site-master">
@@ -175,11 +181,14 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                             </li>
                             @endif
 
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'site_master_view'))
+
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view'))
                             <li class="site-master">
-                                <a href="{{ url('admin/master/site') }}">Site Master</a>
+                                <a href="{{ url('admin/master/slave-device-master') }}">Slave Device Master</a>
                             </li>
-                            @endif        
+                            @endif
+
+                                 
                         </ul>
                     </div>
                 </li>

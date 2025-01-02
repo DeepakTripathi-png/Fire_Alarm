@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\AlertNotificationController;
 use App\Http\Controllers\Admin\Master\DeviceMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
+use App\Http\Controllers\Admin\Master\SlaveDeviceMasterController;
 use App\Http\Controllers\Admin\Device\DeviceController;
 use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
 use App\Http\Controllers\Front\HomeController;
@@ -75,6 +76,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
+    Route::controller(SiteMasterController::class)->group(function () {
+        Route::get('master/site', 'index');
+        Route::post('master/site/store', 'store')->name('master.site.store');
+        Route::get('master/site/data-table','data_table');
+        Route::get('site-master/edit/{id}','edit');
+    });
+
     Route::controller(DeviceMasterController::class)->group(function () {
         Route::get('master/device-master', 'index');
         Route::post('master/device-master/store', 'store')->name('master.device.store');
@@ -82,13 +90,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('device-master/edit/{id}','edit');
     });
 
-
-    Route::controller(SiteMasterController::class)->group(function () {
-        Route::get('master/site', 'index');
-        Route::post('master/site/store', 'store')->name('master.site.store');
-        Route::get('master/site/data-table','data_table');
-        Route::get('site-master/edit/{id}','edit');
+    Route::controller(SlaveDeviceMasterController::class)->group(function () {
+        Route::get('master/slave-device-master', 'index');
+        // Route::post('master/device-master/store', 'store')->name('master.device.store');
+        // Route::get('master/device-master/data-table','data_table');
+        // Route::get('device-master/edit/{id}','edit');
     });
+
+
+
 
 
     Route::controller(DeviceController::class)->group(function (){
@@ -138,7 +148,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 //    Route::view('/customer', 'admin.Customer.customer');
 
    //Alarm Management 
-   Route::view('/alarm', 'admin.Alarm.alarm');
+   Route::view('/alarm', 'Admin.Alarm.alarm');
 
    Route::view('/report', 'Admin.Report.report');
 

@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "3.1.48",
         "nesbot/carbon": "^2.68",
+        "react/socket": "^1.16",
         "stevebauman/location": "^7.0",
         "twilio/sdk": "^8.3",
         "yajra/laravel-datatables-oracle": "^10.3.1"

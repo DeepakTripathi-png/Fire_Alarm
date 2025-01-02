@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\SmsController;
+use App\Http\Controllers\Api\DeviceDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,5 @@ Route::middleware('auth:sanctum')->group( function () {
 
 
 Route::post('/send-sms', [SmsController::class, 'sendSms']);
+
+Route::post('/handle-device-data', [DeviceDataController::class, 'handleDeviceData']);

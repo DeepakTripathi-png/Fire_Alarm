@@ -3,6 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use React\EventLoop\Factory;
+use React\Socket\Server as SocketServer;
+use React\Socket\ConnectionInterface;
+
 
 class ToraiSocketServer extends Command
 {
@@ -18,66 +22,63 @@ class ToraiSocketServer extends Command
     {
         set_time_limit(0);
 
-        $host = '45.79.126.21'; // Set your host IP
-        $port = 9001;           // Set your port
+        $host = '45.79.126.21'; 
+        $port = 9001;           
 
-        $socket = $this->createSocket($host, $port);
+       
+        $loop = Factory::create();
 
+        
+        $socketServer = new SocketServer("$host:$port", $loop);  
+
+        
         $this->info("Torai Server listening on port $port");
 
-        while (true) {
-            $clientSocket = @socket_accept($socket);
+       
+        $socketServer->on('connection', function (ConnectionInterface $conn) {
+            $this->info("Client connected: {$conn->getRemoteAddress()}");
 
-            if ($clientSocket === false) {
-                continue;
-            }
+           
+            $conn->on('data', function ($data) use ($conn) {
+                $this->handleClientData($data);
+                $conn->write("Data received\n");
+            });
 
-            $this->info("Client connected.");
+            $conn->on('close', function () use ($conn) {
+                $this->info("Client disconnected: {$conn->getRemoteAddress()}");
+            });
+        });
 
-            $this->handleClient($clientSocket);
-        }
+        $loop->run();
     }
 
-    protected function createSocket($host, $port)
+    protected function handleClientData($data)
     {
-        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        if ($socket === false) {
-            $this->error("Socket creation failed: " . socket_strerror(socket_last_error()));
-            exit();
-        }
-
-        socket_set_option($socket, SOL_SOCKET, SO_KEEPALIVE, 1);
-
-        if (socket_bind($socket, $host, $port) === false) {
-            $this->error("Socket bind failed: " . socket_strerror(socket_last_error()));
-            exit();
-        }
-
-        if (socket_listen($socket, 5) === false) {
-            $this->error("Socket listen failed: " . socket_strerror(socket_last_error()));
-            exit();
-        }
-
-        return $socket;
+         $this->info("Received data: $data");
+        
+         $apiUrl = 'https://ioglobe.in/api/handle-device-data';
+            
+         $apiResponse = $this->postDataToUrl($apiUrl, ['data' => $data]);
+         
+         $this->info("Response: $apiResponse");
     }
-
-    protected function handleClient($clientSocket)
-    {
-        while (true) {
-            $data = @socket_read($clientSocket, 65536);
-            if ($data === false) {
-                break;
+      
+      
+      protected function postDataToUrl($url, $data)
+      {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    
+            $response = curl_exec($ch);
+    
+            if ($response === false) {
+                Log::error('Curl error: ' . curl_error($ch));
+                return false;
             }
-
-            if (empty($data)) {
-                $this->info("Client disconnected.");
-                break;
-            }
-
-            // Show raw data directly in the terminal
-            $this->info("Received data: $data");
+    
+            curl_close($ch);
+            return $response;
         }
-
-        socket_close($clientSocket);
-    }
 }
