@@ -18,32 +18,57 @@
                             <div class="card-body">
 
 
-                                <form action="{{ route('master.device.store') }}" method="post" id="add-banner-form" enctype="multipart/form-data">
+                                <form action="{{ route('master.slave.device.store') }}" method="post" id="add-banner-form" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" class="form-control" id="id" name="id" value="{{!empty($device)?$device->id:''}}">
+                                    <input type="hidden" class="form-control" id="id" name="id" value="{{!empty($slaveDevice)?$slaveDevice->id:''}}">
 
+                            
                                     <div class="mb-3">
-                                        <label for="device_id" class="form-label">Slave Device Name</label>
-                                        <input type="text" class="form-control" id="device_id" name="device_id"
-                                            placeholder="Slave Device Name" value="{{ old('device_id', !empty($device) ? $device->device_id : '') }}">
-                                        @if($errors->has('device_id'))
-                                            <span class="text-danger"><b>* {{$errors->first('device_id')}}</b></span>
+                                        <label for="slave_device_name" class="form-label">Slave Device Name</label>
+                                        <input type="text" class="form-control" id="slave_device_name" name="slave_device_name"
+                                            placeholder="Slave Device Name" value="{{ old('slave_device_name', !empty($slaveDevice) ? $slaveDevice->slave_device_name : '') }}">
+                                        @if($errors->has('slave_device_name'))
+                                            <span class="text-danger"><b>* {{$errors->first('slave_device_name')}}</b></span>
                                         @endif
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <!-- Slave Device Image Upload Field -->
-                                        <label for="device_image" class="form-label">Upload Slave Device Image</label>
-                                        <input type="file" class="form-control" id="device_image" name="device_image" accept="image/*">
-                                        @if($errors->has('device_image'))
-                                            <span class="text-danger"><b>* {{$errors->first('device_image')}}</b></span>
+                                        <label for="device_image_path" class="form-label">Upload Slave Device Image</label>
+                                        <input type="file" class="form-control" id="device_image_path" name="device_image_path" accept="image/*" data-default-file="{{ !empty($slaveDevice->slave_device_image_path) && Storage::exists($slaveDevice->slave_device_image_path) ? url('/').Storage::url($slaveDevice->slave_device_image_path	) : '' }}" alt="{{ !empty($slaveDevice->slave_device_image_path	) ? $slaveDevice->slave_device_image_path : '' }}"  >
+                                        @if($errors->has('device_image_path'))
+                                            <span class="text-danger"><b>* {{$errors->first('device_image_path')}}</b></span>
                                         @endif
                                     
                                         <!-- Image Preview -->
                                         <div class="mt-3">
                                             <img id="image_preview" src="#" alt="Image Preview" style="max-width: 100px; display: none; border: 1px solid #ddd; padding: 5px;">
                                         </div>
+                                    </div> --}}
+
+                                    <div class="mb-3">
+                                        <!-- Slave Device Image Upload Field -->
+                                        <label for="device_image_path" class="form-label">Upload Slave Device Image</label>
+                                        <input type="file" class="form-control" id="device_image_path" name="device_image_path" accept="image/*">
+                                    
+                                        @if($errors->has('device_image_path'))
+                                            <span class="text-danger"><b>* {{$errors->first('device_image_path')}}</b></span>
+                                        @endif
+                                    
+                                        <!-- Existing Image Preview -->
+                                        <div class="mt-3" id="existing_image_container" style="{{ empty($slaveDevice->slave_device_image_path) ? 'display: none;' : '' }}">
+                                            <img id="existing_image_preview" 
+                                                 src="{{ !empty($slaveDevice->slave_device_image_path) && Storage::exists($slaveDevice->slave_device_image_path) ? url('/').Storage::url($slaveDevice->slave_device_image_path) : '' }}" 
+                                                 alt="Existing Image" 
+                                                 style="max-width: 100px; border: 1px solid #ddd; padding: 5px;">
+                                        </div>
+                                    
+                                        <!-- New Image Preview -->
+                                        <div class="mt-3">
+                                            <img id="new_image_preview" src="#" alt="New Image Preview" style="max-width: 100px; display: none; border: 1px solid #ddd; padding: 5px;">
+                                        </div>
                                     </div>
+                                    
 
                                     <button class="btn btn-success"  type="submit"> {{!empty($device)?"Update":"Add"}} </button>
 
@@ -94,30 +119,55 @@
 @endsection
 
 @section('script')
-{{-- <script src="{{ URL::asset('admin_panel/controller_js/cn_device_master.js')}}"></script> --}}
+<script src="{{ URL::asset('admin_panel/controller_js/cn_slave_device_master.js')}}"></script>
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");
 
         //Image Preview Code Start
-        document.getElementById('device_image').addEventListener('change', function (event) {
-    const imagePreview = document.getElementById('image_preview');
+    //     document.getElementById('device_image_path').addEventListener('change', function (event) {
+    //     const imagePreview = document.getElementById('image_preview');
+    //     const file = event.target.files[0];
+
+    //     if (file) {
+    //         const reader = new FileReader();
+    //         reader.onload = function (e) {
+    //             imagePreview.src = e.target.result;
+    //             imagePreview.style.display = 'block'; // Show the preview
+    //         };
+    //         reader.readAsDataURL(file);
+    //     } else {
+    //         imagePreview.style.display = 'none'; // Hide the preview if no file is selected
+    //         imagePreview.src = '#';
+    //     }
+    // });
+
+
+
+    document.getElementById('device_image_path').addEventListener('change', function (event) {
+    const newImagePreview = document.getElementById('new_image_preview');
+    const existingImageContainer = document.getElementById('existing_image_container');
     const file = event.target.files[0];
 
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            imagePreview.src = e.target.result;
-            imagePreview.style.display = 'block'; // Show the preview
+            newImagePreview.src = e.target.result;
+            newImagePreview.style.display = 'block'; // Show the new image preview
+            existingImageContainer.style.display = 'none'; // Hide the existing image container
         };
         reader.readAsDataURL(file);
     } else {
-        imagePreview.style.display = 'none'; // Hide the preview if no file is selected
-        imagePreview.src = '#';
+        newImagePreview.style.display = 'none'; // Hide the new image preview
+        newImagePreview.src = '#';
+        if (existingImageContainer.querySelector('img').src) {
+            existingImageContainer.style.display = 'block'; // Show the existing image if it exists
+        }
     }
 });
 
+
  //Image Preview Code End
 
-    </script>
+</script>
 @endsection

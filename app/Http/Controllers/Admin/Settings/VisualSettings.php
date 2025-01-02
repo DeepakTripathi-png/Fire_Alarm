@@ -35,6 +35,7 @@ class VisualSettings extends Controller
         ]);
 
         $input = [];
+        
         if(!empty($request->file())){
             $input = array_merge($input, $this->uploadFiles($request->file(), 'images/visuals'));
         }

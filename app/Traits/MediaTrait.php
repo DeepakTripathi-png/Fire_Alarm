@@ -34,4 +34,29 @@ trait MediaTrait {
         return $name_key;
     }
 
+
+
+    public function verifyAndUpload(Request $request, $fieldname, $directory) {
+
+        if( $request->hasFile( $fieldname ) ) {
+
+            if (!$request->file($fieldname)->isValid()) {
+
+                flash('Invalid File!')->error()->important();
+
+                return redirect()->back()->with('error', 'Invalid File.');
+
+            }
+
+            $filename = time().Str::random(5).'.'.$request->file($fieldname)->getClientOriginalExtension();
+            $filepath = $request->file($fieldname)->storeAs('public/'.$directory,$filename);
+
+            return $filepath;
+
+        }
+
+        return null;
+
+    }
+
 }

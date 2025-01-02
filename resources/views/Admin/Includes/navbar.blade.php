@@ -182,7 +182,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                             @endif
 
 
-                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view'))
+                            @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'slave_device_master_view'))
                             <li class="site-master">
                                 <a href="{{ url('admin/master/slave-device-master') }}">Slave Device Master</a>
                             </li>

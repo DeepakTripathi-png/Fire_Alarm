@@ -105,48 +105,12 @@
                                                         <td class="text-center"></td>
                                                         <td class="text-center"></td>
                                                     </tr>
-
-                                                   
-
-
-                                                    <tr>
-                                                        <td class="text-center">4</td>
-                                                        <td>Master > Device Type</td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_type_master_view"
-                                                                class="ccheckbox view" value="device_type_master_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_view') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_master_add"
-                                                                class="ccheckbox add" value="device_master_add"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_master_add') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_master_edit"
-                                                                class="ccheckbox edit" value="device_master_edit"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_master_edit') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_type_master_delete"
-                                                                class="ccheckbox deletes" value="device_type_master_delete"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_delete') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_type_master_status_change"
-                                                                class="ccheckbox status" value="device_type_master_status_change"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_status_change') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                class="ccheckbox all-other"></td>
-
-                                                    </tr>
-
-                                               
-
+                                                    
+                                                     
+                                                    
 
                                                     <tr>
-                                                        <td class="text-center">5</td>
+                                                        <td class="text-center">3</td>
                                                         <td>Master > Site Master</td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 name="privileges[]" id="site_master_view"
@@ -177,6 +141,80 @@
                                                                 class="ccheckbox all-other"></td>
 
                                                     </tr>
+                                                   
+
+
+                                                    <tr>
+                                                        <td class="text-center">4</td>
+                                                        <td>Master > Device </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="device_type_master_view"
+                                                                class="ccheckbox view" value="device_type_master_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_view') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="device_master_add"
+                                                                class="ccheckbox add" value="device_master_add"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_master_add') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="device_master_edit"
+                                                                class="ccheckbox edit" value="device_master_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_master_edit') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="device_type_master_delete"
+                                                                class="ccheckbox deletes" value="device_type_master_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_delete') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="device_type_master_status_change"
+                                                                class="ccheckbox status" value="device_type_master_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_type_master_status_change') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                class="ccheckbox all-other"></td>
+
+                                                    </tr>
+
+
+
+                                                    
+                                                    <tr>
+                                                        <td class="text-center">5</td>
+                                                        <td>Master > Slave Device </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="slave_device_master_view"
+                                                                class="ccheckbox view" value="slave_device_master_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'slave_device_master_view') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="slave_device_master_add"
+                                                                class="ccheckbox add" value="slave_device_master_add"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'slave_device_master_add') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="slave_device_master_edit"
+                                                                class="ccheckbox edit" value="slave_device_master_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'slave_device_master_edit') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="slave_device_master_delete"
+                                                                class="ccheckbox deletes" value="slave_device_master_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'slave_device_master_delete') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="slave_device_master_status_change"
+                                                                class="ccheckbox status" value="slave_device_master_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'slave_device_master_status_change') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                class="ccheckbox all-other"></td>
+
+                                                    </tr>
+
+                                               
+
 
 
 {{-- 

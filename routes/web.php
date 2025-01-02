@@ -92,9 +92,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
     Route::controller(SlaveDeviceMasterController::class)->group(function () {
         Route::get('master/slave-device-master', 'index');
-        // Route::post('master/device-master/store', 'store')->name('master.device.store');
-        // Route::get('master/device-master/data-table','data_table');
-        // Route::get('device-master/edit/{id}','edit');
+        Route::post('master/slave-device-master/store', 'store')->name('master.slave.device.store');
+        Route::get('master/slave-device-master/data-table','data_table');
+        Route::get('slave-device-master/edit/{id}','edit');
     });
 
 
