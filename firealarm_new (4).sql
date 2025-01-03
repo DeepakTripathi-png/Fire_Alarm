@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2024 at 11:35 AM
+-- Generation Time: Jan 03, 2025 at 10:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -88,7 +88,8 @@ CREATE TABLE `assign_devices` (
 --
 
 INSERT INTO `assign_devices` (`id`, `customer_id`, `site_id`, `description`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'This site is assigned for you to monitor', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-19 05:29:51', '2024-12-19 05:29:51');
+(1, 2, 1, 'This site is assigned for you to monitor', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-19 05:29:51', '2024-12-19 05:29:51'),
+(2, 2, 4, 'wfsdfsdf', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-30 06:52:27', '2024-12-30 06:52:27');
 
 -- --------------------------------------------------------
 
@@ -140,18 +141,19 @@ CREATE TABLE `devices` (
 --
 
 INSERT INTO `devices` (`id`, `site_id`, `device_type_id`, `device_id`, `device_name`, `description`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '12222', 'Fire Alarm Pump', 'Hi This is Deepak', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-28 02:48:06', '2024-11-28 02:48:06'),
-(2, 1, 1, '12', '112', '121', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-11 01:23:57', '2024-12-11 01:23:57');
+(3, 4, NULL, '2', NULL, 'adsfds', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-30 06:51:48', '2024-12-30 06:51:48'),
+(5, 4, NULL, '3', NULL, 'This is is assigned to Ashu Department', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-30 22:48:15', '2024-12-30 22:48:15');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `device_type_masters`
+-- Table structure for table `device_masters`
 --
 
-CREATE TABLE `device_type_masters` (
+CREATE TABLE `device_masters` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `device_type` text DEFAULT NULL,
+  `device_id` text DEFAULT NULL,
+  `device_name` varchar(255) DEFAULT NULL,
   `created_ip_address` varchar(255) DEFAULT NULL,
   `modified_ip_address` varchar(255) DEFAULT NULL,
   `created_by` bigint(20) DEFAULT NULL,
@@ -162,24 +164,13 @@ CREATE TABLE `device_type_masters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `device_type_masters`
+-- Dumping data for table `device_masters`
 --
 
-INSERT INTO `device_type_masters` (`id`, `device_type`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Fire Alarm 12', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-11-25 03:12:36', '2024-12-16 04:53:48'),
-(2, 'Pump', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 00:28:20', '2024-11-26 00:28:20'),
-(3, 'Fire Alarm 2', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-12-10 03:56:33', '2024-12-10 03:56:33'),
-(7, 'aaaa', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 01:01:34', '2024-12-12 01:01:34'),
-(8, '1212', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 01:04:28', '2024-12-12 01:04:28'),
-(9, NULL, '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 01:11:04', '2024-12-12 01:11:04'),
-(10, NULL, '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 01:11:09', '2024-12-12 01:11:09'),
-(11, 'test', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 04:31:50', '2024-12-12 04:31:50'),
-(12, 'test', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 04:33:13', '2024-12-12 04:33:13'),
-(13, 'test', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 04:33:29', '2024-12-12 04:33:29'),
-(14, 'ZXZXZXZX', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 04:33:44', '2024-12-12 04:33:44'),
-(15, 'Fire Alarm 278', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-16 04:54:14', '2024-12-17 03:52:56'),
-(16, 'asasas', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-16 04:55:28', '2024-12-16 04:55:28'),
-(17, 'opiuiyouiouopiopipo', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-17 03:53:11', '2024-12-17 03:53:11');
+INSERT INTO `device_masters` (`id`, `device_id`, `device_name`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(2, '867409072672715', 'KE312001', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-12-30 06:05:07', '2024-12-30 06:18:20'),
+(3, '867409072672716', 'KE312002', '127.0.0.1', NULL, 1, NULL, 'active', '2024-12-30 07:10:56', '2024-12-30 07:10:56'),
+(4, '867409072672717', 'KE312003', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-12-30 07:11:04', '2025-01-02 03:54:00');
 
 -- --------------------------------------------------------
 
@@ -226,6 +217,35 @@ CREATE TABLE `general_settings` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `i_o_slaves`
+--
+
+CREATE TABLE `i_o_slaves` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `master_device_id` bigint(20) DEFAULT NULL,
+  `slave_device_id` bigint(20) DEFAULT NULL,
+  `io_slave_name` varchar(255) DEFAULT NULL,
+  `io_device_status` varchar(255) DEFAULT NULL,
+  `created_ip_address` varchar(255) DEFAULT NULL,
+  `modified_ip_address` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `modified_by` bigint(20) DEFAULT NULL,
+  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `i_o_slaves`
+--
+
+INSERT INTO `i_o_slaves` (`id`, `master_device_id`, `slave_device_id`, `io_slave_name`, `io_device_status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 5, 'slave1', '5v', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 05:11:20', '2025-01-02 05:11:20'),
+(2, 2, 11, 'slave4', 'alarm', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2025-01-02 05:25:31', '2025-01-02 06:54:16');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `master_admins`
 --
 
@@ -261,9 +281,10 @@ CREATE TABLE `master_admins` (
 --
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `api_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
-(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2024-12-30 10:16:07', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2024-12-30 04:46:07'),
+(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-03 04:04:37', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-02 22:34:37'),
 (2, 'system', NULL, 'Deepak', 'deepak@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2024-12-20 04:42:17', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2024-12-19 23:12:17'),
-(3, 'system', NULL, 'Ashvini Bhone', 'aashubhone@gmail.com', '$2y$10$H4N.oTXGxOOLX1epyOljTeQdPHHmJkWoA0UHrLt7j8zX9vo/y4xhC', '9552246484', '4', 'vishrantWadi ,pune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-12-17 06:37:24', '2024-12-17 06:37:24');
+(3, 'system', NULL, 'Ashvini Bhone', 'aashubhone@gmail.com', '$2y$10$H4N.oTXGxOOLX1epyOljTeQdPHHmJkWoA0UHrLt7j8zX9vo/y4xhC', '9552246484', '4', 'vishrantWadi ,pune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-12-17 06:37:24', '2024-12-17 06:37:24'),
+(4, 'system', NULL, 'Deepak Client', 'deepakclient@gmail.com', '$2y$10$fv2ghBw5xF4fHdJAYgRwyu6F65C2F9vhkR1QfXu.nA357D6cGtmPu', '+91 7310560108', '4', 'This is Deepak Client', NULL, NULL, NULL, NULL, '2025-01-03 09:23:24', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2025-01-03 03:31:41', '2025-01-03 03:53:24');
 
 -- --------------------------------------------------------
 
@@ -295,7 +316,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2024_11_26_063603_create_site_masters_table', 4),
 (13, '2024_11_28_060802_create_devices_table', 5),
 (14, '2024_12_16_091649_create_assign_devices_table', 6),
-(15, '2024_12_23_095058_create_contacts_table', 7);
+(15, '2024_12_23_095058_create_contacts_table', 7),
+(16, '2024_12_30_111541_create_device_masters_table', 8),
+(17, '2025_01_02_042419_create_slave_device_masters_table', 9),
+(18, '2025_01_02_094652_create_i_o_slaves_table', 10);
 
 -- --------------------------------------------------------
 
@@ -376,7 +400,7 @@ CREATE TABLE `role_privileges` (
 --
 
 INSERT INTO `role_privileges` (`id`, `role_name`, `privileges`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'dashboard_view, device_type_master_view, site_master_view, device_type_masterrole_privileges_view, user_view, device_view, map_site_view, alarm_view, report_view, device_master_add, site_master_add, role_privileges_add, user_add, device_add, map_site_add, alarm_add, report_add, device_master_edit, site_master_edit, role_privileges_edit, user_edit, device_edit, map_site_edit, alarm_edit, report_edit, device_type_master_delete, site_master_delete, role_privileges_delete, user_delete, device_delete, map_site_delete, alarm_delete, report_delete, device_type_master_status_change, site_master_status_change, role_privileges_status_change, user_status_change, device_status, map_site_status, alarm_status, report_status_change,device_type_master_edit', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
+(1, 'Super Admin', 'dashboard_view, device_type_master_view, site_master_view, device_type_masterrole_privileges_view, user_view, device_view, map_site_view, alarm_view, report_view, device_master_add, site_master_add, role_privileges_add, user_add, device_add, map_site_add, alarm_add, report_add, device_master_edit, site_master_edit, role_privileges_edit, user_edit, device_edit, map_site_edit, alarm_edit, report_edit, device_type_master_delete, site_master_delete, role_privileges_delete, user_delete, device_delete, map_site_delete, alarm_delete, report_delete, device_type_master_status_change, site_master_status_change, role_privileges_status_change, user_status_change, device_status, map_site_status, alarm_status, report_status_change,device_type_master_edit,slave_device_master_view,slave_device_master_add,slave_device_master_edit,slave_device_master_delete,slave_device_master_status_change', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
 (3, 'Admin', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_privileges_view,role_privileges_add,role_privileges_edit,role_privileges_delete,role_privileges_status_change,user_view,user_add,user_edit,user_delete,user_status_change,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,report_view,report_add', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:28:04', '2024-11-27 01:36:03'),
 (4, 'Client Admin', 'dashboard_view,alarm_view,reports_view,reports_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2024-11-26 04:46:26'),
 (5, 'Client Operator', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_view,role_view,role_add,role_edit,role_delete,role_status,system_user_view,system_user_add,system_user_edit,system_user_delete,role_status,device_management_view,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,reports_view,reports_edit,reports_view,reports_delete,reports_status', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 04:47:07', '2024-11-26 04:47:07');
@@ -410,6 +434,45 @@ INSERT INTO `site_masters` (`id`, `site_name`, `site_address`, `created_ip_addre
 (3, 'aa', 'aa', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-12 03:59:49', '2024-12-12 03:59:49'),
 (4, 'ashu', 'Swami Plot No 166, Gajanan Nagar, 1/1/1, opposite ASHTAVINAYAK CITY, next to Pearl Society, Maharashtra Vidhyut Department Quarters, Phursungi, Pune, Maharashtra 412308', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-12-12 23:53:36', '2024-12-13 00:08:57'),
 (5, 'asas', 'asasas', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2024-12-13 01:07:47', '2024-12-13 01:07:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slave_device_masters`
+--
+
+CREATE TABLE `slave_device_masters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `slave_device_name` text DEFAULT NULL,
+  `slave_device_image_path` varchar(255) DEFAULT NULL,
+  `slave_device_image_name` varchar(255) DEFAULT NULL,
+  `created_ip_address` varchar(255) DEFAULT NULL,
+  `modified_ip_address` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `modified_by` bigint(20) DEFAULT NULL,
+  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `slave_device_masters`
+--
+
+INSERT INTO `slave_device_masters` (`id`, `slave_device_name`, `slave_device_image_path`, `slave_device_image_name`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'asd', 'public/images/slave_device_images/1735795234gzxsP.png', 'favicon_icon (2).png', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2025-01-01 23:50:34', '2025-01-01 23:50:34'),
+(3, 'dsf', 'public/images/slave_device_images/1735798281rWrSN.png', 'Screenshot 2024-12-30 163649.png', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2025-01-01 23:55:55', '2025-01-02 00:41:21'),
+(4, 'sdzfsz', 'public/images/slave_device_images/17357983085CN8M.png', 'logo.png', '127.0.0.1', '127.0.0.1', 1, 1, 'delete', '2025-01-02 00:41:48', '2025-01-02 00:41:48'),
+(5, 'FIRE ALARM PANEL', 'public/images/slave_device_images/1735799843P2YYI.jfif', 'FireAlarmPanel.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:07:23', '2025-01-02 01:07:23'),
+(6, 'VESDA SYSTEM PANEL', 'public/images/slave_device_images/1735799903n5zxK.jfif', 'vesda.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:08:23', '2025-01-02 01:08:23'),
+(7, 'Room Temperature', 'public/images/slave_device_images/1735799968fOiP0.png', 'roomtemp.png', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:09:28', '2025-01-02 01:09:28'),
+(8, 'Room Humidity', 'public/images/slave_device_images/173580006170AKz.jfif', 'humidity.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:11:01', '2025-01-02 01:11:01'),
+(9, 'Electric Meter', 'public/images/slave_device_images/1735800110a2fRM.jfif', 'electricmeter.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:11:50', '2025-01-02 01:11:50'),
+(10, 'WATER PUMP STATUS', 'public/images/slave_device_images/1735800179vlGqM.jfif', 'waterpump.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:12:59', '2025-01-02 01:12:59'),
+(11, 'WATER PUMP COMMAND', 'public/images/slave_device_images/1735800736LgQjO.jfif', 'firePump.jfif', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2025-01-02 01:13:53', '2025-01-02 01:22:16'),
+(12, 'WATER TANK', 'public/images/slave_device_images/1735800465MulTd.jfif', 'watertank.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:17:45', '2025-01-02 01:17:45'),
+(13, 'WATER VALVES', 'public/images/slave_device_images/1735800535soqA5.jfif', 'WATER VALVES.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:18:55', '2025-01-02 01:18:55'),
+(14, 'WATER METER', 'public/images/slave_device_images/17358005920Isl1.jfif', 'WATER METER.jfif', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-02 01:19:52', '2025-01-02 01:19:52');
 
 -- --------------------------------------------------------
 
@@ -482,9 +545,9 @@ ALTER TABLE `devices`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `device_type_masters`
+-- Indexes for table `device_masters`
 --
-ALTER TABLE `device_type_masters`
+ALTER TABLE `device_masters`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -498,6 +561,12 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `general_settings`
 --
 ALTER TABLE `general_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `i_o_slaves`
+--
+ALTER TABLE `i_o_slaves`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -546,6 +615,12 @@ ALTER TABLE `site_masters`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `slave_device_masters`
+--
+ALTER TABLE `slave_device_masters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -572,7 +647,7 @@ ALTER TABLE `alert_notifications`
 -- AUTO_INCREMENT for table `assign_devices`
 --
 ALTER TABLE `assign_devices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -584,13 +659,13 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `device_type_masters`
+-- AUTO_INCREMENT for table `device_masters`
 --
-ALTER TABLE `device_type_masters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+ALTER TABLE `device_masters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -605,16 +680,22 @@ ALTER TABLE `general_settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `i_o_slaves`
+--
+ALTER TABLE `i_o_slaves`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `master_admins`
 --
 ALTER TABLE `master_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -639,6 +720,12 @@ ALTER TABLE `role_privileges`
 --
 ALTER TABLE `site_masters`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `slave_device_masters`
+--
+ALTER TABLE `slave_device_masters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
