@@ -11,6 +11,7 @@ class DeviceMaster extends Model
 
     protected $fillable = [
         'device_id',
+        'device_name',
         'created_ip_address',
         'modified_ip_address',
         'created_by',

@@ -16,6 +16,7 @@ use Arr;
 use Str;
 use DB;
 use Session;
+use App\Models\IOSlave;
 
 
 class DeviceMasterController extends Controller
@@ -37,12 +38,14 @@ class DeviceMasterController extends Controller
     
         $rules = [
             'device_id' => 'required|integer', 
+            'device_name' => 'required', 
         ];
     
         
         $messages = [
             'device_id.required' => 'Device ID is required.',
             'device_id.integer' => 'Device ID must be an integer.', 
+            'device_name.required' => 'Device name is required.',
         ];
 
         // Validate the request
@@ -56,6 +59,7 @@ class DeviceMasterController extends Controller
         if (!empty($request->id)) {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_edit')) {
                 $input['device_id'] = $request->device_id;
+                $input['device_name'] = $request->device_name;
                 $input['modified_by'] = auth()->guard('master_admins')->user()->id;
                 $input['modified_ip_address'] = $request->ip();
                 DeviceMaster::where('id', $request->id)->update($input);
@@ -66,6 +70,7 @@ class DeviceMasterController extends Controller
         } else {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_add')){
                 $input['device_id'] = $request->device_id;
+                $input['device_name'] = $request->device_name;
                 $input['created_by'] = auth()->guard('master_admins')->user()->id;
                 $input['created_ip_address'] = $request->ip();
                 DeviceMaster::create($input);
@@ -90,9 +95,29 @@ class DeviceMasterController extends Controller
     }
 
 
+    public function view(Request $request){
+
+        $role_id = Auth::guard('master_admins')->user()->role_id;
+        $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
+        if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view')){
+
+             $device = DeviceMaster::where('id',$request->id)->first();
+
+             $ioSlave = IOSlave::where('status', '!=', 'delete')->where('master_device_id',$request->id)->orderBy('id','DESC')->with('masterDevice','slaveDevice')->get();
+
+        
+
+            return view('Admin.Master.device_master_view',compact('device','ioSlave'));
+        }else{
+            return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
+        }
+       
+    }
+
+
     public function data_table(Request $request){
 
-        $device = DeviceMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id','device_id','status')->get();
+        $device = DeviceMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id','device_id','device_name','status')->get();
 
        
 
@@ -104,6 +129,11 @@ class DeviceMasterController extends Controller
                     return !empty($row->device_id) ? $row->device_id : '' ;
                 })
 
+                  
+                ->addColumn('device_name', function ($row) {
+                    return !empty($row->device_name) ? $row->device_name: '' ;
+                })
+
 
             
 
@@ -111,6 +141,14 @@ class DeviceMasterController extends Controller
                     $actionBtn = '';
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
+
+
+                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view')) {
+                        $actionBtn .= '<a href="' . url('admin/device-master/view/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-primary btn-xs View_button" title="View"><i class="mdi mdi-eye"></i></button></a>';
+                    } else {
+                        $actionBtn .= '<a href="javascript:void;"> <button type="button" data-id="' . $row->id . '" class="btn btn-primary btn-xs View_button" title="View" disabled><i class="mdi mdi-eye"></i></button></a>';
+                    }
+
 
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_edit')) {
                         $actionBtn .= '<a href="' . url('admin/device-master/edit/' . $row->id ) . '"> <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit"><i class="mdi mdi-pencil"></i></button></a>';
@@ -127,6 +165,7 @@ class DeviceMasterController extends Controller
                     }
                     return $actionBtn;
                 })
+
                 ->addColumn('status', function ($row) {
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
@@ -149,11 +188,91 @@ class DeviceMasterController extends Controller
                         }
                     }
                 })
+
                 // ->rawColumns(['action', 'status'])
                 ->rawColumns(['action', 'status','site_address'])
                 ->make(true);
         }
     }
+
+
+    
+
+
+
+    public function view_data_table(Request $request){
+
+        //   dd($request->all());
+
+        $ioSlaves= IOSlave::where('status', '!=', 'delete')->orderBy('id','DESC')->with('masterDevice','slaveDevice')->get();
+
+
+        if ($request->ajax()){
+            return DataTables::of($ioSlaves)
+                ->addIndexColumn()
+
+          
+
+                ->addColumn('io_slave_name', function ($row){
+                    return !empty($row->io_slave_name) ? strtoupper($row->io_slave_name) : '' ;
+                })
+
+
+                ->addColumn('slave_device_image', function ($row){
+                    $image_path = '';
+                    $image_name = '';
+                    if (!empty($row->slaveDevice->slave_device_image_path)) {
+                        $image_path = Storage::exists($row->slaveDevice->slave_device_image_path) ? url('/').Storage::url($row->slaveDevice->slave_device_image_path) : "";
+                    
+                        $image_name = $row->slaveDevice->slave_device_image_name;
+                    }
+                    return '<img src="' . $image_path . '" alt="' . $image_name . '" width="100" class="review-image" style="cursor:pointer;">';
+                })
+                
+                ->addColumn('slave_device_name', function ($row){
+                    return !empty($row->slaveDevice->slave_device_name) ? strtoupper($row->slaveDevice->slave_device_name) : '' ;
+                })
+
+
+            
+
+                ->addColumn('io_device_status', function ($row) {
+                    if (!empty($row->io_device_status)) {
+                        $status = strtoupper($row->io_device_status);
+                        $color = '';
+                
+                        switch ($status) {
+                            case 'NORMAL':
+                                $color = 'background-color:rgb(58, 199, 58);'; 
+                                break;
+                            case 'ALARM':
+                                $color = 'background-color:rgb(215, 35, 35);'; 
+                                break;
+                            case 'ON':
+                                $color = 'background-color:rgb(43, 176, 43);'; 
+                                break;
+                            case 'OFF':
+                                $color = 'background-color: rgb(188, 51, 51);'; 
+                                break;
+                            default:
+                                $color = 'background-color: rgb(92, 178, 213);';;
+                                break;
+                        }
+                
+                        return "<span style='display: block; padding: 5px; text-align: center;color:white; $color'>$status</span>";
+                    }
+                
+                    return '';
+                })
+
+                ->rawColumns(['slave_device_image','io_device_status'])
+                ->make(true);
+        }
+    }
+
+
+
+
 
 
 

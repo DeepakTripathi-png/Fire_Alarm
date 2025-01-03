@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Device\DeviceController;
 use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Admin\IoSlave\IoSlaveController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -83,11 +84,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('site-master/edit/{id}','edit');
     });
 
-    Route::controller(DeviceMasterController::class)->group(function () {
+    Route::controller(DeviceMasterController::class)->group(function (){
         Route::get('master/device-master', 'index');
         Route::post('master/device-master/store', 'store')->name('master.device.store');
         Route::get('master/device-master/data-table','data_table');
         Route::get('device-master/edit/{id}','edit');
+        Route::get('device-master/view/{id}','view');
+        Route::get('master/device-master/view_data-table','view_data_table');
     });
 
     Route::controller(SlaveDeviceMasterController::class)->group(function () {
@@ -97,6 +100,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('slave-device-master/edit/{id}','edit');
     });
 
+
+
+
+    Route::controller(IoSlaveController::class)->group(function (){
+
+        Route::get('io-slave', 'index');
+        Route::get('/io-slave/add', 'add');
+        Route::post('io-slave/store', 'store')->name('ioslave.store');
+
+        Route::get('io-slave/edit/{id}','edit');
+
+
+        Route::get('io-slave/data-table','data_table');
+       
+    });
 
 
 

@@ -31,6 +31,15 @@
                                         @endif
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label for="device_name" class="form-label">Device Name</label>
+                                        <input type="text" class="form-control" id="device_name" name="device_name"
+                                            placeholder="Device Name" value="{{ old('device_name', !empty($device) ? $device->device_name : '') }}">
+                                        @if($errors->has('device_name'))
+                                            <span class="text-danger"><b>* {{$errors->first('device_name')}}</b></span>
+                                        @endif
+                                    </div>
+
                                     <button class="btn btn-success"  type="submit"> {{!empty($device)?"Update":"Add"}} </button>
 
                                     <button type="reset" class="btn btn-danger reset-button">Cancel </button>
@@ -53,6 +62,7 @@
                                                     <tr role="row">
                                                             <th  class="text-center">Sr. No.</th>
                                                             <th  class="text-center">Device ID</th>
+                                                            <th  class="text-center">Device Name</th>
                                                             <th  class="text-center">Status</th>
                                                             <th  class="text-center"> Action</th>    
                                                     </tr>

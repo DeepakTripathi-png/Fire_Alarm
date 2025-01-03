@@ -24,12 +24,6 @@ class DeviceController extends Controller
 
     public function index(){
 
-        // $device = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
-
-
-        // dd($device);
-        
-        
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')){
@@ -43,46 +37,31 @@ class DeviceController extends Controller
 
 
 
-    // public function add(){
-    //     $role_id = Auth::guard('master_admins')->user()->role_id;
-    //     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
-    //     if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')){
-    //         $assignedDeviceID= Device::where('status','active')->select('device_id')->get();
-
-    //         $devices=DeviceMaster::where('status','active')->get();
-    //         $sites=SiteMaster::where('status','active')->get();
-    //         return view('Admin.Device.add_device',compact('devices','sites'));
-    //     }else{
-    //         return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
-    //     }
-       
-    // }
 
 
     public function add()
-{
-    $role_id = Auth::guard('master_admins')->user()->role_id;
-    $RolesPrivileges = Role_privilege::where('id', $role_id)
-        ->where('status', 'active')
-        ->select('privileges')
-        ->first();
+    {
+        $role_id = Auth::guard('master_admins')->user()->role_id;
+        $RolesPrivileges = Role_privilege::where('id', $role_id)
+            ->where('status', 'active')
+            ->select('privileges')
+            ->first();
 
-    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')) {
-        // Get assigned device IDs
-        $assignedDeviceIDs = Device::where('status', 'active')->pluck('device_id');
+        if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')) {
+          
+            $assignedDeviceIDs = Device::where('status', 'active')->pluck('device_id');
 
-        // Get devices excluding assigned ones
-        $devices = DeviceMaster::where('status', 'active')
-            ->whereNotIn('id', $assignedDeviceIDs) // Exclude assigned device IDs
-            ->get();
+            $devices = DeviceMaster::where('status', 'active')
+                ->whereNotIn('id', $assignedDeviceIDs)
+                ->get();
 
-        $sites = SiteMaster::where('status', 'active')->get();
+            $sites = SiteMaster::where('status', 'active')->get();
 
-        return view('Admin.Device.add_device', compact('devices', 'sites'));
-    } else {
-        return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
+            return view('Admin.Device.add_device', compact('devices', 'sites'));
+        } else {
+            return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
+        }
     }
-}
 
 
 
@@ -92,8 +71,6 @@ class DeviceController extends Controller
 
     public function store(Request $request)
     {
-
-        
         $validatedData = $request->validate([
             'site_id' => 'required|integer',
             'device_id' => 'required|integer',
@@ -169,18 +146,10 @@ class DeviceController extends Controller
                     return !empty($row->site->site_name) ? $row->site->site_name : '' ;
                 })
 
-                // ->addColumn('site_address', function ($row) {
-                //     return !empty($row->site->site_address) ? $row->site->site_address : '' ;
-                // })
-
                 ->addColumn('site_address', function ($row) {
                     return !empty($row->site->site_address) ? "<div class='scrollable-cell'>".implode(', ', explode(',',$row->site->site_address))."</div>" : '' ;
                 })
 
-
-                // ->addColumn('device_type', function ($row) {
-                //     return !empty($row->deviceType->device_type) ? $row->deviceType->device_type : '' ;
-                // })
 
                 ->addColumn('device_id', function ($row) {
                     return !empty($row->deviceType->device_id) ? $row->deviceType->device_id : '' ;
