@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2025 at 10:29 AM
+-- Generation Time: Jan 06, 2025 at 06:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -281,10 +281,12 @@ CREATE TABLE `master_admins` (
 --
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `api_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
-(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-03 04:04:37', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-02 22:34:37'),
-(2, 'system', NULL, 'Deepak', 'deepak@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2024-12-20 04:42:17', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2024-12-19 23:12:17'),
+(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-06 04:39:13', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-05 23:09:13'),
+(2, 'system', NULL, 'Deepak', 'deepak@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2025-01-03 12:35:08', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2025-01-03 07:05:08'),
 (3, 'system', NULL, 'Ashvini Bhone', 'aashubhone@gmail.com', '$2y$10$H4N.oTXGxOOLX1epyOljTeQdPHHmJkWoA0UHrLt7j8zX9vo/y4xhC', '9552246484', '4', 'vishrantWadi ,pune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-12-17 06:37:24', '2024-12-17 06:37:24'),
-(4, 'system', NULL, 'Deepak Client', 'deepakclient@gmail.com', '$2y$10$fv2ghBw5xF4fHdJAYgRwyu6F65C2F9vhkR1QfXu.nA357D6cGtmPu', '+91 7310560108', '4', 'This is Deepak Client', NULL, NULL, NULL, NULL, '2025-01-03 09:23:24', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2025-01-03 03:31:41', '2025-01-03 03:53:24');
+(4, 'system', NULL, 'Deepak Client', 'deepakclient@gmail.com', '$2y$10$fv2ghBw5xF4fHdJAYgRwyu6F65C2F9vhkR1QfXu.nA357D6cGtmPu', '+91 7310560108', '4', 'This is Deepak Client', NULL, NULL, NULL, NULL, '2025-01-06 04:38:23', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2025-01-03 03:31:41', '2025-01-05 23:08:23'),
+(5, 'system', NULL, 'Deepak Site User', 'deepaksite@gmail.com', '$2y$10$81i/oPHRjptLafxYiI92auq6YZ0Y/uL0ewa56oFn7CHx98H5lF7K2', '+91 7310560108', '5', NULL, NULL, NULL, NULL, NULL, '2025-01-03 12:47:18', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 4, NULL, '2025-01-03 05:30:41', '2025-01-03 07:17:18'),
+(6, 'system', NULL, 'Client', 'client@gmail.com', '$2y$10$xCgp08loD1XO0.QJtQZF6OFH7xsNI5ETm5xQRtB7OmQh7E.KH7hWa', '+91-7310560108', '4', NULL, NULL, NULL, NULL, NULL, '2025-01-06 04:38:41', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 2, NULL, '2025-01-03 05:56:52', '2025-01-05 23:08:41');
 
 -- --------------------------------------------------------
 
@@ -402,8 +404,8 @@ CREATE TABLE `role_privileges` (
 INSERT INTO `role_privileges` (`id`, `role_name`, `privileges`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'dashboard_view, device_type_master_view, site_master_view, device_type_masterrole_privileges_view, user_view, device_view, map_site_view, alarm_view, report_view, device_master_add, site_master_add, role_privileges_add, user_add, device_add, map_site_add, alarm_add, report_add, device_master_edit, site_master_edit, role_privileges_edit, user_edit, device_edit, map_site_edit, alarm_edit, report_edit, device_type_master_delete, site_master_delete, role_privileges_delete, user_delete, device_delete, map_site_delete, alarm_delete, report_delete, device_type_master_status_change, site_master_status_change, role_privileges_status_change, user_status_change, device_status, map_site_status, alarm_status, report_status_change,device_type_master_edit,slave_device_master_view,slave_device_master_add,slave_device_master_edit,slave_device_master_delete,slave_device_master_status_change', NULL, '127.0.0.1', NULL, 1, 'active', NULL, '2024-11-25 03:53:55'),
 (3, 'Admin', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_privileges_view,role_privileges_add,role_privileges_edit,role_privileges_delete,role_privileges_status_change,user_view,user_add,user_edit,user_delete,user_status_change,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,report_view,report_add', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:28:04', '2024-11-27 01:36:03'),
-(4, 'Client Admin', 'dashboard_view,alarm_view,reports_view,reports_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2024-11-26 04:46:26'),
-(5, 'Client Operator', 'dashboard_view,device_type_master_view,device_master_add,device_master_edit,device_type_master_delete,device_type_master_status_change,site_master_view,site_master_add,site_master_edit,site_master_delete,site_master_status_change,role_view,role_view,role_add,role_edit,role_delete,role_status,system_user_view,system_user_add,system_user_edit,system_user_delete,role_status,device_management_view,device_view,device_add,device_edit,device_delete,device_status,map_site_view,map_site_add,map_site_edit,map_site_delete,map_site_status,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,reports_view,reports_edit,reports_view,reports_delete,reports_status', '127.0.0.1', NULL, 1, NULL, 'active', '2024-11-26 04:47:07', '2024-11-26 04:47:07');
+(4, 'Client', 'dashboard_view,user_view,user_add,user_edit,user_delete,user_status_change,alarm_view', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-15 05:32:08', '2025-01-03 04:21:34'),
+(5, 'Operator', 'dashboard_view,alarm_view,alarm_edit,alarm_add,alarm_delete,alarm_status,report_view,report_add', '127.0.0.1', '127.0.0.1', 1, 1, 'active', '2024-11-26 04:47:07', '2025-01-03 07:15:39');
 
 -- --------------------------------------------------------
 
@@ -689,7 +691,7 @@ ALTER TABLE `i_o_slaves`
 -- AUTO_INCREMENT for table `master_admins`
 --
 ALTER TABLE `master_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
