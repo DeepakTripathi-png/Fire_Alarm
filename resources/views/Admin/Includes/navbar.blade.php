@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- Notification List -->
-                <div class="slimscroll noti-scroll">
+                {{-- <div class="slimscroll noti-scroll">
                     <!-- Notification Item -->
                     <a href="javascript:;" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
@@ -38,8 +38,6 @@
                         <p class="notify-details">
                             <span>New message received</span>
                             <small class="text-muted">2 mins ago</small>
-                            {{-- <br> --}}
-                            {{-- <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 10:00 AM</small> --}}
                         </p>
                     </a>
 
@@ -51,8 +49,6 @@
                         <p class="notify-details">
                             <span>New user registered</span>
                             <small class="text-muted">10 mins ago</small>
-                            {{-- <br> --}}
-                            {{-- <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 9:50 AM</small> --}}
                         </p>
                     </a>
 
@@ -64,11 +60,58 @@
                         <p class="notify-details">
                             <span>System alert</span>
                             <small class="text-muted">30 mins ago</small>
-                            {{-- <br>
-                            <small class="text-muted"><i class="mdi mdi-clock-outline"></i> Dec 16, 2024 - 9:30 AM</small> --}}
                         </p>
                     </a>
+                </div> --}}
+
+                <div class="slimscroll noti-scroll">
+                    <!-- Fire Alarm Triggered -->
+                    <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-danger">
+                            <i class="mdi mdi-fire-alert"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>Fire Alarm Triggered!</span>
+                            <small class="text-muted">Just now</small>
+                        </p>
+                    </a>
+                
+                    <!-- Smoke Detected -->
+                    <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-warning">
+                            <i class="mdi mdi-smoke-detector"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>Smoke Detected in Building A</span>
+                            <small class="text-muted">5 mins ago</small>
+                        </p>
+                    </a>
+                
+                    <!-- Fire Drill Scheduled -->
+                    {{-- <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-info">
+                            <i class="mdi mdi-calendar-alert"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>Fire Drill Scheduled</span>
+                            <small class="text-muted">30 mins ago</small>
+                        </p>
+                    </a> --}}
+                
+                    <!-- System Check -->
+                    {{-- <a href="javascript:;" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-primary">
+                            <i class="mdi mdi-cog-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            <span>Fire System Check Completed</span>
+                            <small class="text-muted">1 hour ago</small>
+                        </p>
+                    </a> --}}
+                    
                 </div>
+                
+
 
                 <!-- Footer -->
                 <a href="javascript:;" class="dropdown-item text-center text-primary notify-item notify-all">
@@ -94,10 +137,6 @@
                     <span>My Account</span>
                 </a>
 
-                {{-- <a href="javascript:;" class="dropdown-item notify-item">
-                    <i class="fe-lock"></i>
-                    <span>Lock Screen</span>
-                </a> --}}
 
                 <div class="dropdown-divider"></div>
 
@@ -223,39 +262,6 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 </li>
                 @endif
 
-                {{-- @endif --}}
-
-                {{--@if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')||str_contains($RolesPrivileges, 'map_site_view'))
-                        <li class="setting">
-                            <a href="#setting" data-bs-toggle="collapse">
-                                <i class="mdi mdi-chart-pie"></i>
-                                <span> Device Management </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="setting">
-                                <ul class="nav-second-level">
-                              
-                                     
-                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view'))
-                                    <li class="change-password">
-                                        <a href="{{ url('/admin/device') }}">
-                                            <span> Device </span>
-                                        </a>
-                                    </li>
-                                    @endif
-
-                                    @if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_site_view'))
-                                    <li class="visual-setting">
-                                        <a href="{{ url('/admin/assign-site') }}">
-                                            <span> Assign Site</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                   
-                                </ul>
-                            </div>
-                        </li>
-                @endif --}}
 
 
                 @if(!empty($RolesPrivileges) && (str_contains($RolesPrivileges, 'device_view') || str_contains($RolesPrivileges, 'map_site_view')))
@@ -294,7 +300,7 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
                 <li class="vendor">
                     <a href="{{ url('admin/alarm') }}">
                     <i class="mdi mdi-bell-ring"></i>
-                        <span> Alert Management </span>
+                        <span> Alarm Notification </span>
                     </a>
                 </li>
                 @endif

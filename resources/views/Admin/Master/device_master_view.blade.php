@@ -1,151 +1,45 @@
-{{-- @section('meta_title')
-    Device  Master View | IOGLOBE
-@endsection
-@extends('Admin.Layouts.layout')
-@section('content')
-
-    <div class="content-page">
-        <div class="content">
-            <div class="container-fluid">
-
-
-                <div class="row">
-                    <div class="mb-2 justify-content-between d-flex align-items-center">
-                        <h4 class="mt-0 header-title">Master Device View</h4>
-                    </div>
-                    <div class="col-12">
-                        <div class="card department-card">
-                            <div class="card-body">
-                                <div class="d-flex gap-5">
-                                    
-                                     <h4 class="mt-0 header-title">Master Device Name: &nbsp; {{!empty($device->device_name)?$device->device_name:''}}</h4>
-                                    
-                                   
-                                      <h4 class="mt-0 header-title">Master Device ID:&nbsp; {{!empty($device->device_id)?$device->device_id:''}}</h4>
-                                    
-                                </div>
-
-                            <div class="d-flex gap-5 m-5 mb-0">
-
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="header-title mt-0 mb-4">TOTAL ALARM</h4>
-                                            <div class="widget-chart-1">
-                                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                                    <i class="mdi mdi-alarm-light text-primary display-4"></i>
-                                                </div>
-                                                <div class="widget-detail-1 text-end">
-                                                    <h2 class="fw-normal pt-2 mb-1"> 1 </h2>
-                                                    <p class="text-muted mb-1">Total Alarm Count</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="header-title mt-0 mb-4">ACTIVE ALARM</h4>
-                                            <div class="widget-chart-1">
-                                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                                    <i class="mdi mdi-alarm-light text-danger display-4"></i>
-                                                </div>
-                                                <div class="widget-detail-1 text-end">
-                                                    <h2 class="fw-normal pt-2 mb-1"> 0 </h2>
-                                                    <p class="text-muted mb-1">Active Alarm Count</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="header-title mt-0 mb-4">ACK. ALARM</h4>
-                                            <div class="widget-chart-1">
-                                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                                    <i class="mdi mdi-alarm-light text-warning display-4"></i>
-                                                </div>
-                                                <div class="widget-detail-1 text-end">
-                                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                                    <p class="text-muted mb-1">Acknowledge Alarm Count</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>  
-                            
-                            
-                            <div class="card-body table-responsive department-card">
-                                       
-            
-                                <div class="mb-2 justify-content-between d-flex align-items-center">
-                                    <h4 class="mt-0 header-title">Slave Device List</h4>
-                                </div>
-    
-                                <table id="cims_data_table_1" class="table table-bordered table-bordered dt-responsiv w-100 ">
-                                    <thead class="table-light">
-                                        <tr role="row">
-                                           
-    
-                                            <th>Sr no</th>
-                                            <th>IO & Slave</th>
-                                            <th>Device Image</th>
-                                            <th>Connected Device Name</th>
-                                            <th>Current Status</th>
-                                         
-    
-    
-                                        </tr>
-                                    </thead>
-    
-                                    <tbody>
-    
-                           
-                                        
-                                    </tbody>
-                                </table>
-                                
-                            </div>
-
-
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div>
-
-                
-            </div>
-
-        </div>
-    </div>
-@endsection
-
-@section('script')
-<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master.js')}}"></script>
-    <script>
-        $(".system-user").addClass("menuitem-active");
-        $(".system-user-list").addClass("menuitem-active");
-    </script>
-@endsection --}}
-
-
-
-
-
 @section('meta_title')
     Dashboard | IOGLOBE
 @endsection
 @extends('Admin.Layouts.layout')
 @section('content')
+
+
+<style>
+    .card {
+        display: block;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: var(--ct-card-bg);
+        background-clip: border-box;
+        /* border: 0 solid var(--ct-card-border-color);
+        border-radius: 0.25rem; */
+        padding: 0px !important;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        /* padding: 1rem; */
+        /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; */
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+
+    .morris-donut-example svg text tspan {
+        font-size: 10px !important;
+    }
+
+    .content {
+        /* padding-top: 25px; */
+    }
+
+    .random {
+        display: none;
+    }
+    .content-page {
+    padding: 0 12px 40px 12px;
+}
+</style>
 
 
 
@@ -186,7 +80,7 @@
                             <h4 class="header-title mt-0 mb-4">Active Alarm</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-alarm-light text-warning"></i>
+                                    <i class="mdi mdi-alarm-light text-danger"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
@@ -203,7 +97,7 @@
                             <h4 class="header-title mt-0 mb-4">ACK. Alarm</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <i class="mdi mdi-alarm-light text-danger"></i>
+                                    <i class="mdi mdi-alarm-light text-warning"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
@@ -324,7 +218,7 @@
                                 <h4 class="mt-0 header-title">Device List</h4>
                             </div>
 
-                            <table id="cims_data_table_1" class="table table-bordered table-bordered dt-responsiv w-100 ">
+                            <table id="cims_data_table" class="table table-bordered table-bordered dt-responsiv w-100 ">
                                 <thead class="table-light">
                                     <tr role="row">
                                        
@@ -368,10 +262,10 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master.js')}}"></script>
+<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master_view.js')}}"></script>
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");
-    </script>
+</script>
 @endsection
 

@@ -46,8 +46,9 @@ class AssignDeviceController extends Controller
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'map_site_add')){
+
             $customers = Master_admin::where('status', 'active') 
-            ->where('id', '!=', 1)    
+            ->where('role_id', 4)    
             ->get();
 
             $sites=SiteMaster::where('status','active')->get();    

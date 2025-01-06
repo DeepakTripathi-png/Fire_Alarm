@@ -117,6 +117,9 @@
 <script>
     $(".system-user").addClass("menuitem-active");
     $(".system-user-list").addClass("menuitem-active");
+
+    // $(".visual-setting").addClass("menuitem-active");
+    // $(".setting").addClass("menuitem-active");
 </script>
 
 <script>
