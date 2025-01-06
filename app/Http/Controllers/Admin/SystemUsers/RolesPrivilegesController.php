@@ -78,7 +78,18 @@ class RolesPrivilegesController extends Controller
     }
 
     public function data_table(Request $request){
-        $roles_previleges = Role_privilege::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id', 'role_name', 'privileges', 'status')->get();
+        $role_id = Auth::guard('master_admins')->user()->role_id;
+       
+        if($role_id=="1"){
+            $roles_previleges = Role_privilege::where('status', '!=', 'delete')->where('id',"!=",'1')->orderBy('id','DESC')->select('id', 'role_name', 'privileges', 'status')->get();
+        }elseif($role_id=="3"){
+            $roles_previleges = Role_privilege::where('status', '!=', 'delete')->where('id',"!=",'1')->where('id','!=','3')->orderBy('id','DESC')->select('id', 'role_name', 'privileges', 'status')->get();
+        }elseif($role_id=="4"){
+            $roles_previleges = Role_privilege::where('status', '!=', 'delete')->where('id',"!=",'1')->where('id','!=','3')->where('id','!=','4')->orderBy('id','DESC')->select('id', 'role_name', 'privileges', 'status')->get();
+        }else{
+            $roles_previleges =null;
+        }
+       
         if ($request->ajax()) {
             return DataTables::of($roles_previleges)
                 ->addIndexColumn()
@@ -100,13 +111,14 @@ class RolesPrivilegesController extends Controller
                     }
 
 
-                    if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_delete') && $row->id != 1 && $row->id != 2 && $row->id != 3) {
-                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
-                    } else {
-                        $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
-                    }
+                    // if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'role_privileges_delete') && $row->id != 1 && $row->id != 2 && $row->id != 3) {
+                    //     $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="role_privileges" data-flash="Roles And Privileges Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
+                    // } else {
+                    //     $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
+                    // }
                     return $actionBtn;
                 })
+
                 ->addColumn('status', function ($row) {
                     $role_id = Auth::guard('master_admins')->user()->role_id;
                     $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();

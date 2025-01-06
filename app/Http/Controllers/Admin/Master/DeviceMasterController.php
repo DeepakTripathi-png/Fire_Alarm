@@ -202,9 +202,14 @@ class DeviceMasterController extends Controller
 
     public function view_data_table(Request $request){
 
-        //   dd($request->all());
+        //   dd($request->master_device_id);
 
-        $ioSlaves= IOSlave::where('status', '!=', 'delete')->orderBy('id','DESC')->with('masterDevice','slaveDevice')->get();
+        if(!empty($request->master_device_id)){
+            $ioSlaves= IOSlave::where('status', '!=', 'delete')->where('master_device_id',$request->master_device_id)->orderBy('id','DESC')->with('masterDevice','slaveDevice')->get();
+        }else{
+            $ioSlaves= IOSlave::where('status', '!=', 'delete')->orderBy('id','DESC')->with('masterDevice','slaveDevice')->get();
+        }
+      
 
 
         if ($request->ajax()){

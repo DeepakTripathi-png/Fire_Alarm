@@ -34,7 +34,15 @@ class SystemUserController extends Controller
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'user_add')){
-            $all_roles = Role_privilege::where('id', '!=', '1')->where('status', 'active')->orderBy('id', 'DESC')->get();
+            if($role_id=="3"){
+                $all_roles = Role_privilege::where('id', '!=', '1')->where('id', '!=', '3')->where('id', '!=', '5')->where('status', 'active')->orderBy('id', 'DESC')->get();
+            }elseif($role_id=="4"){
+                $all_roles = Role_privilege::where('id', '!=', '1')->where('id', '!=', '3')->where('id', '!=', '4')->where('status', 'active')->orderBy('id', 'DESC')->get(); 
+            }else{
+                $all_roles = Role_privilege::where('id', '!=', '1')->where('id', '!=', '5')->where('status', 'active')->orderBy('id', 'DESC')->get();
+            }
+           
+
             return view('Admin.System-users.add-system-user', compact('all_roles'));
         }else {
             return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
@@ -117,7 +125,18 @@ class SystemUserController extends Controller
     }
 
     public function data_table(Request $request){
-        $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.role_id', '!=', 1)->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
+
+        $role_id = Auth::guard('master_admins')->user()->role_id;
+        $user_id = auth()->guard('master_admins')->user()->id; 
+        if($role_id=="1"){
+            $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.role_id', '!=', 1)->where('master_admins.role_id', '!=', 5)->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
+        }elseif($role_id=="3"){
+            $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.role_id', '!=', 1)->where('master_admins.role_id', '!=', 3)->where('master_admins.role_id', '!=', 5)->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
+        }elseif($role_id=="4"){
+            $system_user = Master_admin::where('master_admins.status', '!=', 'delete')->where('master_admins.role_id', '!=', 1)->where('master_admins.role_id', '!=', 3)->where('master_admins.role_id', '!=', 4)->where('master_admins.created_by',$user_id)->where('master_admins.id', '!=', Auth::guard('master_admins')->user()->id)->where('role_privileges.status', '!=', 'delete')->join('role_privileges', 'role_privileges.id', '=' , 'master_admins.role_id')->orderBy('id','DESC')->select('master_admins.id', 'master_admins.user_name', 'master_admins.email', 'master_admins.mobile_no', 'master_admins.role_id', 'master_admins.status', 'role_privileges.role_name')->orderBy('master_admins.id', 'DESC')->get();
+        }
+        
+
         if ($request->ajax()) {
             return DataTables::of($system_user)
                 ->addIndexColumn()

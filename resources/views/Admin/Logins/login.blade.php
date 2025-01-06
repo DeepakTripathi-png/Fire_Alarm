@@ -53,7 +53,7 @@
                         <a href="">
                             <img src="{{URL::asset('package_assets/images/alarm_logo.png')}}" alt="" height="35" class="mx-auto">
                         </a>
-                        <p class="text-muted mt-2 mb-2">Tor.ai</p>
+                        {{-- <p class="text-muted mt-2 mb-2">Tor.ai</p> --}}
                     </div>
                     <div class="card">
 

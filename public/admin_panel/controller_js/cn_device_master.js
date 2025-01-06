@@ -41,31 +41,52 @@ $(function () {
 
 
 
-$(function () {
+// $(function () {
+//     var table = $('#cims_data_table_1').DataTable({
+//         processing: true,
+//         serverSide: true,
+//         ajax: {
+//             url: base_url + "/admin/master/device-master/view_data-table",
+//             data: function (d) {
+//                 d.master_device_id = $('#device_id').val();
+//             }
+//         },
+//         columns: [
+//             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+          
+//             { data: 'io_slave_name', name: 'io_slave_name' },
+//             { data: 'slave_device_image', name: 'slave_device_image' },
+//             { data: 'slave_device_name', name: 'slave_device_name' },
+//             { data: 'io_device_status', name: 'io_device_status' },
+           
+//         ]
+//     });
+
+//     // Reload table when any filter changes
+//     $('#device_id').on('change', function () {
+//         table.ajax.reload(null, false);
+//     });
+// });
+
+
+$(function (){
     var table = $('#cims_data_table_1').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
             url: base_url + "/admin/master/device-master/view_data-table",
-            // data: function (d) {
-            //     d.master_device_name = $('#master_device_name').val();
-            //     d.master_device_id = $('#master_device_id').val();
-            //     d.slave_device_name = $('#slave_device_name').val();
-            // }
+            data: function (d) {
+                d.master_device_id = $('#device_id').val(); 
+            }
         },
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-          
             { data: 'io_slave_name', name: 'io_slave_name' },
             { data: 'slave_device_image', name: 'slave_device_image' },
             { data: 'slave_device_name', name: 'slave_device_name' },
-            { data: 'io_device_status', name: 'io_device_status' },
-           
+            { data: 'io_device_status', name: 'io_device_status' }
         ]
     });
 
-    // Reload table when any filter changes
-    $('#master_device_name, #master_device_id, #slave_device_name').on('change', function () {
-        table.ajax.reload(null, false);
-    });
+    table.ajax.reload(null, false);
 });
