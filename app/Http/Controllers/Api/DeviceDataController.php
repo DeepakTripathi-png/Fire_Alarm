@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Alarm;
+use App\Models\IOSlave;
 
 class DeviceDataController extends Controller
 {
@@ -11,9 +13,9 @@ class DeviceDataController extends Controller
     {
        $rawData = $request->data;
        
-       // $data = explode(',', $rawData);
-       
        $data= $this->parsePayload($rawData);
+
+       $this->processIncomingData($data);
        
        return $data;
    }
@@ -60,7 +62,6 @@ class DeviceDataController extends Controller
    
    
    function extractModbusData($dataParts) {
-       // Locate Modbus data section (find `MS` and its data)
        $modbusStartIndex = array_search('MS', $dataParts);
        $separatorIndex = array_search('|', $dataParts, $modbusStartIndex + 1);
        
@@ -81,12 +82,7 @@ class DeviceDataController extends Controller
        return $parsedModbus;
    }
    
-
-
-   
-   
    function extractBLEData($dataParts) {
-       // Locate BLE data section
        $bleStartIndex = array_search('L', $dataParts);
        $endOfBleIndex = array_search('E', $dataParts);
    
@@ -97,4 +93,50 @@ class DeviceDataController extends Controller
        $bleData = array_slice($dataParts, $bleStartIndex + 1, $endOfBleIndex - $bleStartIndex - 1);
        return $bleData;
    }
+
+
+    //Notification
+
+     public function processIncomingData($parsedData)
+     {
+       
+        $incomingData = $parsedData; 
+
+        $slaveId = $incomingData['modbus_data']['slave_id'] ?? null;
+
+        $ioSlave = IOSlave::where('slave_device_id', $slaveId)->first();
+
+        if (!empty($ioSlave)&&!empty($incomingData)){
+            $di1Status = $incomingData['digital_input']['di1_val'];
+            $di2Status = $incomingData['digital_input']['di2_val'];
+            $dac1Status = $incomingData['analog_input']['adc1_val'];
+            $adc2Status = $incomingData['analog_input']['adc2_val'];
+            $alarm= $incomingData['modbus_data']['0x0009'];
+
+
+
+
+            if ($di1Status == 1 || $di2Status == 1 ||  $dac1Status==1 || $adc2Status=1 ||$alarm==0xFFFF) {
+                $newStatus = 'alarm'; 
+            } else {
+                $newStatus = 'normal'; 
+            }
+
+            // $ioSlave->mobus_data =!empty($incomingData['modbus_data'])?json_encode($incomingData['modbus_data']):null;
+            $ioSlave->io_device_status = $newStatus;
+            $ioSlave->save();
+
+            
+            if ($newStatus === 'alarm') {
+                $message = 'An alarm has been triggered for ' . $ioSlave->slaveDevice->slave_device_name;
+
+                Alarm::create([
+                    'modbus_data' => !empty($incomingData['modbus_data'])?json_encode($incomingData['modbus_data']):null,
+                    'ioslave_id' => $ioSlave->id,
+                    'message' => $message,
+                ]);
+            }
+        } 
+    }
+
 }

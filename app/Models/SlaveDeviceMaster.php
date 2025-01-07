@@ -19,4 +19,9 @@ class SlaveDeviceMaster extends Model
            'modified_by',
            'status', 
     ];
+
+    public function ioSlaves()
+    {
+        return $this->hasMany(IOSlave::class, 'slave_device_id');
+    }
 }

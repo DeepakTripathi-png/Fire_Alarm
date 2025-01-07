@@ -20,4 +20,10 @@ class DeviceMaster extends Model
     ];
 
 
+    public function ioSlaves()
+    {
+        return $this->hasMany(IOSlave::class, 'master_device_id');
+    }
+
+
 }

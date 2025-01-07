@@ -34,6 +34,4 @@ class IOSlave extends Model
           return $this->belongsTo(SlaveDeviceMaster::class, 'slave_device_id');
       }
 
-
-
 }
