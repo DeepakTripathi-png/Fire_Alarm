@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2025 at 06:18 AM
+-- Generation Time: Jan 07, 2025 at 05:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `firealarm_new`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alarms`
+--
+
+CREATE TABLE `alarms` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ioslave_id` bigint(20) UNSIGNED NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `modbus_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`modbus_data`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -281,12 +296,12 @@ CREATE TABLE `master_admins` (
 --
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `api_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
-(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-06 04:39:13', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-05 23:09:13'),
+(1, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-06 05:58:44', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-06 00:28:44'),
 (2, 'system', NULL, 'Deepak', 'deepak@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2025-01-03 12:35:08', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2025-01-03 07:05:08'),
 (3, 'system', NULL, 'Ashvini Bhone', 'aashubhone@gmail.com', '$2y$10$H4N.oTXGxOOLX1epyOljTeQdPHHmJkWoA0UHrLt7j8zX9vo/y4xhC', '9552246484', '4', 'vishrantWadi ,pune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-12-17 06:37:24', '2024-12-17 06:37:24'),
 (4, 'system', NULL, 'Deepak Client', 'deepakclient@gmail.com', '$2y$10$fv2ghBw5xF4fHdJAYgRwyu6F65C2F9vhkR1QfXu.nA357D6cGtmPu', '+91 7310560108', '4', 'This is Deepak Client', NULL, NULL, NULL, NULL, '2025-01-06 04:38:23', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2025-01-03 03:31:41', '2025-01-05 23:08:23'),
 (5, 'system', NULL, 'Deepak Site User', 'deepaksite@gmail.com', '$2y$10$81i/oPHRjptLafxYiI92auq6YZ0Y/uL0ewa56oFn7CHx98H5lF7K2', '+91 7310560108', '5', NULL, NULL, NULL, NULL, NULL, '2025-01-03 12:47:18', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 4, NULL, '2025-01-03 05:30:41', '2025-01-03 07:17:18'),
-(6, 'system', NULL, 'Client', 'client@gmail.com', '$2y$10$xCgp08loD1XO0.QJtQZF6OFH7xsNI5ETm5xQRtB7OmQh7E.KH7hWa', '+91-7310560108', '4', NULL, NULL, NULL, NULL, NULL, '2025-01-06 04:38:41', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 2, NULL, '2025-01-03 05:56:52', '2025-01-05 23:08:41');
+(6, 'system', NULL, 'Client', 'client@gmail.com', '$2y$10$xCgp08loD1XO0.QJtQZF6OFH7xsNI5ETm5xQRtB7OmQh7E.KH7hWa', '+91-7310560108', '4', NULL, NULL, NULL, NULL, NULL, '2025-01-06 06:08:40', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 2, NULL, '2025-01-03 05:56:52', '2025-01-06 00:38:40');
 
 -- --------------------------------------------------------
 
@@ -321,7 +336,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2024_12_23_095058_create_contacts_table', 7),
 (16, '2024_12_30_111541_create_device_masters_table', 8),
 (17, '2025_01_02_042419_create_slave_device_masters_table', 9),
-(18, '2025_01_02_094652_create_i_o_slaves_table', 10);
+(18, '2025_01_02_094652_create_i_o_slaves_table', 10),
+(20, '2025_01_06_105009_create_alarms_table', 11);
 
 -- --------------------------------------------------------
 
@@ -523,6 +539,12 @@ CREATE TABLE `visual_settings` (
 --
 
 --
+-- Indexes for table `alarms`
+--
+ALTER TABLE `alarms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `alert_notifications`
 --
 ALTER TABLE `alert_notifications`
@@ -640,6 +662,12 @@ ALTER TABLE `visual_settings`
 --
 
 --
+-- AUTO_INCREMENT for table `alarms`
+--
+ALTER TABLE `alarms`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `alert_notifications`
 --
 ALTER TABLE `alert_notifications`
@@ -697,7 +725,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
