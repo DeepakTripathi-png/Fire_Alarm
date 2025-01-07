@@ -264,8 +264,8 @@ $RolesPrivileges = App\Models\Master\Role_privilege::where('status', 'active')->
 
 
 
-                @if(!empty($RolesPrivileges) && (str_contains($RolesPrivileges, 'device_view') || str_contains($RolesPrivileges, 'map_site_view')))
-                @if(str_contains($RolesPrivileges, 'device_view'))
+                @if(!empty($RolesPrivileges))
+                @if(str_contains($RolesPrivileges, 'io_slave_management_view'))
                 <li class="setting">
                     <a href="{{ url('/admin/io-slave') }}">
                         <i class="mdi mdi-rss"></i>

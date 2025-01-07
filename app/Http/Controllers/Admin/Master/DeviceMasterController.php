@@ -264,7 +264,8 @@ class DeviceMasterController extends Controller
                                 break;
                         }
                 
-                        return "<span style='display: block; padding: 5px; text-align: center;color:white; $color'>$status</span>";
+                       
+                        return "<span style='display: block; width: 100%; height: 100%; padding-left: 20px;padding-right: 20px;padding-top:16px;padding-bottom:16px;text-align: center; color: white; $color; box-sizing: border-box;font-size:18px;font-weight:bold;'>$status</span>";
                     }
                 
                     return '';

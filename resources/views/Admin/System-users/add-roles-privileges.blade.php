@@ -217,21 +217,7 @@
 
 
 
-{{-- 
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Role Management</td>
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="role_view" class="ccheckbox view"
-                                                                value="role_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'role_view') ? 'checked' : '' }}>
-                                                        </td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                    </tr> --}}
+
 
 
                                                     <tr>
@@ -300,27 +286,44 @@
                                                     </tr>
 
 
-
-
-                                                    {{-- <tr>
+                                                    
+                                                    <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Device Management</td>
+                                                        <td>IO & Slave Management</td>
                                                         <td class="text-center"><input type="checkbox"
-                                                                name="privileges[]" id="device_management_view"
-                                                                class="ccheckbox view" value="device_management_view"
-                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'device_management_view') ? 'checked' : '' }}>
+                                                                name="privileges[]" id="io_slave_management_view"
+                                                                class="ccheckbox view" value="io_slave_management_view"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'io_slave_management_view') ? 'checked' : '' }}>
                                                         </td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                        <td class="text-center"></td>
-                                                    </tr> --}}
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="io_slave_management_add" class="ccheckbox add"
+                                                                value="io_slave_management_add"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'io_slave_management_add') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="io_slave_management_edit"
+                                                                class="ccheckbox edit" value="io_slave_management_edit"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'io_slave_management_edit') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="io_slave_management_delete"
+                                                                class="ccheckbox deletes" value="io_slave_management_delete"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'io_slave_management_delete') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                name="privileges[]" id="io_slave_management_status_change"
+                                                                class="ccheckbox status" value="io_slave_management_status_change"
+                                                                {{ isset($role_privileges) && !empty($role_privileges->privileges) && str_contains($role_privileges->privileges, 'io_slave_management_status_change') ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td class="text-center"><input type="checkbox"
+                                                                class="ccheckbox all-other"></td>
+                                                    </tr>
+
 
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Device Management > Device</td>
+                                                        <td>Device Management</td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 name="privileges[]" id="device_view"
                                                                 class="ccheckbox view" value="device_view"
@@ -353,7 +356,7 @@
 
                                                     <tr>
                                                         <td class="text-center">3</td>
-                                                        <td>Device Management > Map Site</td>
+                                                        <td>Site Management</td>
                                                         <td class="text-center"><input type="checkbox"
                                                                 name="privileges[]" id="map_site_view"
                                                                 class="ccheckbox view" value="map_site_view"
