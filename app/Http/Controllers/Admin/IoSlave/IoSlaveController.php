@@ -19,6 +19,7 @@ use Session;
 use App\Models\DeviceMaster;
 use App\Models\SlaveDeviceMaster;
 use App\Models\IOSlave;
+use App\Models\ControllerDevicePort;
 
 class IoSlaveController extends Controller
 {
@@ -119,11 +120,28 @@ class IoSlaveController extends Controller
         try {
             $ioSlave= IOSlave::where('id',$id)->first();
 
+            $controllerId = DeviceMaster::where('id', $ioSlave->master_device_id)->value('controller_type_id');
+
+            $allPortListArray = ControllerDevicePort::where('status', 'active')
+            ->where('controller_device_id', $controllerId)
+            ->pluck('port')
+            ->toArray();
+
+            $usedPortArray = IOSlave::where('status','active')->where('master_device_id', $ioSlave->master_device_id)
+                ->pluck('io_slave_name')
+                ->toArray();
+
+            $excludePorts = [$ioSlave->io_slave_name];
+
+            $availablePorts = array_diff($allPortListArray, $usedPortArray);
+
+            $availablePorts = array_unique(array_merge($availablePorts, $excludePorts));
+
             $masterDevices = DeviceMaster::where('status', 'active')->get();
 
             $slaveDevices = SlaveDeviceMaster::where('status', 'active')->get();
          
-            return view('Admin.IoSlave.add_ioslave', compact('ioSlave','masterDevices','slaveDevices'));
+            return view('Admin.IoSlave.add_ioslave', compact('ioSlave','masterDevices','slaveDevices','availablePorts'));
         } 
         catch (\Illuminate\Contracts\Encryption\DecryptException $e){
             return redirect('admin/device')->with('error', 'Access Denied !');
@@ -273,6 +291,37 @@ class IoSlaveController extends Controller
         }
     }
 
+
+
+    public function getPortList(Request $request)
+    {
+        $controllerId = DeviceMaster::where('id', $request->device_id)
+            ->value('controller_type_id');
+    
+        $allPortListArray = ControllerDevicePort::where('status', 'active')
+            ->where('controller_device_id', $controllerId)
+            ->pluck('port')
+            ->toArray();
+
+        $usedPortArray = IOSlave::where('master_device_id', $request->device_id)
+            ->pluck('io_slave_name')
+            ->toArray();
+
+        $availablePorts = array_diff($allPortListArray, $usedPortArray);
+
+       
+
+
+
+    
+
+        
+    
+        return response()->json([
+            'unused_ports' => $availablePorts,     
+        ]);
+    }
+    
 
 
 

@@ -9,6 +9,10 @@ $(function () {
             name: 'DT_RowIndex'
         },
         {
+            data: 'controller_type',
+            name: 'controller_type'
+        },
+        {
             data: 'device_type',
             name: 'device_type'
         },

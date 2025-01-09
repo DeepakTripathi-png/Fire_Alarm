@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('device_masters', function (Blueprint $table) {
+        Schema::create('controller_devices', function (Blueprint $table){
             $table->id();
-            $table->bigInteger('controller_type_id')->nullable();
-            $table->text('device_id')->nullable();
-            $table->string('device_name')->nullable();
+            $table->string('controller_name')->nullable(); 
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
             $table->bigInteger('created_by')->nullable();
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('device_masters');
+        Schema::dropIfExists('controller_devices');
     }
 };

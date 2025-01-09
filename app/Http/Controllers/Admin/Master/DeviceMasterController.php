@@ -17,6 +17,7 @@ use Str;
 use DB;
 use Session;
 use App\Models\IOSlave;
+use App\Models\ControllerDevice;
 
 
 class DeviceMasterController extends Controller
@@ -26,7 +27,8 @@ class DeviceMasterController extends Controller
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_type_master_view')){
-            return view('Admin.Master.device_master');
+            $controllerTypes=ControllerDevice::where('status','active')->get();
+            return view('Admin.Master.device_master',compact('controllerTypes'));
         }else{
             return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
         }
@@ -37,6 +39,7 @@ class DeviceMasterController extends Controller
     {
     
         $rules = [
+            'controller_type'=>'required|integer',
             'device_id' => 'required|integer', 
             'device_name' => 'required', 
         ];
@@ -46,9 +49,9 @@ class DeviceMasterController extends Controller
             'device_id.required' => 'Device ID is required.',
             'device_id.integer' => 'Device ID must be an integer.', 
             'device_name.required' => 'Device name is required.',
+            'controller_type.required' => 'Device type is required.'
         ];
 
-        // Validate the request
         $validated = $request->validate($rules, $messages);
 
         $input = [];
@@ -58,6 +61,7 @@ class DeviceMasterController extends Controller
 
         if (!empty($request->id)) {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_edit')) {
+                $input['controller_type_id'] = $request->controller_type;
                 $input['device_id'] = $request->device_id;
                 $input['device_name'] = $request->device_name;
                 $input['modified_by'] = auth()->guard('master_admins')->user()->id;
@@ -69,6 +73,7 @@ class DeviceMasterController extends Controller
             }
         } else {
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_master_add')){
+                $input['controller_type_id'] = $request->controller_type;
                 $input['device_id'] = $request->device_id;
                 $input['device_name'] = $request->device_name;
                 $input['created_by'] = auth()->guard('master_admins')->user()->id;
@@ -82,12 +87,11 @@ class DeviceMasterController extends Controller
     }
 
 
-
-
     public function edit($id){
         try {
             $device= DeviceMaster::where('id',$id)->first();
-            return view('Admin.Master.device_master', compact('device'));
+            $controllerTypes=ControllerDevice::where('status','active')->get();
+            return view('Admin.Master.device_master', compact('device','controllerTypes'));
         } 
         catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return redirect('admin/roles-privileges')->with('error', 'Access Denied !');
@@ -117,14 +121,20 @@ class DeviceMasterController extends Controller
 
     public function data_table(Request $request){
 
-        $device = DeviceMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->select('id','device_id','device_name','status')->get();
+        $device = DeviceMaster::where('status', '!=', 'delete')->orderBy('id','DESC')->with('controllerDevice')->get();
+
+        // dd($device);
 
        
 
         if ($request->ajax()){
             return DataTables::of($device)
                 ->addIndexColumn()
-                
+                 
+                ->addColumn('controller_type', function ($row) {
+                    return !empty($row->controllerDevice->controller_name) ? $row->controllerDevice->controller_name : '' ;
+                })
+
                 ->addColumn('device_type', function ($row) {
                     return !empty($row->device_id) ? $row->device_id : '' ;
                 })

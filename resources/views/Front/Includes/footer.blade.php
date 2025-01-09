@@ -183,6 +183,48 @@ a {
 }
 
 
+.uparrow-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 900px;
+  /* background-color: #007bff;  */
+  padding: 10px;
+  border-radius: 50%;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.uparrow-btn a {
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+}
+
+.uparrow-btn:hover {
+  /* background-color: #0056b3; */
+  transform: scale(1.1);
+  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); */
+}
+
+.uparrow-btn i {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Hide the button initially and show it when scrolling down */
+.uparrow-btn {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.scrolled .uparrow-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
 @media (max-width: 600px) 
 {  
 .contact-widget.footer-widget {
@@ -201,6 +243,15 @@ a {
         <div class="container">
             <div class="footer-content">
                 <div class="row">
+
+                  <div class="uparrow-btn">
+                    <a href="#home">
+                      <i class="fa fa-arrow-circle-up"></i>
+                    </a>
+                  </div>
+                  
+
+                  
                     <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                         <div class="logo-widget footer-widget">
                             <figure class="logo-box"><a href="#">
@@ -285,4 +336,16 @@ a {
     });
 });
 
+
+
+</script>
+
+<script>
+  window.addEventListener("scroll", function() {
+    if (window.scrollY > 3000) {
+      document.body.classList.add("scrolled");
+    } else {
+      document.body.classList.remove("scrolled");
+    }
+  });
 </script>

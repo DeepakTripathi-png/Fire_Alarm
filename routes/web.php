@@ -108,11 +108,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('io-slave', 'index');
         Route::get('/io-slave/add', 'add');
         Route::post('io-slave/store', 'store')->name('ioslave.store');
-
         Route::get('io-slave/edit/{id}','edit');
-
-
         Route::get('io-slave/data-table','data_table');
+        Route::get('io-slave/get-port-list','getPortList');
        
     });
 
@@ -143,9 +141,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
         Route::get('/assign-site/add', 'add');
         Route::post('assign-site/store', 'store')->name('assign-site.store');
         Route::get('assign-site/edit/{id}','edit');
-
-
         Route::get('assign-site/data-table','data_table');
+      
        
     });
 

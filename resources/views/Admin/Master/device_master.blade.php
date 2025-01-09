@@ -21,6 +21,28 @@
                                 <form action="{{ route('master.device.store') }}" method="post" id="add-banner-form" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" class="form-control" id="id" name="id" value="{{!empty($device)?$device->id:''}}">
+                                    
+                                    <div class="mb-3">
+                                        <label for="controller_type" class="form-label">Controller Type</label>
+                                        <select class="form-control" id="controller_type" name="controller_type">
+                                            <option value="" disabled {{ old('controller_type', !empty($device) ? $device->controller_type : '') ? '' : 'selected' }}>
+                                                Select Controller Type
+                                            </option>
+                                            @foreach ($controllerTypes as $controllerType)
+                                                <option value="{{ $controllerType->id }}" 
+                                                    {{ old('controller_type', !empty($device) ? $device->controller_type_id : '') == $controllerType->id ? 'selected' : '' }}>
+                                                    {{ $controllerType->controller_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    
+                                        @if($errors->has('controller_type'))
+                                            <span class="text-danger"><b>* {{$errors->first('controller_type')}}</b></span>
+                                        @endif
+                                    </div>
+                                    
+
+                                      
 
                                     <div class="mb-3">
                                         <label for="device_id" class="form-label">Device ID</label>
@@ -61,6 +83,7 @@
                                                 <thead class="table-light">
                                                     <tr role="row">
                                                             <th  class="text-center">Sr. No.</th>
+                                                            <th  class="text-center">Controller Type</th>
                                                             <th  class="text-center">Device ID</th>
                                                             <th  class="text-center">Device Name</th>
                                                             <th  class="text-center">Status</th>

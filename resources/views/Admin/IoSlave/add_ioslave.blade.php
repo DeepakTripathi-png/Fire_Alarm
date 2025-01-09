@@ -28,7 +28,7 @@
 
                                             <div class="mb-3 col-6">
                                                 <label for="master_device_id" class="form-label">Select Master Device</label>
-                                                <select class="form-select" id="master_device_id" name="master_device_id">
+                                                <select class="form-select" id="master_device_id" name="master_device_id" onchange="fetchDeviceDetails(this.value)">
                                                     <option value="">Select Master Device</option>
                                                     @if(!empty($masterDevices))
                                                     @foreach($masterDevices as $device)
@@ -42,9 +42,24 @@
                                                 <span class="text-danger"><b>* {{$errors->first('master_device_id')}}</b></span>
                                               @endif
                                             </div>
+
+                                            <div class="mb-3 col-6">
+                                                <label for="io_or_slave_name" class="form-label">Select Port</label>
+                                                <select class="form-select" id="io_or_slave_name" name="io_or_slave_name">
+                                                    <option value="">Select Port</option>
+                                                    @foreach( $availablePorts ?? [] as $port)
+                                                        <option value="{{ $slaveDevice->id ?? '' }}"  {{ !empty($port) && $ioSlave->io_slave_name == $port ? 'selected' : '' }}>
+                                                            {{ strtoupper($port) ?? '' }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @if($errors->has('slave_device_id'))
+                                                  <span class="text-danger"><b>* {{$errors->first('slave_device_id')}}</b></span>
+                                                @endif
+                                            </div>
                                      
                                             <div class="mb-3 col-6">
-                                                <label for="slave_device_id" class="form-label">Select Slave Device</label>
+                                                <label for="slave_device_id" class="form-label">Select Connected Device</label>
                                                 <select class="form-select" id="slave_device_id" name="slave_device_id">
                                                     <option value="">Select Slave Device</option>
                                                     @foreach($slaveDevices ?? [] as $slaveDevice)
@@ -58,14 +73,14 @@
                                                 @endif
                                             </div>
 
-                                            <div class="mb-3 col-6">
+                                            {{-- <div class="mb-3 col-6">
                                                 <label for="io_or_slave_name" class="form-label">IO or Slave Name</label>
                                                 <input type="text" class="form-control" id="io_or_slave_name" name="io_or_slave_name" 
                                                     value="{{ old('io_or_slave_name', $ioSlave->io_slave_name ?? '') }}" placeholder="Enter IO or Slave Name">
                                                 @if($errors->has('io_or_slave_name'))
                                                     <span class="text-danger"><b>* {{$errors->first('io_or_slave_name')}}</b></span>
                                                 @endif
-                                            </div>
+                                            </div> --}}
                                          </div>
                                     </div>
 
@@ -93,6 +108,46 @@
     $(".system-user").addClass("menuitem-active");
     $(".system-user-list").addClass("menuitem-active");
 </script>
+
+<script>
+    function fetchDeviceDetails(deviceId) {
+        if (deviceId) {
+            $.ajax({
+                type: "get",
+                url: "{{ url('/admin/io-slave/get-port-list') }}",
+                data: {
+                    device_id: deviceId
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('#io_or_slave_name').empty();
+                    $('#io_or_slave_name').append('<option value="">Select Port</option>');
+
+                    // Check if unused_ports is an object and has keys
+                    if (response.unused_ports && Object.keys(response.unused_ports).length > 0) {
+                        // Iterate over the object
+                        Object.entries(response.unused_ports).forEach(([key, port]) => {
+                            $('#io_or_slave_name').append(
+                                '<option value="' + port + '">' + port.toUpperCase() + '</option>'
+                            );
+                        });
+                    } else {
+                        $('#io_or_slave_name').append('<option value="" disabled>No Available Ports</option>');
+                    }
+                },
+                error: function(err) {
+                    console.error(err);
+                    alert('Error fetching ports. Please try again.');
+                }
+            });
+        } else {
+            console.log('No device selected.');
+        }
+    }
+</script>
+
+   
+
 
 <script>
     $(document).ready(function() {
