@@ -13,7 +13,8 @@ $(function (){
             { data: 'io_slave_name', name: 'io_slave_name' },
             { data: 'slave_device_image', name: 'slave_device_image' },
             { data: 'slave_device_name', name: 'slave_device_name' },
-            { data: 'io_device_status', name: 'io_device_status' }
+            { data: 'io_device_status', name: 'io_device_status' },
+            { data: 'acknowledge', name: 'acknowledge' }
         ]
     });
 

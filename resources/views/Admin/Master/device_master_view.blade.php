@@ -228,6 +228,7 @@
                                         <th>Device Image</th>
                                         <th>Connected Device Name</th>
                                         <th>Current Status</th>
+                                        <th>Acknowledge</th>
                                      
 
 

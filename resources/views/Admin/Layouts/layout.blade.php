@@ -14,9 +14,15 @@
 <input type="hidden" value="{{url('/')}}" id="base_url"/>      
 <div id="wrapper">
         @include('Admin.partials.alert-notification')
+
+       
+       
         @include('Admin.Includes.navbar')
         @yield('content')
+    
+        
     </div>
     @include('Admin.Includes.footer')
+    @include('Admin.partials.questioner')
 </body>
 </html>

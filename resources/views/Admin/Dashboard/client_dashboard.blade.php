@@ -223,6 +223,7 @@
                                         <th>Device Image</th>
                                         <th>Connected Device Name</th>
                                         <th>Current Status</th>
+                                        <th>Acknowledge</th>
                                      
 
 
@@ -262,4 +263,6 @@
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");
     </script>
+    
+        
 @endsection
