@@ -10,9 +10,15 @@ class Alarm extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ioslave_id',
+       'ioslave_id',
         'message',
-        'modbus_data'
+        'modbus_data',
+        'alarm_status', 
+        'created_ip_address',
+        'modified_ip_address',
+        'created_by',
+        'modified_by',
+        'status',
     ];
 
     // Relationship with IOSlave

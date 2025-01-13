@@ -16,6 +16,12 @@ return new class extends Migration
             $table->foreignId('ioslave_id'); 
             $table->string('message'); 
             $table->json('modbus_data')->nullable();
+            $table->enum('alarm_status', ['active', 'acknowledge'])->default('active');
+            $table->string('created_ip_address')->nullable();
+            $table->string('modified_ip_address')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('modified_by')->nullable();
+            $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

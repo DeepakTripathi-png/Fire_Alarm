@@ -263,6 +263,4 @@
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");
     </script>
-    
-        
 @endsection

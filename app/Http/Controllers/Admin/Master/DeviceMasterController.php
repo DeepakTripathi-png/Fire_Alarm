@@ -285,9 +285,10 @@ class DeviceMasterController extends Controller
     //             ->make(true);
     //     }
     // }
-
-
-
+    
+    
+    
+    
     public function view_data_table(Request $request)
     {
         if (!empty($request->master_device_id)) {
@@ -339,7 +340,7 @@ class DeviceMasterController extends Controller
                     }
                     return '';
                 })
-                // Add a new column for the "Acknowledge" button
+                
                 ->addColumn('acknowledge', function ($row) {
                     return '<button id="acknowledge-btn" type="button" class="btn btn-sm btn-success acknowledge-btn"   style="display: block; width: 100%; height: 100%; padding-left: 15px;padding-right: 15px;padding-top:16px;padding-bottom:16px;text-align: center; color: white; background-color: rgb(31, 92, 116); box-sizing: border-box;font-size:18px;font-weight:bold;border-style:none" data-id="' . $row->id . '">Acknowledge</button>';
                 })
