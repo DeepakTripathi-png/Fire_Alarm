@@ -258,7 +258,8 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master_view.js')}}"></script>
+<script src="{{ URL::asset('admin_panel/controller_js/cn_client_dashboard.js')}}"></script>
+
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");

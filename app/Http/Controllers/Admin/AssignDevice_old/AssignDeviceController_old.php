@@ -17,7 +17,7 @@ use DB;
 use Session;
 use App\Models\Master\Master_admin;
 use App\Models\SiteMaster;
-use App\Models\AssignDevice;
+use App\Models\AssignSiteToCustomer;
 
 class AssignDeviceController extends Controller
 {
@@ -25,7 +25,7 @@ class AssignDeviceController extends Controller
 
     public function index(){
 
-       $assignedDevices=AssignDevice::where('status','active')->with('site','customer')->get();
+       $assignedDevices=AssignSiteToCustomer::where('status','active')->with('site','customer')->get();
 
     //    dd($assignedDevices);
 
@@ -90,7 +90,7 @@ class AssignDeviceController extends Controller
                 if (!empty($RolesPrivileges) && str_contains($RolesPrivileges->privileges, 'map_site_edit')) {
                     $input['modified_by'] = auth()->guard('master_admins')->user()->id;
                     $input['modified_ip_address'] = $request->ip();
-                    AssignDevice::where('id', $request->id)->update($input);
+                    AssignSiteToCustomer::where('id', $request->id)->update($input);
                     return redirect('admin/assign-site')->with('success', 'Assign Device updated successfully!');
                 } else {
                     return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
@@ -99,7 +99,7 @@ class AssignDeviceController extends Controller
                 if (!empty($RolesPrivileges) && str_contains($RolesPrivileges->privileges, 'map_site_add')) {
                     $input['created_by'] = auth()->guard('master_admins')->user()->id;
                     $input['created_ip_address'] = $request->ip();
-                    AssignDevice::create($input);
+                    AssignSiteToCustomer::create($input);
                     return redirect('admin/assign-site')->with('success', 'Assign Device added successfully!');
                 } else {
                     return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
@@ -110,7 +110,7 @@ class AssignDeviceController extends Controller
 
     public function edit($id){
         try {
-            $device= AssignDevice::where('id',$id)->with('site','customer')->first();
+            $device= AssignSiteToCustomer::where('id',$id)->with('site','customer')->first();
 
             $customers = Master_admin::where('status', 'active') 
             ->where('id', '!=', 1)    
@@ -130,7 +130,7 @@ class AssignDeviceController extends Controller
 
     public function data_table(Request $request){
 
-        $assignedDevices=AssignDevice::where('status','active')->with('site','customer')->get();
+        $assignedDevices=AssignSiteToCustomer::where('status','active')->with('site','customer')->get();
 
         if ($request->ajax()) {
             return DataTables::of($assignedDevices)
@@ -181,7 +181,7 @@ class AssignDeviceController extends Controller
     
     
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_delete')) {
-                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="assign_devices" data-flash="Device Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
+                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="assign_site_to_customers" data-flash="Device Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
                     }
@@ -195,10 +195,10 @@ class AssignDeviceController extends Controller
     
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_status')) {
                         if ($row->status == 'active') {
-                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_devices" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
+                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_site_to_customers" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;
                         } else {
-                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_devices" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
+                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_site_to_customers" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
                             return $statusBlockBtn;
                         }
                     } else {
