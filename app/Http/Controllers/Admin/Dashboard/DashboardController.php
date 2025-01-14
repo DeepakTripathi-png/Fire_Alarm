@@ -18,6 +18,8 @@ use Str;
 use DB;
 use Session;
 use App\Models\IOSlave;
+use App\Models\AssignSiteToCustomer;
+
 
 class DashboardController extends Controller
 {
@@ -33,9 +35,26 @@ class DashboardController extends Controller
             return view('Admin.Dashboard.index',compact('totalSiteCount','totalDeviceCount'));
        }else{
 
-           $user = Auth::guard('master_admins')->user();
+        $user = Auth::guard('master_admins')->user();
 
-        //    dd($user);
+        $assignedSite = AssignSiteToCustomer::where('customer_id', $user->id)
+            ->where('status', 'active')
+            ->pluck('site_id')
+            ->toArray();
+        
+        $assignedDevice = AssignDeviceToSite::where('status', 'active')
+            ->whereIn('site_id', $assignedSite)
+            ->pluck('device_id')
+            ->toArray();
+
+        $ioSlaves = IOSlave::where('status','active')
+            ->whereIn('master_device_id', $assignedDevice)
+            ->orderBy('id', 'DESC')
+            ->with('masterDevice', 'slaveDevice')
+            ->get();    
+
+
+        //    dd($ioSlaves);
 
           return view('Admin.Dashboard.client_dashboard');
        }
@@ -49,11 +68,48 @@ class DashboardController extends Controller
         
     public function client_dashboard_data_table(Request $request)
     {
+
+
+        $user = Auth::guard('master_admins')->user();
+
+       
+
+ 
+
         
-        if (!empty($request->master_device_id)) {
-            $ioSlaves = IOSlave::where('status', '!=', 'delete')->where('master_device_id', $request->master_device_id)->orderBy('id', 'DESC')->with('masterDevice', 'slaveDevice')->get();
-        } else {
-            $ioSlaves = IOSlave::where('status', '!=', 'delete')->orderBy('id', 'DESC')->with('masterDevice', 'slaveDevice')->get();
+        if (!empty($user->role_id) && $user->role_id == 4) {
+
+            $assignedSite = AssignSiteToCustomer::where('customer_id', $user->id)
+            ->where('status', 'active')
+            ->pluck('site_id')
+            ->toArray();
+        
+           $assignedDevice = AssignDeviceToSite::where('status', 'active')
+            ->whereIn('site_id', $assignedSite)
+            ->pluck('device_id')
+            ->toArray();
+
+            $ioSlaves = IOSlave::where('status','active')
+            ->whereIn('master_device_id', $assignedDevice)
+            ->orderBy('id', 'DESC')
+            ->with('masterDevice', 'slaveDevice')
+            ->get();  
+        } elseif (!empty($user->role_id) && $user->role_id == 5) {
+            $assignedSite = AssignSiteToCustomer::where('customer_id', $user->created_by)
+            ->where('status', 'active')
+            ->pluck('site_id')
+            ->toArray();
+        
+           $assignedDevice = AssignDeviceToSite::where('status', 'active')
+            ->whereIn('site_id', $assignedSite)
+            ->pluck('device_id')
+            ->toArray();
+
+            $ioSlaves = IOSlave::where('status','active')
+            ->whereIn('master_device_id', $assignedDevice)
+            ->orderBy('id', 'DESC')
+            ->with('masterDevice', 'slaveDevice')
+            ->get();  
         }
 
         if ($request->ajax()) {
