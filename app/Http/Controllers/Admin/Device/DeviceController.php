@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\AssignDeviceToSite;
+namespace App\Http\Controllers\Admin\Device;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\AssignDeviceToSite;
+use App\Models\Device;
 use App\Models\Master\Role_privilege;
 use App\Models\DeviceMaster;
 use App\Models\SiteMaster;
@@ -19,17 +19,16 @@ use Str;
 use DB;
 use Session;
 
-class AssigDeviceToSiteController extends Controller
+class DeviceController extends Controller
 {
-    
+
     public function index(){
 
         $role_id = Auth::guard('master_admins')->user()->role_id;
         $RolesPrivileges = Role_privilege::where('id', $role_id)->where('status', 'active')->select('privileges')->first();
         if(!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_view')){
            
-            return view('Admin.AssignDeviceToSite.assigned_device_listing');
-            
+            return view('Admin.Device.device');
         }else{
             return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!'); 
         }
@@ -50,7 +49,7 @@ class AssigDeviceToSiteController extends Controller
 
         if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_add')) {
           
-            $assignedDeviceIDs = AssignDeviceToSite::where('status', 'active')->pluck('device_id');
+            $assignedDeviceIDs = Device::where('status', 'active')->pluck('device_id');
 
             $devices = DeviceMaster::where('status', 'active')
                 ->whereNotIn('id', $assignedDeviceIDs)
@@ -58,8 +57,7 @@ class AssigDeviceToSiteController extends Controller
 
             $sites = SiteMaster::where('status', 'active')->get();
 
-            return view('Admin.AssignDeviceToSite.assign_device_to_site', compact('devices', 'sites'));
-           
+            return view('Admin.Device.add_device', compact('devices', 'sites'));
         } else {
             return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
         }
@@ -99,7 +97,7 @@ class AssigDeviceToSiteController extends Controller
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges->privileges, 'device_edit')) {
                 $input['modified_by'] = auth()->guard('master_admins')->user()->id;
                 $input['modified_ip_address'] = $request->ip();
-                AssignDeviceToSite::where('id', $request->id)->update($input);
+                Device::where('id', $request->id)->update($input);
                 return redirect('admin/device')->with('success', 'Device updated successfully!');
             } else {
                 return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
@@ -108,7 +106,7 @@ class AssigDeviceToSiteController extends Controller
             if (!empty($RolesPrivileges) && str_contains($RolesPrivileges->privileges, 'device_add')) {
                 $input['created_by'] = auth()->guard('master_admins')->user()->id;
                 $input['created_ip_address'] = $request->ip();
-                AssignDeviceToSite::create($input);
+                Device::create($input);
                 return redirect('admin/device')->with('success', 'Device added successfully!');
             } else {
                 return redirect()->back()->with('error', 'Sorry, You Have No Permission For This Request!');
@@ -121,12 +119,12 @@ class AssigDeviceToSiteController extends Controller
  
     public function edit($id){
         try {
-            $device= AssignDeviceToSite::where('id',$id)->with('site','deviceType')->first();
+            $device= Device::where('id',$id)->with('site','deviceType')->first();
 
             $deviceTypes=DeviceMaster::where('status','active')->get();
             $sites=SiteMaster::where('status','active')->get();
          
-            return view('Admin.AssignDeviceToSite.assign_device_to_site', compact('device','deviceTypes', 'sites'));
+            return view('Admin.Device.add_device', compact('device','deviceTypes', 'sites'));
         } 
         catch (\Illuminate\Contracts\Encryption\DecryptException $e){
             return redirect('admin/device')->with('error', 'Access Denied !');
@@ -136,7 +134,7 @@ class AssigDeviceToSiteController extends Controller
 
     public function data_table(Request $request){
 
-        $device = AssignDeviceToSite::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
+        $device = Device::where('status', '!=', 'delete')->with('site','deviceType')->orderBy('id','DESC')->get();
 
         
 
@@ -177,7 +175,7 @@ class AssigDeviceToSiteController extends Controller
     
     
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_delete')) {
-                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="assign_device_to_sites" data-flash="Device Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
+                        $actionBtn .=  ' <a href="javascript:void;" data-id="' . $row->id . '" data-table="devices" data-flash="Device Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete"><i class="mdi mdi-trash-can"></i></a>';
                     } else {
                         $actionBtn .= '<a href="javascript:void;" class="btn btn-danger btn-xs" title="Disabled" style="cursor:not-allowed;" disabled><i class="mdi mdi-trash-can"></i></a>';
                     }
@@ -191,10 +189,10 @@ class AssigDeviceToSiteController extends Controller
     
                     if (!empty($RolesPrivileges) && str_contains($RolesPrivileges, 'device_status')) {
                         if ($row->status == 'active') {
-                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_device_to_sites" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
+                            $statusActiveBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="devices" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
                             return $statusActiveBtn;
                         } else {
-                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="assign_device_to_sites" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
+                            $statusBlockBtn = '<a href="javascript:void(0)"  data-id="' . $row->id . '" data-table="devices" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
                             return $statusBlockBtn;
                         }
                     } else {
@@ -212,5 +210,8 @@ class AssigDeviceToSiteController extends Controller
                 ->make(true);
         }
     }
+
+
+
 
 }

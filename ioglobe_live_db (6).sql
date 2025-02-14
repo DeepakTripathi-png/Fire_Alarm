@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 14, 2025 at 07:20 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Feb 14, 2025 at 06:25 AM
+-- Server version: 8.0.41
+-- PHP Version: 8.3.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `firealarm_new`
+-- Database: `ioglobe_live_db`
 --
 
 -- --------------------------------------------------------
@@ -28,17 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alarms` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ioslave_id` bigint(20) NOT NULL,
-  `message` varchar(255) NOT NULL,
-  `modbus_data` longtext DEFAULT NULL,
-  `alarm_status` enum('active','acknowledged') NOT NULL DEFAULT 'active',
-  `occurrences` int(10) UNSIGNED NOT NULL DEFAULT 1,
-  `last_triggered_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` bigint UNSIGNED NOT NULL,
+  `ioslave_id` bigint NOT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `modbus_data` longtext COLLATE utf8mb4_unicode_ci,
+  `alarm_status` enum('active','acknowledged') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `occurrences` int UNSIGNED NOT NULL DEFAULT '1',
+  `last_triggered_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_acknowledged_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `alarms`
+--
+
+INSERT INTO `alarms` (`id`, `ioslave_id`, `message`, `modbus_data`, `alarm_status`, `occurrences`, `last_triggered_at`, `last_acknowledged_at`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Fire Alarm Panel Has Detected An Alarm!', NULL, 'active', 560, '2025-02-13 10:55:07', NULL, '2025-02-13 09:21:30', '2025-02-13 10:55:07');
 
 -- --------------------------------------------------------
 
@@ -47,12 +54,12 @@ CREATE TABLE `alarms` (
 --
 
 CREATE TABLE `alert_notifications` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `device_id` varchar(255) NOT NULL,
-  `device_type` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `id` bigint UNSIGNED NOT NULL,
+  `device_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `device_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -64,15 +71,15 @@ CREATE TABLE `alert_notifications` (
 --
 
 CREATE TABLE `assign_device_to_sites` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `site_id` bigint(20) DEFAULT NULL,
-  `device_id` varchar(255) DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `site_id` bigint DEFAULT NULL,
+  `device_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -92,15 +99,15 @@ INSERT INTO `assign_device_to_sites` (`id`, `site_id`, `device_id`, `description
 --
 
 CREATE TABLE `assign_site_to_customers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `customer_id` bigint(20) DEFAULT NULL,
-  `site_id` bigint(20) DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `customer_id` bigint DEFAULT NULL,
+  `site_id` bigint DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -120,11 +127,11 @@ INSERT INTO `assign_site_to_customers` (`id`, `customer_id`, `site_id`, `descrip
 --
 
 CREATE TABLE `contacts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `message` text NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -143,13 +150,13 @@ INSERT INTO `contacts` (`id`, `name`, `mobile`, `email`, `message`, `created_at`
 --
 
 CREATE TABLE `controller_devices` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `controller_name` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `controller_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -168,14 +175,14 @@ INSERT INTO `controller_devices` (`id`, `controller_name`, `created_ip_address`,
 --
 
 CREATE TABLE `controller_device_ports` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `controller_device_id` bigint(20) DEFAULT NULL,
-  `port` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `controller_device_id` bigint DEFAULT NULL,
+  `port` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -211,15 +218,15 @@ INSERT INTO `controller_device_ports` (`id`, `controller_device_id`, `port`, `cr
 --
 
 CREATE TABLE `device_masters` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `controller_type_id` bigint(20) DEFAULT NULL,
-  `device_id` text DEFAULT NULL,
-  `device_name` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `controller_type_id` bigint DEFAULT NULL,
+  `device_id` text COLLATE utf8mb4_unicode_ci,
+  `device_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -239,13 +246,13 @@ INSERT INTO `device_masters` (`id`, `controller_type_id`, `device_id`, `device_n
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` bigint UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -255,21 +262,21 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `general_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `address` longtext DEFAULT NULL,
-  `map_link` longtext DEFAULT NULL,
-  `facebook_url` varchar(255) DEFAULT NULL,
-  `linkedin_url` varchar(255) DEFAULT NULL,
-  `instagram_url` varchar(255) DEFAULT NULL,
-  `twitter_url` varchar(255) DEFAULT NULL,
-  `skype_url` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` longtext COLLATE utf8mb4_unicode_ci,
+  `map_link` longtext COLLATE utf8mb4_unicode_ci,
+  `facebook_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedin_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `skype_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -281,16 +288,16 @@ CREATE TABLE `general_settings` (
 --
 
 CREATE TABLE `i_o_slaves` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `master_device_id` bigint(20) DEFAULT NULL,
-  `slave_device_id` bigint(20) DEFAULT NULL,
-  `io_slave_name` varchar(255) DEFAULT NULL,
-  `io_device_status` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `master_device_id` bigint DEFAULT NULL,
+  `slave_device_id` bigint DEFAULT NULL,
+  `io_slave_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `io_device_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -300,8 +307,8 @@ CREATE TABLE `i_o_slaves` (
 --
 
 INSERT INTO `i_o_slaves` (`id`, `master_device_id`, `slave_device_id`, `io_slave_name`, `io_device_status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `status`, `created_at`, `updated_at`) VALUES
-(4, 1, 5, 'di1', NULL, '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-08 04:49:15', '2025-01-08 04:49:15'),
-(5, 1, 12, 'slave1', NULL, '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-08 05:49:57', '2025-01-08 05:49:57'),
+(4, 1, 5, 'di1', 'alarm', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-08 04:49:15', '2025-02-13 10:55:07'),
+(5, 1, 12, 'slave1', 'normal', '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-08 05:49:57', '2025-02-13 10:55:07'),
 (6, 2, 11, 'di1', NULL, '127.0.0.1', NULL, 1, NULL, 'active', '2025-01-13 05:34:35', '2025-01-13 05:34:35');
 
 -- --------------------------------------------------------
@@ -311,28 +318,28 @@ INSERT INTO `i_o_slaves` (`id`, `master_device_id`, `slave_device_id`, `io_slave
 --
 
 CREATE TABLE `master_admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_type` varchar(255) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `mobile_no` varchar(255) DEFAULT NULL,
-  `role_id` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `user_profile_image_path` varchar(255) DEFAULT NULL,
-  `user_profile_image_name` varchar(255) DEFAULT NULL,
-  `fcm_token` varchar(255) DEFAULT NULL,
-  `access_token` varchar(255) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_profile_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_profile_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fcm_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `api_token` varchar(255) DEFAULT NULL,
-  `otp` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `otp` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -343,7 +350,7 @@ CREATE TABLE `master_admins` (
 
 INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`, `password`, `mobile_no`, `role_id`, `address`, `user_profile_image_path`, `user_profile_image_name`, `fcm_token`, `access_token`, `last_login`, `remember_token`, `api_token`, `otp`, `status`, `created_ip_address`, `modified_ip_address`, `created_by`, `modified_by`, `created_at`, `updated_at`) VALUES
 (1, 'system', NULL, 'Super Admin', 'superadmin@gmail.com', '$2y$10$0AVkTepXHUcEZlAqLgwPI.A3dMtsXeu9BWSXmtfEuibfb79UCY1HK', NULL, '1', NULL, NULL, NULL, NULL, NULL, '2025-01-14 06:15:16', NULL, NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2025-01-14 00:45:16'),
-(2, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2025-01-13 09:26:51', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2025-01-13 03:56:51'),
+(2, 'system', NULL, 'Admin', 'admin@gmail.com', '$2y$10$H96yJAyONnwqzbJmFp5nW.sgDoE.IWT21K8/WyXsenu7p3P9Z7lHG', '7310560108', '3', 'Codepix Pune Maharastra', NULL, NULL, NULL, NULL, '2025-02-13 04:03:59', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2024-11-27 01:02:56', '2025-02-13 04:03:59'),
 (4, 'system', NULL, 'Client', 'client@gmail.com', '$2y$10$fv2ghBw5xF4fHdJAYgRwyu6F65C2F9vhkR1QfXu.nA357D6cGtmPu', '+91 7310560108', '4', 'This is Deepak Client', NULL, NULL, NULL, NULL, '2025-01-14 06:19:39', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 1, NULL, '2025-01-03 03:31:41', '2025-01-14 00:49:39'),
 (7, 'system', NULL, 'Operator', 'operator@gmail.com', '$2y$10$VJ8AGunoFyapRJatE48A6.8ig6SkLi.5NZ5Thm1g1HiKK7/X3cyCe', '+91 7310560108', '5', NULL, NULL, NULL, NULL, NULL, '2025-01-14 04:46:25', NULL, NULL, NULL, 'active', '127.0.0.1', NULL, 4, NULL, '2025-01-13 23:15:48', '2025-01-13 23:16:25');
 
@@ -354,9 +361,9 @@ INSERT INTO `master_admins` (`id`, `user_type`, `user_id`, `user_name`, `email`,
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -394,8 +401,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -406,12 +413,12 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -425,9 +432,9 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `role_name` varchar(255) NOT NULL,
-  `hierarchy_level` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `role_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hierarchy_level` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -449,14 +456,14 @@ INSERT INTO `roles` (`id`, `role_name`, `hierarchy_level`, `created_at`, `update
 --
 
 CREATE TABLE `role_privileges` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `role_name` varchar(255) DEFAULT NULL,
-  `privileges` text DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `role_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `privileges` text COLLATE utf8mb4_unicode_ci,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -478,14 +485,14 @@ INSERT INTO `role_privileges` (`id`, `role_name`, `privileges`, `created_ip_addr
 --
 
 CREATE TABLE `site_masters` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `site_name` varchar(255) DEFAULT NULL,
-  `site_address` longtext DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `site_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_address` longtext COLLATE utf8mb4_unicode_ci,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -508,15 +515,15 @@ INSERT INTO `site_masters` (`id`, `site_name`, `site_address`, `created_ip_addre
 --
 
 CREATE TABLE `slave_device_masters` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `slave_device_name` text DEFAULT NULL,
-  `slave_device_image_path` varchar(255) DEFAULT NULL,
-  `slave_device_image_name` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `slave_device_name` text COLLATE utf8mb4_unicode_ci,
+  `slave_device_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slave_device_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -547,12 +554,12 @@ INSERT INTO `slave_device_masters` (`id`, `slave_device_name`, `slave_device_ima
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -564,20 +571,20 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `visual_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `logo_image_path` varchar(255) DEFAULT NULL,
-  `logo_image_name` varchar(255) DEFAULT NULL,
-  `mini_logo_image_path` varchar(255) DEFAULT NULL,
-  `mini_logo_image_name` varchar(255) DEFAULT NULL,
-  `logo_email_image_path` varchar(255) DEFAULT NULL,
-  `logo_email_image_name` varchar(255) DEFAULT NULL,
-  `favicon_image_path` varchar(255) DEFAULT NULL,
-  `favicon_image_name` varchar(255) DEFAULT NULL,
-  `created_ip_address` varchar(255) DEFAULT NULL,
-  `modified_ip_address` varchar(255) DEFAULT NULL,
-  `created_by` bigint(20) DEFAULT NULL,
-  `modified_by` bigint(20) DEFAULT NULL,
-  `status` enum('active','delete','inactive') NOT NULL DEFAULT 'active',
+  `id` bigint UNSIGNED NOT NULL,
+  `logo_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mini_logo_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mini_logo_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo_email_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo_email_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon_image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` bigint DEFAULT NULL,
+  `modified_by` bigint DEFAULT NULL,
+  `status` enum('active','delete','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -725,121 +732,121 @@ ALTER TABLE `visual_settings`
 -- AUTO_INCREMENT for table `alarms`
 --
 ALTER TABLE `alarms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `alert_notifications`
 --
 ALTER TABLE `alert_notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `assign_device_to_sites`
 --
 ALTER TABLE `assign_device_to_sites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `assign_site_to_customers`
 --
 ALTER TABLE `assign_site_to_customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `controller_devices`
 --
 ALTER TABLE `controller_devices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `controller_device_ports`
 --
 ALTER TABLE `controller_device_ports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `device_masters`
 --
 ALTER TABLE `device_masters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `general_settings`
 --
 ALTER TABLE `general_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `i_o_slaves`
 --
 ALTER TABLE `i_o_slaves`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `master_admins`
 --
 ALTER TABLE `master_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `role_privileges`
 --
 ALTER TABLE `role_privileges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `site_masters`
 --
 ALTER TABLE `site_masters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `slave_device_masters`
 --
 ALTER TABLE `slave_device_masters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `visual_settings`
 --
 ALTER TABLE `visual_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
